@@ -3,8 +3,10 @@ package com.example.itjobstreet
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -44,7 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class MainActivity : ComponentActivity() {
+class WrongPasswordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Login()
+                    Login2()
                 }
             }
         }
@@ -63,7 +65,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login(modifier: Modifier = Modifier) {
+fun Login2(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .requiredWidth(width = 360.dp)
@@ -186,6 +188,34 @@ fun Login(modifier: Modifier = Modifier) {
                     .requiredWidth(width = 321.dp)
                     .requiredHeight(height = 60.dp))
         }
+        Box(
+            modifier = Modifier
+                .align(alignment = Alignment.TopStart)
+                .offset(x = 20.dp,
+                    y = 470.dp)
+                .requiredWidth(width = 321.dp)
+                .requiredHeight(height = 33.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .requiredWidth(width = 321.dp)
+                    .requiredHeight(height = 33.dp)
+                    .clip(shape = RoundedCornerShape(10.dp))
+                    .background(color = Color(0xff990000).copy(alpha = 0.1f)))
+            Text(
+                text = "NIM atau Password salah",
+                color = Color(0xff990000).copy(alpha = 0.9f),
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    fontSize = 15.sp),
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+                    .offset(x = 0.5.dp,
+                        y = 0.dp)
+                    .requiredWidth(width = 290.dp)
+                    .requiredHeight(height = 25.dp)
+                    .wrapContentHeight(align = Alignment.CenterVertically))
+        }
         TextButton(
             onClick = { },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
@@ -193,7 +223,7 @@ fun Login(modifier: Modifier = Modifier) {
                 .align(alignment = Alignment.TopStart)
                 .offset(
                     x = 115.dp,
-                    y = 500.dp
+                    y = 520.dp
                 )
                 .requiredWidth(width = 130.dp)
                 .requiredHeight(height = 40.dp)
@@ -225,5 +255,5 @@ fun Login(modifier: Modifier = Modifier) {
 @Preview(widthDp = 360, heightDp = 800)
 @Composable
 private fun Login1Preview() {
-    Login(Modifier)
+    Login2(Modifier)
 }
