@@ -224,6 +224,6 @@ fun Login(modifier: Modifier = Modifier) {
 
 @Preview(widthDp = 360, heightDp = 800)
 @Composable
-private fun Login1Preview() {
+private fun LoginPreview() {
     Login(Modifier)
 }

@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -46,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class WrongPasswordActivity : ComponentActivity() {
+class LoginSuccessActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,7 +57,7 @@ class WrongPasswordActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Login2()
+                    Login3()
                 }
             }
         }
@@ -65,7 +66,7 @@ class WrongPasswordActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login2(modifier: Modifier = Modifier) {
+fun Login3(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .requiredWidth(width = 360.dp)
@@ -74,15 +75,39 @@ fun Login2(modifier: Modifier = Modifier) {
     ) {
         Box(
             modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.dp,
-                    y = 193.dp
-                )
+                .align(alignment = Alignment.TopStart)
+                .offset(x = 0.dp,
+                    y = 193.dp)
                 .requiredWidth(width = 360.dp)
                 .requiredHeight(height = 607.dp)
                 .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-                .background(color = Color.White))
+                .background(color = Color(0xfff9f9f9)))
+        Text(
+            text = "Got an Issue?",
+            color = Color.Black,
+            style = TextStyle(
+                fontSize = 19.sp),
+            modifier = Modifier
+                .align(alignment = Alignment.TopCenter)
+                .offset(x = 0.dp,
+                    y = 709.dp))
+        Text(
+            text = "USU Single Sign On",
+            color = Color(0xfff9f9f9),
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier
+                .align(alignment = Alignment.TopCenter)
+                .offset(x = 0.5.dp,
+                    y = 72.dp))
+        Image(
+            painter = painterResource(id = R.drawable.logo_ti),
+            contentDescription = "logo_ti",
+            modifier = Modifier
+                .align(alignment = Alignment.TopCenter)
+                .offset(x = 0.5.dp,
+                    y = 145.dp)
+                .requiredWidth(width = 95.dp)
+                .requiredHeight(height = 96.dp))
         Text(
             text = buildAnnotatedString {
                 withStyle(style = SpanStyle(
@@ -92,43 +117,9 @@ fun Login2(modifier: Modifier = Modifier) {
                     color = Color(0xff0033cc),
                     fontSize = 15.sp)) {append("administrator [helpdesk@usu.ac.id]")}},
             modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 20.dp,
-                    y = 735.dp
-                ))
-        Text(
-            text = "Got an Issue?",
-            color = Color.Black,
-            style = TextStyle(
-                fontSize = 19.sp),
-            modifier = Modifier
                 .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.dp,
-                    y = 709.dp
-                ))
-        Image(
-            painter = painterResource(id = R.drawable.logo_ti),
-            contentDescription = "logo_ti",
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.5.dp,
-                    y = 145.dp
-                )
-                .requiredWidth(width = 95.dp)
-                .requiredHeight(height = 96.dp))
-        Text(
-            text = "USU Single Sign On",
-            color = Color(0xfff9f9f9),
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.5.dp,
-                    y = 72.dp
-                ))
+                .offset(x = 0.5.dp,
+                    y = 735.dp))
         Box(
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
@@ -191,30 +182,57 @@ fun Login2(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 20.dp,
-                    y = 470.dp)
-                .requiredWidth(width = 321.dp)
-                .requiredHeight(height = 33.dp)
+                .offset(x = 0.dp,
+                    y = 3.dp)
+                .requiredWidth(width = 360.dp)
+                .requiredHeight(height = 800.dp)
+                .background(color = Color.Black.copy(alpha = 0.1f)))
+        Box(
+            modifier = Modifier
+                .align(alignment = Alignment.TopStart)
+                .offset(x = 50.dp,
+                    y = 318.dp)
+                .requiredWidth(width = 260.dp)
+                .requiredHeight(height = 135.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .requiredWidth(width = 321.dp)
-                    .requiredHeight(height = 33.dp)
+                    .requiredWidth(width = 260.dp)
+                    .requiredHeight(height = 180.dp)
                     .clip(shape = RoundedCornerShape(10.dp))
-                    .background(color = Color(0xff990000).copy(alpha = 0.1f)))
-            Text(
-                text = "NIM atau Password salah",
-                color = Color(0xff990000).copy(alpha = 0.9f),
-                textAlign = TextAlign.Center,
-                style = TextStyle(
-                    fontSize = 15.sp),
+                    .background(color = Color(0xffffffff))
+                    .border(border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.5f)),
+                        shape = RoundedCornerShape(10.dp)),
+                    )
+            Box(
                 modifier = Modifier
-                    .align(alignment = Alignment.Center)
-                    .offset(x = 0.5.dp,
-                        y = 0.dp)
-                    .requiredWidth(width = 290.dp)
-                    .requiredHeight(height = 25.dp)
-                    .wrapContentHeight(align = Alignment.CenterVertically))
+                    .align(alignment = Alignment.TopStart)
+                    .offset(x = 73.dp,
+                        y = 17.dp)
+                    .requiredWidth(width = 115.dp)
+                    .requiredHeight(height = 98.dp)
+            ) {
+                Text(
+                    text = "Login Success",
+                    color = Color(0xff198754),
+                    textAlign = TextAlign.Center,
+                    style = TextStyle(
+                        fontSize = 16.sp),
+                    modifier = Modifier
+                        .align(alignment = Alignment.TopStart)
+                        .offset(x = 0.dp,
+                            y = 74.dp)
+                        .wrapContentHeight(align = Alignment.CenterVertically))
+                Image(
+                    painter = painterResource(id = R.drawable.icon_check),
+                    contentDescription = "icon_check",
+                    modifier = Modifier
+                        .align(alignment = Alignment.TopStart)
+                        .offset(x = 27.dp,
+                            y = 0.dp)
+                        .requiredWidth(width = 61.dp)
+                        .requiredHeight(height = 61.dp))
+            }
         }
         TextButton(
             onClick = { },
@@ -223,7 +241,7 @@ fun Login2(modifier: Modifier = Modifier) {
                 .align(alignment = Alignment.TopStart)
                 .offset(
                     x = 115.dp,
-                    y = 520.dp
+                    y = 500.dp
                 )
                 .requiredWidth(width = 130.dp)
                 .requiredHeight(height = 40.dp)
@@ -254,6 +272,6 @@ fun Login2(modifier: Modifier = Modifier) {
 
 @Preview(widthDp = 360, heightDp = 800)
 @Composable
-private fun Login2Preview() {
-    Login2(Modifier)
+private fun Login3Preview() {
+    Login3(Modifier)
 }
