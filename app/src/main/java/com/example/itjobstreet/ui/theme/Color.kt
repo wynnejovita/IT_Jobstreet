@@ -11,7 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 //Warna status bar hp (primary)
-val Blue1 = Color(0xFF2493DC)
+val Blue01 = Color(0xFF2493DC)
 
 //Warna background aplikasi
-val White1 = Color(0xFFFFFFFF)
+val White01 = Color(0xFFFFFFFF)
