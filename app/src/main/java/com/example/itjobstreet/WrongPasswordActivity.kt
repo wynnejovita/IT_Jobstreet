@@ -17,6 +17,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -26,19 +28,23 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -83,31 +89,6 @@ fun Login2(modifier: Modifier = Modifier) {
                 .requiredHeight(height = 607.dp)
                 .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
                 .background(color = Color.White))
-        Text(
-            text = buildAnnotatedString {
-                withStyle(style = SpanStyle(
-                    color = Color.Black,
-                    fontSize = 15.sp)) {append("Report to ")}
-                withStyle(style = SpanStyle(
-                    color = Color(0xff0033cc),
-                    fontSize = 15.sp)) {append("administrator [helpdesk@usu.ac.id]")}},
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 20.dp,
-                    y = 735.dp
-                ))
-        Text(
-            text = "Got an Issue?",
-            color = Color.Black,
-            style = TextStyle(
-                fontSize = 19.sp),
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.dp,
-                    y = 709.dp
-                ))
         Image(
             painter = painterResource(id = R.drawable.logo_ti),
             contentDescription = "logo_ti",
@@ -161,10 +142,11 @@ fun Login2(modifier: Modifier = Modifier) {
                     .requiredHeight(height = 60.dp))
 
             var password by rememberSaveable { mutableStateOf("") }
+            val passwordVisibility = remember { mutableStateOf(true) }
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 label = {
                     Text(
@@ -176,6 +158,17 @@ fun Login2(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .requiredHeight(height = 17.dp)
                             .wrapContentHeight(align = Alignment.CenterVertically))
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+                        passwordVisibility.value = !passwordVisibility.value
+                    }) {
+                        Icon(
+                            imageVector = if (passwordVisibility.value) ImageVector.vectorResource(id = R.drawable.visibility_off) else ImageVector.vectorResource(id = R.drawable.visibility),
+                            contentDescription = "visibility",
+                            tint = Color.Gray
+                        )
+                    }
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     containerColor = Color.White.copy(alpha = 0.08f)),
@@ -249,6 +242,31 @@ fun Login2(modifier: Modifier = Modifier) {
                         .wrapContentHeight(align = Alignment.CenterVertically))
             }
         }
+        Text(
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(
+                    color = Color.Black,
+                    fontSize = 15.sp)) {append("Report to ")}
+                withStyle(style = SpanStyle(
+                    color = Color(0xff0033cc),
+                    fontSize = 15.sp)) {append("administrator [helpdesk@usu.ac.id]")}},
+            modifier = Modifier
+                .align(alignment = Alignment.TopStart)
+                .offset(
+                    x = 20.dp,
+                    y = 735.dp
+                ))
+        Text(
+            text = "Got an Issue?",
+            color = Color.Black,
+            style = TextStyle(
+                fontSize = 19.sp),
+            modifier = Modifier
+                .align(alignment = Alignment.TopCenter)
+                .offset(
+                    x = 0.dp,
+                    y = 709.dp
+                ))
     }
 }
 
