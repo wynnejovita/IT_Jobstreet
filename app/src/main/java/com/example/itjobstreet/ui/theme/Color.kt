@@ -15,3 +15,6 @@ val Blue01 = Color(0xFF2493DC)
 
 //Warna background aplikasi
 val White01 = Color(0xFFFFFFFF)
+
+//Warna onSurface
+val Black01 = Color(0xFF000000)
