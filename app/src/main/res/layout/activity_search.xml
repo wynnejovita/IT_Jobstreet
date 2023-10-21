@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Search">
+    tools:context=".Search"
+    >
 
     <SearchView
         android:id="@+id/searchView"
@@ -16,6 +17,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
+        android:background="@drawable/searchview_background"
+        android:queryBackground="@android:color/transparent"
         />
 
     <ListView
@@ -24,5 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:background="@color/white"
         />
+
 </LinearLayout>
