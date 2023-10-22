@@ -7,22 +7,28 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -69,232 +75,208 @@ class LoginSuccessActivity : ComponentActivity() {
 }
 
 @Composable
-fun Login3(modifier: Modifier = Modifier) {
+fun Login3() {
     Box(
-        modifier = modifier
-            .requiredWidth(width = 360.dp)
-            .requiredHeight(height = 800.dp)
+        modifier = Modifier
             .background(color = Color(0xff2493dc))
-    ) {
-        Box(
+            .fillMaxSize()
+    ){
+        Column(
             modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 0.dp,
-                    y = 193.dp)
-                .requiredWidth(width = 360.dp)
-                .requiredHeight(height = 607.dp)
-                .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-                .background(color = Color(0xfff9f9f9)))
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "USU Single Sign On",
+                color = Color(0xfff9f9f9),
+                style = MaterialTheme.typography.headlineLarge,
+                modifier = Modifier
+                    .padding(top = 72.dp)
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(top = 180.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
+                    .background(color = Color.White)
+            ){
+                Column(
+                    modifier = Modifier
+                        .padding(top = 86.dp, start = 24.dp, end = 24.dp)
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 12.dp,
+                    ),
+                ) {
+                    var identity by rememberSaveable { mutableStateOf("") }
+                    val containerColor = Color.White.copy(alpha = 0.08f)
+                    OutlinedTextField(
+                        value = identity,
+                        onValueChange = { identity = it },
+                        label = {
+                            Text(
+                                text = "Identity (NIM/USU’s Email)",
+                                color = Color.Black.copy(alpha = 0.5f),
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight.Medium),
+                                modifier = Modifier
+                                    .requiredHeight(height = 17.dp)
+                                    .wrapContentHeight(align = Alignment.CenterVertically))
+                        },
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = containerColor,
+                            unfocusedContainerColor = containerColor,
+                            disabledContainerColor = containerColor,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .requiredHeight(height = 60.dp))
+
+                    var password by rememberSaveable { mutableStateOf("") }
+                    val passwordVisibility = remember { mutableStateOf(true) }
+                    val containerColor1 = Color.White.copy(alpha = 0.08f)
+                    OutlinedTextField(
+                        value = password,
+                        onValueChange = { password = it },
+                        visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                        label = {
+                            Text(
+                                text = "Password",
+                                color = Color.Black.copy(alpha = 0.5f),
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight.Medium),
+                                modifier = Modifier
+                                    .requiredHeight(height = 17.dp)
+                                    .wrapContentHeight(align = Alignment.CenterVertically))
+                        },
+                        trailingIcon = {
+                            IconButton(onClick = {
+                                passwordVisibility.value = !passwordVisibility.value
+                            }) {
+                                Icon(
+                                    imageVector = if (passwordVisibility.value) ImageVector.vectorResource(id = R.drawable.visibility_off) else ImageVector.vectorResource(id = R.drawable.visibility),
+                                    contentDescription = "visibility",
+                                    tint = Color.Gray
+                                )
+                            }
+                        },
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = containerColor1,
+                            unfocusedContainerColor = containerColor1,
+                            disabledContainerColor = containerColor1,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .requiredHeight(height = 60.dp)
+                    )
+                    ElevatedButton(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
+                        modifier = Modifier
+                            .padding(24.dp)
+                            .width(132.dp)
+                    ) {
+                        Text("LOGIN", color = Color.White)
+                    }
+                }
+
+                Column(
+                    modifier = Modifier
+                        .padding(24.dp)
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
+                ) {
+                    Text(
+                        text = "Got an Issue?",
+                        color = Color.Black,
+                        style = TextStyle(
+                            fontSize = 19.sp),
+                    )
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(style = SpanStyle(
+                                color = Color.Black,
+                                fontSize = 15.sp)
+                            ) {append("Report to ")}
+                            withStyle(style = SpanStyle(
+                                color = Color(0xff0033cc),
+                                fontSize = 15.sp)
+                            ) {append("administrator [helpdesk@usu.ac.id]")}},
+                    )
+                }
+            }
+        }
         Image(
             painter = painterResource(id = R.drawable.logo_ti),
             contentDescription = "logo_ti",
             modifier = Modifier
                 .align(alignment = Alignment.TopCenter)
-                .offset(x = 0.5.dp,
-                    y = 145.dp)
+                .offset(
+                    x = 0.dp,
+                    y = 132.dp
+                )
                 .requiredWidth(width = 95.dp)
                 .requiredHeight(height = 96.dp))
-        Text(
-            text = buildAnnotatedString {
-                withStyle(style = SpanStyle(
-                    color = Color.Black,
-                    fontSize = 15.sp)) {append("Report to ")}
-                withStyle(style = SpanStyle(
-                    color = Color(0xff0033cc),
-                    fontSize = 15.sp)) {append("administrator [helpdesk@usu.ac.id]")}},
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(x = 0.5.dp,
-                    y = 735.dp))
         Box(
             modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 20.dp,
-                    y = 315.dp
-                )
-                .requiredWidth(width = 321.dp)
-                .requiredHeight(height = 119.dp)
-        ) {
-            var identity by rememberSaveable { mutableStateOf("") }
-            val containerColor = Color.White.copy(alpha = 0.08f)
-            OutlinedTextField(
-                value = identity,
-                onValueChange = { identity = it },
-                label = {
-                    Text(
-                        text = "Identity (NIM/USU’s Email)",
-                        color = Color.Black.copy(alpha = 0.5f),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Medium),
-                        modifier = Modifier
-                            .requiredHeight(height = 17.dp)
-                            .wrapContentHeight(align = Alignment.CenterVertically))
-                },
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = containerColor,
-                    unfocusedContainerColor = containerColor,
-                    disabledContainerColor = containerColor,
-                ),
-                modifier = Modifier
-                    .requiredWidth(width = 321.dp)
-                    .requiredHeight(height = 60.dp))
-
-            var password by rememberSaveable { mutableStateOf("") }
-            val passwordVisibility = remember { mutableStateOf(true) }
-            val containerColor1 = Color.White.copy(alpha = 0.08f)
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                label = {
-                    Text(
-                        text = "Password",
-                        color = Color.Black.copy(alpha = 0.5f),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Medium),
-                        modifier = Modifier
-                            .requiredHeight(height = 17.dp)
-                            .wrapContentHeight(align = Alignment.CenterVertically))
-                },
-                trailingIcon = {
-                    IconButton(onClick = {
-                        passwordVisibility.value = !passwordVisibility.value
-                    }) {
-                        Icon(
-                            imageVector = if (passwordVisibility.value) ImageVector.vectorResource(id = R.drawable.visibility_off) else ImageVector.vectorResource(id = R.drawable.visibility),
-                            contentDescription = "visibility",
-                            tint = Color.Gray
-                        )
-                    }
-                },
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = containerColor1,
-                    unfocusedContainerColor = containerColor1,
-                    disabledContainerColor = containerColor1,
-                ),
-                modifier = Modifier
-                    .align(alignment = Alignment.TopStart)
-                    .offset(
-                        x = 0.dp,
-                        y = 74.dp
-                    )
-                    .requiredWidth(width = 321.dp)
-                    .requiredHeight(height = 60.dp))
-        }
-        Box(
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 0.dp,
-                    y = 3.dp)
-                .requiredWidth(width = 360.dp)
-                .requiredHeight(height = 800.dp)
-                .background(color = Color.Black.copy(alpha = 0.1f)))
-        Box(
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 50.dp,
-                    y = 318.dp)
-                .requiredWidth(width = 260.dp)
-                .requiredHeight(height = 135.dp)
-        ) {
+                .fillMaxSize()
+                .background(color = Color.Black.copy(alpha = 0.1f))
+        ){
             Box(
                 modifier = Modifier
+                    .align(alignment = Alignment.Center)
                     .requiredWidth(width = 260.dp)
                     .requiredHeight(height = 180.dp)
                     .clip(shape = RoundedCornerShape(10.dp))
                     .background(color = Color(0xffffffff))
-                    .border(border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.5f)),
-                        shape = RoundedCornerShape(10.dp)),
-                    )
-            Box(
-                modifier = Modifier
-                    .align(alignment = Alignment.TopStart)
-                    .offset(x = 73.dp,
-                        y = 17.dp)
-                    .requiredWidth(width = 115.dp)
-                    .requiredHeight(height = 98.dp)
-            ) {
-                Text(
-                    text = "Login Success",
-                    color = Color(0xff198754),
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(
-                        fontSize = 16.sp),
+                    .border(
+                        border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.5f)),
+                        shape = RoundedCornerShape(10.dp)
+                    ),
+            ){
+                Column(
                     modifier = Modifier
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 0.dp,
-                            y = 74.dp)
-                        .wrapContentHeight(align = Alignment.CenterVertically))
-                Image(
-                    painter = painterResource(id = R.drawable.icon_check),
-                    contentDescription = "icon_check",
-                    modifier = Modifier
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 27.dp,
-                            y = 0.dp)
-                        .requiredWidth(width = 61.dp)
-                        .requiredHeight(height = 61.dp))
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 12.dp,
+                        alignment = Alignment.CenterVertically,
+                    ),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_check),
+                        contentDescription = "icon_check",
+                        modifier = Modifier
+                            .requiredWidth(width = 61.dp)
+                            .requiredHeight(height = 61.dp))
+                    Text(
+                        text = "Login Success",
+                        color = Color(0xff198754),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.SemiBold),
+                        modifier = Modifier)
+                }
             }
         }
-        TextButton(
-            onClick = { },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 115.dp,
-                    y = 500.dp
-                )
-                .requiredWidth(width = 130.dp)
-                .requiredHeight(height = 40.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .requiredWidth(width = 130.dp)
-                    .requiredHeight(height = 40.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(shape = RoundedCornerShape(9.dp))
-                        .background(color = Color(0xff2493dc)))
-                Text(
-                    text = "LOGIN",
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(
-                        fontSize = 16.sp),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentHeight(align = Alignment.CenterVertically))
-            }
-        }
-        Text(
-            text = "Got an Issue?",
-            color = Color.Black,
-            style = TextStyle(
-                fontSize = 19.sp),
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(x = 0.dp,
-                    y = 709.dp))
-        Text(
-            text = "USU Single Sign On",
-            color = Color(0xfff9f9f9),
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(x = 0.5.dp,
-                    y = 72.dp))
     }
 }
 
-@Preview(widthDp = 360, heightDp = 800)
+@Preview(showBackground = true)
 @Composable
 private fun Login3Preview() {
-    Login3(Modifier)
+    Login3()
 }
