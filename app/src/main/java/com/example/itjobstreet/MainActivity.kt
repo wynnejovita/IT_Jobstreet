@@ -1,8 +1,6 @@
 package com.example.itjobstreet
 
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -15,11 +13,7 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -72,7 +66,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Login(modifier: Modifier = Modifier) {
     Box(
@@ -124,6 +117,7 @@ fun Login(modifier: Modifier = Modifier) {
                 .requiredHeight(height = 119.dp)
         ) {
             var identity by rememberSaveable { mutableStateOf("") }
+            val containerColor = Color.White.copy(alpha = 0.08f)
             OutlinedTextField(
                 value = identity,
                 onValueChange = { identity = it },
@@ -138,14 +132,18 @@ fun Login(modifier: Modifier = Modifier) {
                             .requiredHeight(height = 17.dp)
                             .wrapContentHeight(align = Alignment.CenterVertically))
                 },
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.White.copy(alpha = 0.08f)),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = containerColor,
+                    unfocusedContainerColor = containerColor,
+                    disabledContainerColor = containerColor,
+                ),
                 modifier = Modifier
                     .requiredWidth(width = 321.dp)
                     .requiredHeight(height = 60.dp))
 
             var password by rememberSaveable { mutableStateOf("") }
             val passwordVisibility = remember { mutableStateOf(true) }
+            val containerColor1 = Color.White.copy(alpha = 0.08f)
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -173,8 +171,11 @@ fun Login(modifier: Modifier = Modifier) {
                         )
                     }
                 },
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.White.copy(alpha = 0.08f)),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = containerColor1,
+                    unfocusedContainerColor = containerColor1,
+                    disabledContainerColor = containerColor1,
+                ),
                 modifier = Modifier
                     .align(alignment = Alignment.TopStart)
                     .offset(
