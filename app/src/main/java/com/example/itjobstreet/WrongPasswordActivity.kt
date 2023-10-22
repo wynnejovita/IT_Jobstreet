@@ -209,7 +209,7 @@ fun Login2() {
 
                 Column(
                     modifier = Modifier
-                        .padding(24.dp)
+                        .padding(bottom = 24.dp, start = 10.dp, end = 10.dp)
                         .fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom
