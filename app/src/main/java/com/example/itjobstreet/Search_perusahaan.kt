@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -410,77 +411,23 @@ fun SearchPerusahaan() {
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
 
-                                )
-
-                                ClickableText(
-                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
-                                    style = TextStyle(
-                                        color = Color.Black,
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(95.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.telkom),
-                                    contentDescription = "profil_perusahaan",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "PT. Telkom",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
-
-                                )
+                                }
 
                                 ClickableText(
                                     text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
@@ -540,77 +487,23 @@ fun SearchPerusahaan() {
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
 
-                                )
-
-                                ClickableText(
-                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
-                                    style = TextStyle(
-                                        color = Color.Black,
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(95.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.telkom),
-                                    contentDescription = "profil_perusahaan",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "PT. Telkom",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
-
-                                )
+                                }
 
                                 ClickableText(
                                     text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
@@ -670,12 +563,23 @@ fun SearchPerusahaan() {
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
 
-                                )
+                                }
 
                                 ClickableText(
                                     text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
@@ -735,12 +639,175 @@ fun SearchPerusahaan() {
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Icon(
-                                    imageVector = Icons.Filled.Star,
-                                    contentDescription = "Bintang",
-                                    tint = Color(0xFFFFC600)
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+
+                                }
+
+                                ClickableText(
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(95.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
 
                                 )
+                            }
+                            Column {
+                                Text(
+                                    text = "PT. Telkom",
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+
+                                }
+
+                                ClickableText(
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(95.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
+                                )
+                            }
+                            Column {
+                                Text(
+                                    text = "PT. Telkom",
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement =Arrangement.spacedBy(
+                                        space = 1.dp)){
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+                                    Icon(
+                                        Icons.Filled.Star,
+                                        "star",
+                                        tint = Color(0xFFFFC600))
+
+                                }
 
                                 ClickableText(
                                     text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
