@@ -95,4 +95,5 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_search_post">Search_post</string>
+    <string name="title_activity_search_orang">Search_orang</string>
 </resources>
