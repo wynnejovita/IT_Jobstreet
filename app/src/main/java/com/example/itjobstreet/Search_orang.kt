@@ -181,7 +181,7 @@ fun SearchOrang() {
                     ){
                         OutlinedButton(
                             onClick={},
-                            border = BorderStroke(1.dp,Color(0xFF2493DC)),
+                            border = BorderStroke(1.dp,Color.White),
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(50.dp))
