@@ -32,6 +32,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -194,14 +195,14 @@ fun SearchPerusahaan() {
                         Button(
                             onClick={},
                             border = BorderStroke(1.dp, Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(50.dp))
                                 .padding(end = 10.dp)
                         ){
                             Text(
                                 text = "Orang",
-                                color = Color(0xFF2493DC),
+                                color = Color.White,
                                 style = TextStyle(
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold
@@ -211,14 +212,14 @@ fun SearchPerusahaan() {
                         Button(
                             onClick={},
                             border = BorderStroke(1.dp, Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(50.dp))
                                 .padding(end = 10.dp)
                         ){
                             Text(
                                 text = "Perusahaan",
-                                color = Color(0xFFFFFFFF),
+                                color = Color(0xFF2493DC),
                                 style = TextStyle(
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold
@@ -276,8 +277,8 @@ fun SearchPerusahaan() {
                 actions = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector =  ImageVector.vectorResource(id = R.drawable.visibility),
-                            contentDescription = "Localized description",
+                            imageVector =  ImageVector.vectorResource(id = R.drawable.vector),
+                            contentDescription = "filter",
                             modifier = Modifier
                                 .requiredWidth(width = 30.dp)
                                 .requiredHeight(height = 30.dp)
@@ -374,7 +375,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -393,8 +394,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -403,24 +404,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
@@ -440,7 +440,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -459,8 +459,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -469,24 +469,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
@@ -506,7 +505,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -525,8 +524,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -535,24 +534,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
@@ -572,7 +570,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -591,8 +589,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -601,24 +599,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
@@ -638,7 +635,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -657,8 +654,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -667,24 +664,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
@@ -704,7 +700,7 @@ fun SearchPerusahaan() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
@@ -723,8 +719,8 @@ fun SearchPerusahaan() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
+                                    painter = painterResource(id = R.drawable.telkom),
+                                    contentDescription = "profil_perusahaan",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
@@ -733,24 +729,23 @@ fun SearchPerusahaan() {
                             }
                             Column {
                                 Text(
-                                    text = "Raihan Alifya Lubis",
+                                    text = "PT. Telkom",
                                     color = Color.Black,
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
+                                Icon(
+                                    imageVector = Icons.Filled.Star,
+                                    contentDescription = "Bintang",
+                                    tint = Color(0xFFFFC600)
+
                                 )
+
                                 ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    text = AnnotatedString("Jl. Mongonsidi No.6, Anggrung, Kec. Medan Polonia, Kota Medan"),
                                     style = TextStyle(
-                                        color = Color(0xff2493dc),
+                                        color = Color.Black,
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
