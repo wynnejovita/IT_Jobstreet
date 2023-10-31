@@ -13,6 +13,11 @@
         android:theme="@style/Theme.ITJobstreet"
         tools:targetApi="31">
         <activity
+            android:name=".Search_NotFound"
+            android:exported="false"
+            android:label="@string/title_activity_search_not_found"
+            android:theme="@style/Theme.ITJobstreet" />
+        <activity
             android:name=".Search_perusahaan"
             android:exported="false"
             android:label="@string/title_activity_search_perusahaan"

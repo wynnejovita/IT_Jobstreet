@@ -97,4 +97,5 @@
     <string name="title_activity_search_post">Search_post</string>
     <string name="title_activity_search_orang">Search_orang</string>
     <string name="title_activity_search_perusahaan">Search_perusahaan</string>
+    <string name="title_activity_search_not_found">Search_NotFound</string>
 </resources>
