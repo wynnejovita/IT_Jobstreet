@@ -1,5 +1,6 @@
 package com.example.itjobstreet
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,18 +9,24 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -36,12 +43,14 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
@@ -49,10 +58,12 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,7 +74,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ParagraphStyle
@@ -137,11 +151,24 @@ fun HomePageDetailShow() {
 
 
                     }
-                    IconButton(onClick = {}) {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                        type = "text/plain"
+                        flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    val context = LocalContext.current
+                    IconButton(
+                        onClick = {context.startActivity(shareIntent)},
+                        modifier = Modifier
+                    ) {
                         Icon(
-                            Icons.Filled.Share,
-                            "share",
-                            tint = Color.White)
+                            imageVector = Icons.Filled.Share,
+                            contentDescription = "share",
+                            tint = Color.White,
+                            modifier = Modifier.size(22.dp)
+                        )
                     }
 
                 },
@@ -168,401 +195,416 @@ fun HomePageDetailShow() {
                         sheetState = sheetState
                     ) {
                         // Sheet content
-                        Column{
-                            Box(modifier = Modifier.fillMaxWidth().padding(start=10.dp)){
-                                Text(
-                                    text = "Komentar",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 15.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                    modifier = Modifier.align(alignment = Alignment.CenterStart)
-                                )
+                        Scaffold(
+                            topBar = {
+                                Box(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(110.dp)){
+                                    Column(modifier = Modifier
+                                        .padding(start=15.dp)
+                                        .fillMaxWidth(),
 
-                                IconButton(
-                                    onClick = {scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                        if (!sheetState.isVisible) {
-                                            showComment = false
-                                        }
-                                    }},
-                                    modifier = Modifier.align(alignment = Alignment.TopEnd)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Close,
-                                        contentDescription = "tutup",
-                                        tint = Color.Black
-                                    )
-                                }
-                            }
+                                        ){
+                                        Box(modifier = Modifier.fillMaxWidth()){
 
-                            Row(modifier = Modifier.padding(start=10.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement =Arrangement.spacedBy(
-                                    space = 2.dp
-                                )){
+                                            Text(
+                                                text = "Komentar",
+                                                color = Color.Black,
+                                                style = TextStyle(
+                                                    fontSize = 15.sp, fontWeight = FontWeight.Medium
+                                                ),
+                                                modifier = Modifier.align(alignment = Alignment.CenterStart)
+                                            )
 
-                                Button(
-                                    onClick={},
-                                    border = BorderStroke(1.dp,Color.Black),
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFFFF)),
-                                    modifier = Modifier
-                                        .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp),
-                                    elevation = ButtonDefaults.buttonElevation(
-                                        defaultElevation = 15.dp
-                                    )
-                                ){
-                                    Text(
-                                        text = "Teratas",
-                                        color = Color.Black,
-                                        style = TextStyle(
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.Medium),
-                                    )
-                                }
-                                Button(
-                                    onClick={},
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFFFF)),
-                                    modifier = Modifier
-                                        .clip(shape = RoundedCornerShape(50.dp)),
-                                    elevation = ButtonDefaults.buttonElevation(
-                                        defaultElevation = 15.dp
-                                    )
-                                ){
-                                    Text(
-                                        text = "Terbaru",
-                                        color = Color.Black,
-                                        style = TextStyle(
-                                            fontSize = 12.sp),
-                                    )
-                                }
-                            }
-                            Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                            Box(modifier = Modifier.fillMaxWidth()){
-                                Column(
-                                    modifier = Modifier
-                                        .padding(start=15.dp, end= 15.dp)
-                                        .fillMaxWidth()
-                                        .verticalScroll(rememberScrollState())
-                                    ,
-
-                                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally
-
-                                ) {
-                                    Column{
-                                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
-                                            Box(modifier = Modifier.padding(top=15.dp)){
-                                                Row{
-                                                    Box(modifier = Modifier.requiredWidth(320.dp)){
-                                                        Row(
-                                                            modifier = Modifier
-                                                                .clip(RoundedCornerShape(8.dp)),
-                                                            horizontalArrangement = Arrangement.spacedBy(
-                                                                space = 5.dp
-                                                            ),
-                                                        )
-                                                        {
-
-                                                            Box(
-                                                                modifier = Modifier
-                                                                    .clip(RoundedCornerShape(8.dp))
-                                                                    .size(56.dp)
-                                                            ) {
-                                                                Image(
-                                                                    painter = painterResource(id = R.drawable.profil_image),
-                                                                    contentDescription = "profil_user",
-                                                                    modifier = Modifier
-                                                                        .requiredWidth(width = 56.dp)
-                                                                        .requiredHeight(height = 56.dp)
-
-                                                                )
-                                                            }
-
-                                                            Column {
-                                                                Row(
-                                                                    horizontalArrangement = Arrangement.spacedBy(
-                                                                        space = 5.dp
-                                                                    )
-                                                                ){
-                                                                    Text(
-                                                                        text = "Raihan Alifya Lubis",
-                                                                        color = Color.Black,
-                                                                        style = TextStyle(
-                                                                            fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                        ),
-                                                                    )
-                                                                    Text(
-                                                                        text =  "1h",
-                                                                        color = Color.Gray,
-                                                                        style = TextStyle(
-                                                                            fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                        ),
-                                                                    )
-                                                                }
-
-                                                                Text(
-                                                                    text = "Berapa perkiraan pegawai yang bakalan direkrut, bang?",
-                                                                    color = Color.Black,
-                                                                    style = TextStyle(
-                                                                        fontSize = 12.sp
-                                                                    )
-                                                                )
-                                                                ClickableText(
-                                                                    text = AnnotatedString("Balas"),
-
-                                                                    style = TextStyle(
-                                                                        color = Color.Gray,
-                                                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                    ),
-                                                                    onClick = { }
-                                                                )
-
-
-                                                            }
-                                                        }
+                                            IconButton(
+                                                onClick = {scope.launch { sheetState.hide() }.invokeOnCompletion {
+                                                    if (!sheetState.isVisible) {
+                                                        showComment = false
                                                     }
-
-
-                                                }
-                                            }
-                                            Column(
-                                                modifier=Modifier.padding(top=15.dp),
-                                                verticalArrangement = Arrangement.Center,
-                                                horizontalAlignment = Alignment.End
+                                                }},
+                                                modifier = Modifier.align(alignment = Alignment.TopEnd)
                                             ) {
-                                                IconButton(
-                                                    onClick = {},
-                                                    modifier = Modifier
-                                                        .requiredWidth(width = 20.dp)
-                                                        .requiredHeight(height = 20.dp)
-                                                ) {
-                                                    Icon(
-                                                        imageVector = Icons.Filled.FavoriteBorder,
-                                                        contentDescription = "favorite",
-                                                        tint = Color.Black
-                                                    )
-                                                }
+                                                Icon(
+                                                    imageVector = Icons.Filled.Close,
+                                                    contentDescription = "tutup",
+                                                    tint = Color.Black
+                                                )
+                                            }
+                                        }
+
+                                        Row{
+
+                                            Button(
+                                                onClick={},
+                                                border = BorderStroke(1.dp,Color.Black),
+                                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFFFF)),
+                                                modifier = Modifier
+                                                    .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp),
+                                                elevation = ButtonDefaults.buttonElevation(
+                                                    defaultElevation = 15.dp
+                                                )
+                                            ){
                                                 Text(
-                                                    text = "15",
+                                                    text = "Teratas",
                                                     color = Color.Black,
                                                     style = TextStyle(
-                                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                    ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                                                        fontSize = 12.sp,
+                                                        fontWeight = FontWeight.Medium),
                                                 )
                                             }
-                                        }
-
-                                        var visible = remember { mutableStateOf(true) }
-                                        Column (modifier=Modifier.fillMaxWidth().padding(start=61.dp),
-                                            horizontalAlignment = Alignment.Start) {
-                                            Row(horizontalArrangement = Arrangement.spacedBy(
-                                                space = 2.dp), verticalAlignment = Alignment.CenterVertically){
-                                                ClickableText(
-                                                    text = AnnotatedString("Lihat 3 balasan"),
-
+                                            Button(
+                                                onClick={},
+                                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFFFF)),
+                                                modifier = Modifier
+                                                    .clip(shape = RoundedCornerShape(50.dp)),
+                                                elevation = ButtonDefaults.buttonElevation(
+                                                    defaultElevation = 15.dp
+                                                )
+                                            ){
+                                                Text(
+                                                    text = "Terbaru",
+                                                    color = Color.Black,
                                                     style = TextStyle(
-                                                        color = Color.Gray,
-                                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                    ),
-                                                    onClick = { visible.value = !visible.value}
+                                                        fontSize = 12.sp),
                                                 )
-                                                Icon(
-                                                    Icons.Filled.ArrowDropDown,
-                                                    contentDescription = "balas",
-                                                    tint = Color.LightGray)
                                             }
-
-//Balasan komentar
-                                            AnimatedVisibility(visible = !visible.value) {
-                                                Column(
-                                                    modifier = Modifier
-                                                        .fillMaxWidth(),
-                                                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                                                    horizontalAlignment = Alignment.Start
-
-                                                ) {Column{
-                                                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
-                                                        Box(modifier = Modifier.padding(top=5.dp)){
-                                                            Row{
-                                                                Box(modifier = Modifier.requiredWidth(280.dp)){
-                                                                    Row(
-                                                                        modifier = Modifier
-                                                                            .clip(RoundedCornerShape(8.dp)),
-                                                                        horizontalArrangement = Arrangement.spacedBy(
-                                                                            space = 5.dp
-                                                                        ),
-                                                                    )
-                                                                    {
-
-                                                                        Box(
-                                                                            modifier = Modifier
-                                                                                .clip(RoundedCornerShape(8.dp))
-                                                                                .size(36.dp)
-                                                                        ) {
-                                                                            Image(
-                                                                                painter = painterResource(id = R.drawable.profil_image),
-                                                                                contentDescription = "profil_user",
-                                                                                modifier = Modifier
-                                                                                    .requiredWidth(width = 36.dp)
-                                                                                    .requiredHeight(height = 36.dp)
-
-                                                                            )
-                                                                        }
-
-                                                                        Column {
-                                                                            Row(
-                                                                                horizontalArrangement = Arrangement.spacedBy(
-                                                                                    space = 5.dp
-                                                                                )
-                                                                            ){
-                                                                                Text(
-                                                                                    text = "Raihan Alifya Lubis",
-                                                                                    color = Color.Black,
-                                                                                    style = TextStyle(
-                                                                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                                    ),
-                                                                                )
-                                                                                Text(
-                                                                                    text =  "1h",
-                                                                                    color = Color.Gray,
-                                                                                    style = TextStyle(
-                                                                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                                    ),
-                                                                                )
-                                                                            }
-
-                                                                            Text(
-                                                                                text = "Berapa perkiraan pegawai yang bakalan direkrut, bang?",
-                                                                                color = Color.Black,
-                                                                                style = TextStyle(
-                                                                                    fontSize = 12.sp
-                                                                                )
-                                                                            )
-                                                                            ClickableText(
-                                                                                text = AnnotatedString("Balas"),
-
-                                                                                style = TextStyle(
-                                                                                    color = Color.Gray,
-                                                                                    fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                                ),
-                                                                                onClick = { }
-                                                                            )
-
-
-                                                                        }
-                                                                    }
-                                                                }
-
-
-                                                            }
-                                                        }
-                                                        Column(
-                                                            modifier=Modifier.padding(top=5.dp),
-                                                            verticalArrangement = Arrangement.Center,
-                                                            horizontalAlignment = Alignment.End
-                                                        ) {
-                                                            IconButton(
-                                                                onClick = {},
-                                                                modifier = Modifier
-                                                                    .requiredWidth(width = 20.dp)
-                                                                    .requiredHeight(height = 20.dp)
-                                                            ) {
-                                                                Icon(
-                                                                    imageVector = Icons.Filled.FavoriteBorder,
-                                                                    contentDescription = "favorite",
-                                                                    tint = Color.Black
-                                                                )
-                                                            }
-                                                            Text(
-                                                                text = "15",
-                                                                color = Color.Black,
-                                                                style = TextStyle(
-                                                                    fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                                                ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
-                                                            )
-                                                        }
-                                                    }
-                                                }
-
-                                                }
-                                            }
-//Akhir balasan komentar
 
                                         }
                                     }
-
-
+                                    Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth().align(alignment = Alignment.BottomCenter))
                                 }
                             }
+                            ,
+                            bottomBar = {
+                                BottomAppBar(
 
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .border(border = BorderStroke(1.dp, Color.Gray))
-                                .padding(10.dp)
-                            )
-                            {
-                                Row(verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement =Arrangement.spacedBy(
-                                        space = 5.dp
-                                    )){
-                                    Box(
-                                        modifier = Modifier
-                                            .clip(RoundedCornerShape(8.dp))
-                                            .size(35.dp)
-                                    ) {
-                                        Image(
-                                            painter = painterResource(id = R.drawable.profil_image),
-                                            contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .border(BorderStroke(1.dp, Color.Gray)),
+                                    containerColor = Color.Transparent,
+                                    contentColor = MaterialTheme.colorScheme.primary,
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement =Arrangement.spacedBy(
+                                            space = 5.dp
+                                        ),
+                                        ){
+                                        Box(
                                             modifier = Modifier
-                                                .fillMaxSize()
+                                                .clip(RoundedCornerShape(8.dp))
+                                                .size(35.dp)
+                                        ) {
+                                            Image(
+                                                painter = painterResource(id = R.drawable.profil_image),
+                                                contentDescription = "profil_user",
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+
+                                            )
+                                        }
+                                        var perusahaan by rememberSaveable { mutableStateOf("") }
+                                        OutlinedTextField(
+                                            value = perusahaan,
+                                            onValueChange = {perusahaan = it},
+                                            placeholder = {
+                                                Text("Kirim komentar", color = Color.LightGray, fontSize = 12.sp)
+                                            },
+                                            trailingIcon = {
+                                                Row(verticalAlignment = Alignment.CenterVertically){
+                                                    IconButton(onClick = {}) {
+                                                        Icon(
+                                                            painter = painterResource(id = R.drawable.at_comment),
+                                                            "send_comment",
+                                                            tint = Color.Gray,
+                                                            modifier = Modifier
+                                                                .requiredWidth(width = 23.dp)
+                                                                .requiredHeight(height = 23.dp))
+                                                    }
+                                                    IconButton(onClick = {}) {
+                                                        Icon(
+                                                            Icons.Filled.Send,
+                                                            "send_comment",
+                                                            tint = Color.Gray)
+                                                    }
+                                                }
+
+                                            },
+                                            colors = OutlinedTextFieldDefaults.colors(
+                                                focusedBorderColor = Color.Gray,
+                                                unfocusedBorderColor = Color.LightGray,
+                                            ),
+                                            textStyle = LocalTextStyle.current.copy(
+                                                fontSize = 14.sp,
+                                                color = Color.Black
+                                            ),
+                                            shape = RoundedCornerShape(20.dp),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(55.dp)
+                                                .background(
+                                                    color = Color(0xffffffff),
+                                                    shape = RoundedCornerShape(20.dp)
+                                                )
 
                                         )
                                     }
-                                    var perusahaan by rememberSaveable { mutableStateOf("") }
-                                    OutlinedTextField(
-                                        value = perusahaan,
-                                        onValueChange = {perusahaan = it},
-                                        placeholder = {
-                                            Text("Cari Perusahaan", color = Color.LightGray, fontSize = 10.sp)
-                                        },
-                                        trailingIcon = {
-                                            Row(verticalAlignment = Alignment.CenterVertically){
-                                                IconButton(onClick = {}) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.at_comment),
-                                                        "send_comment",
-                                                        tint = Color.Gray,
+                                }
+                            },
+
+                            ) { innerPadding ->
+
+                            Column(
+                                modifier = Modifier
+                                    .padding(start=15.dp, end= 15.dp)
+                                    .fillMaxWidth()
+                                    .padding(innerPadding),
+                                verticalArrangement = Arrangement.spacedBy(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+
+                            ) {Column{
+                                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+                                    Box(modifier = Modifier.padding(top=15.dp)){
+                                        Row{
+                                            Box(modifier = Modifier.requiredWidth(320.dp)){
+                                                Row(
+                                                    modifier = Modifier
+                                                        .clip(RoundedCornerShape(8.dp)),
+                                                    horizontalArrangement = Arrangement.spacedBy(
+                                                        space = 5.dp
+                                                    ),
+                                                )
+                                                {
+
+                                                    Box(
                                                         modifier = Modifier
-                                                            .requiredWidth(width = 23.dp)
-                                                            .requiredHeight(height = 23.dp))
-                                                }
-                                                IconButton(onClick = {}) {
-                                                    Icon(
-                                                        Icons.Filled.Send,
-                                                        "send_comment",
-                                                        tint = Color.Gray)
+                                                            .clip(RoundedCornerShape(8.dp))
+                                                            .size(56.dp)
+                                                    ) {
+                                                        Image(
+                                                            painter = painterResource(id = R.drawable.profil_image),
+                                                            contentDescription = "profil_user",
+                                                            modifier = Modifier
+                                                                .requiredWidth(width = 56.dp)
+                                                                .requiredHeight(height = 56.dp)
+
+                                                        )
+                                                    }
+
+                                                    Column {
+                                                        Row(
+                                                            horizontalArrangement = Arrangement.spacedBy(
+                                                                space = 5.dp
+                                                            )
+                                                        ){
+                                                            Text(
+                                                                text = "Raihan Alifya Lubis",
+                                                                color = Color.Black,
+                                                                style = TextStyle(
+                                                                    fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                                ),
+                                                            )
+                                                            Text(
+                                                                text =  "1h",
+                                                                color = Color.Gray,
+                                                                style = TextStyle(
+                                                                    fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                                ),
+                                                            )
+                                                        }
+
+                                                        Text(
+                                                            text = "Berapa perkiraan pegawai yang bakalan direkrut, bang?",
+                                                            color = Color.Black,
+                                                            style = TextStyle(
+                                                                fontSize = 12.sp
+                                                            )
+                                                        )
+                                                        ClickableText(
+                                                            text = AnnotatedString("Balas"),
+
+                                                            style = TextStyle(
+                                                                color = Color.Gray,
+                                                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                            ),
+                                                            onClick = { }
+                                                        )
+
+
+                                                    }
                                                 }
                                             }
 
-                                        },
-                                        colors = OutlinedTextFieldDefaults.colors(
-                                            focusedBorderColor = Color.Gray,
-                                            unfocusedBorderColor = Color.LightGray,
-                                        ),
-                                        singleLine = true,
-                                        shape = RoundedCornerShape(20.dp),
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(55.dp)
-                                            .background(
-                                                color = Color(0xffffffff),
-                                                shape = RoundedCornerShape(20.dp)
-                                            )
 
-                                    )
+                                        }
+                                    }
+                                    Column(
+                                        modifier=Modifier.padding(top=15.dp),
+                                        verticalArrangement = Arrangement.Center,
+                                        horizontalAlignment = Alignment.End
+                                    ) {
+                                        IconButton(
+                                            onClick = {},
+                                            modifier = Modifier
+                                                .requiredWidth(width = 20.dp)
+                                                .requiredHeight(height = 20.dp)
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Filled.FavoriteBorder,
+                                                contentDescription = "favorite",
+                                                tint = Color.Black
+                                            )
+                                        }
+                                        Text(
+                                            text = "15",
+                                            color = Color.Black,
+                                            style = TextStyle(
+                                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                            ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                                        )
+                                    }
+                                }
+
+                                val visible = remember { mutableStateOf(true) }
+                                Column (modifier=Modifier.fillMaxWidth().padding(start=61.dp),
+                                    horizontalAlignment = Alignment.Start) {
+                                    Row(horizontalArrangement = Arrangement.spacedBy(
+                                        space = 2.dp), verticalAlignment = Alignment.CenterVertically){
+                                        ClickableText(
+                                            text = AnnotatedString("Lihat 3 balasan"),
+
+                                            style = TextStyle(
+                                                color = Color.Gray,
+                                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                            ),
+                                            onClick = { visible.value = !visible.value}
+                                        )
+                                        Icon(
+                                            Icons.Filled.ArrowDropDown,
+                                            contentDescription = "balas",
+                                            tint = Color.LightGray)
+                                    }
+
+//Balasan komentar
+                                    AnimatedVisibility(visible = !visible.value) {
+                                        Column(
+                                            modifier = Modifier
+                                                .fillMaxWidth(),
+                                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                                            horizontalAlignment = Alignment.Start
+
+                                        ) {Column{
+                                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+                                                Box(modifier = Modifier.padding(top=5.dp)){
+                                                    Row{
+                                                        Box(modifier = Modifier.requiredWidth(280.dp)){
+                                                            Row(
+                                                                modifier = Modifier
+                                                                    .clip(RoundedCornerShape(8.dp)),
+                                                                horizontalArrangement = Arrangement.spacedBy(
+                                                                    space = 5.dp
+                                                                ),
+                                                            )
+                                                            {
+
+                                                                Box(
+                                                                    modifier = Modifier
+                                                                        .clip(RoundedCornerShape(8.dp))
+                                                                        .size(36.dp)
+                                                                ) {
+                                                                    Image(
+                                                                        painter = painterResource(id = R.drawable.profil_image),
+                                                                        contentDescription = "profil_user",
+                                                                        modifier = Modifier
+                                                                            .requiredWidth(width = 36.dp)
+                                                                            .requiredHeight(height = 36.dp)
+
+                                                                    )
+                                                                }
+
+                                                                Column {
+                                                                    Row(
+                                                                        horizontalArrangement = Arrangement.spacedBy(
+                                                                            space = 5.dp
+                                                                        )
+                                                                    ){
+                                                                        Text(
+                                                                            text = "Raihan Alifya Lubis",
+                                                                            color = Color.Black,
+                                                                            style = TextStyle(
+                                                                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                                            ),
+                                                                        )
+                                                                        Text(
+                                                                            text =  "1h",
+                                                                            color = Color.Gray,
+                                                                            style = TextStyle(
+                                                                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                                            ),
+                                                                        )
+                                                                    }
+
+                                                                    Text(
+                                                                        text = "Berapa perkiraan pegawai yang bakalan direkrut, bang?",
+                                                                        color = Color.Black,
+                                                                        style = TextStyle(
+                                                                            fontSize = 12.sp
+                                                                        )
+                                                                    )
+                                                                    ClickableText(
+                                                                        text = AnnotatedString("Balas"),
+
+                                                                        style = TextStyle(
+                                                                            color = Color.Gray,
+                                                                            fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                                        ),
+                                                                        onClick = { }
+                                                                    )
+
+
+                                                                }
+                                                            }
+                                                        }
+
+
+                                                    }
+                                                }
+                                                Column(
+                                                    modifier=Modifier.padding(top=5.dp),
+                                                    verticalArrangement = Arrangement.Center,
+                                                    horizontalAlignment = Alignment.End
+                                                ) {
+                                                    IconButton(
+                                                        onClick = {},
+                                                        modifier = Modifier
+                                                            .requiredWidth(width = 20.dp)
+                                                            .requiredHeight(height = 20.dp)
+                                                    ) {
+                                                        Icon(
+                                                            imageVector = Icons.Filled.FavoriteBorder,
+                                                            contentDescription = "favorite",
+                                                            tint = Color.Black
+                                                        )
+                                                    }
+                                                    Text(
+                                                        text = "15",
+                                                        color = Color.Black,
+                                                        style = TextStyle(
+                                                            fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                                        ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                                                    )
+                                                }
+                                            }
+                                        }
+
+                                        }
+                                    }
+//Akhir balasan komentar
+
                                 }
                             }
+
+                            }
                         }
+                        // End sheet content
                     }
                 }
                 Icon(
@@ -630,7 +672,7 @@ fun HomePageDetailShow() {
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Medium
-                        ), modifier = Modifier.align(alignment = Alignment.Center).padding(start=15.dp, end=15.dp, top=15.dp, bottom=30.dp)
+                        ), modifier = Modifier.align(alignment = Alignment.Center).padding(start=15.dp, end=15.dp, top=15.dp, bottom=60.dp)
                     )
                 }
 
@@ -775,19 +817,59 @@ fun HomePageDetailShow() {
 
                 }
             }
-            Box(
-                modifier = Modifier
-                    .requiredWidth(width = 200.dp)
-                    .requiredHeight(height = 280.dp)
-                    .align(alignment = Alignment.CenterHorizontally)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.poster),
-                    contentDescription = "poster_lowongan",
+            val scale = remember { mutableStateOf(1f) }
+            var offset by remember { mutableStateOf(Offset(0f, 0f)) }
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.align(alignment = Alignment.CenterHorizontally)){
+                Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                )
+                        .requiredWidth(width = 200.dp)
+                        .requiredHeight(height = 280.dp)
+                        .align(alignment = Alignment.CenterHorizontally)
+                        .clip(RectangleShape) // Clip the box content
+                        .background(Color.White)
+                        .border(2.dp, Color(0xFF2493DC))
+
+
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.poster),
+                        contentDescription = "poster_lowongan",
+                        modifier = Modifier
+                            .align(Alignment.Center) // keep the image centralized into the Box
+                            .pointerInput(Unit) {
+                                detectTransformGestures { centroid, pan, zoom, rotation ->
+                                    scale.value *= zoom
+                                    offset = if (scale.value == 1f) Offset(0f, 0f) else offset + pan
+                                }
+                            }
+                            .graphicsLayer(
+                                // adding some zoom limits (min 50%, max 200%)
+                                scaleX = maxOf(.5f, minOf(3f, scale.value)),
+                                scaleY = maxOf(.5f, minOf(3f, scale.value)),
+                                translationX = offset.x, translationY = offset.y
+                            ),
+                    )
+
+                }
+                TextButton(
+                    onClick = {
+                        scale.value = 1f
+                        offset = Offset(0f, 0f)
+                    },
+                    modifier = Modifier
+                        .background(Color(0xFF2493DC))
+                        .requiredHeight(height = 30.dp)
+                        .requiredWidth(width = 200.dp)
+                ) {
+                    Text(text = "Reset zoom",
+                        color = Color.White,
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Black
+                        ))
+                }
             }
+
             Column{
                 Text(
                     text = "Kriteria",
