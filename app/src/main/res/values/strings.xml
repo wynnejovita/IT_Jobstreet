@@ -98,4 +98,10 @@
     <string name="title_activity_search_orang">Search_orang</string>
     <string name="title_activity_search_perusahaan">Search_perusahaan</string>
     <string name="title_activity_search_not_found">Search_NotFound</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_home_page_detail">HomePageDetail</string>
+    <string name="title_activity_profile_posting">ProfilePosting</string>
+    <string name="title_activity_coba">Coba</string>
+    <string name="title_activity_profile_komentar">ProfileKomentar</string>
+    <string name="title_activity_profile_review">ProfileReview</string>
 </resources>

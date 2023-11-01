@@ -24,8 +24,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
@@ -33,7 +33,6 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -269,7 +268,7 @@ fun SearchPerusahaan() {
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Localized description",
                             tint = Color(0xffffffff)
                         )
@@ -278,7 +277,7 @@ fun SearchPerusahaan() {
                 actions = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector =  ImageVector.vectorResource(id = R.drawable.vector),
+                            imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "filter",
                             modifier = Modifier
                                 .requiredWidth(width = 30.dp)
