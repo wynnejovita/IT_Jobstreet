@@ -89,7 +89,14 @@ class Search_NotFound : ComponentActivity() {
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 // tes
+>>>>>>> origin/master
+=======
+// tes
+>>>>>>> bd94d0cd04410114952b16c68c62c80457af2ad3
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchNotFound() {

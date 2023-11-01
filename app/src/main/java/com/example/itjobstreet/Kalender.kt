@@ -68,7 +68,7 @@ fun TampilKalender() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconButton(onClick = { /* dismiss the UI */ }) {
+            IconButton(onClick = { }) {
                 Icon(Icons.Filled.Close, contentDescription = "Localized description")
             }
             TextButton(
@@ -97,3 +97,6 @@ fun KalenderPreview() {
         TampilKalender()
     }
 }
+=======
+}
+>>>>>>> bd94d0cd04410114952b16c68c62c80457af2ad3
