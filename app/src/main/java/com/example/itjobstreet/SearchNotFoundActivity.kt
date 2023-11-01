@@ -1,6 +1,5 @@
 package com.example.itjobstreet
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,17 +24,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -66,7 +62,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
@@ -77,7 +72,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class Search_orang : ComponentActivity() {
+class SearchNotFoundActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -87,16 +82,24 @@ class Search_orang : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SearchOrang()
+                    SearchNotFound()
                 }
             }
         }
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+// tes
+>>>>>>> origin/master
+=======
+// tes
+>>>>>>> bd94d0cd04410114952b16c68c62c80457af2ad3
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchOrang() {
+fun SearchNotFound() {
     Scaffold(
         topBar = {
             Box(
@@ -273,7 +276,7 @@ fun SearchOrang() {
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Localized description",
                             tint = Color(0xffffffff)
                         )
@@ -282,7 +285,7 @@ fun SearchOrang() {
                 actions = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector =  ImageVector.vectorResource(id = R.drawable.visibility),
+                            imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "Localized description",
                             modifier = Modifier
                                 .requiredWidth(width = 30.dp)
@@ -370,6 +373,46 @@ fun SearchOrang() {
                 space = 16.dp
             )
         ) {
+                Column{
+                    Box(modifier = Modifier.padding(top = 25.dp, start = 180.dp, end = 210.dp)){
+                            Box(
+                                modifier = Modifier
+                                    .requiredWidth(width = 150.dp)
+                                    .requiredHeight(height = 150.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.logo_ti),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 150.dp)
+                                        .requiredHeight(height = 150.dp)
+
+                                )
+                            }
+
+
+
+                    }
+                    Text(
+                        text = "Waduh, Pencarian Tidak Ditemukan",
+                        color = Color(0x802493DC),
+                        modifier = Modifier.padding(top = 10.dp, start = 90.dp),
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    )
+                    Text(
+                        text = "Waduh, Pencarian Tidak DitemukanCoba cari dengan kata kunci lainnya atau lihat rekomendasi pekerjaan di bawah ini.",
+                        color = Color(0x99000000),
+                        modifier = Modifier.padding(top = 2.dp, start = 20.dp, end = 20.dp),
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    )
+                }
+
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp
@@ -410,12 +453,14 @@ fun SearchOrang() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
                                 Text(
                                     text = "Alumni",
+                                    modifier = Modifier.padding(start = 5.dp),
                                     color = Color(0xff616161),
                                     style = TextStyle(
                                         fontSize = 12.sp,
@@ -424,6 +469,7 @@ fun SearchOrang() {
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
@@ -476,12 +522,83 @@ fun SearchOrang() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
                                 Text(
                                     text = "Alumni",
+                                    color = Color(0xff616161),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
+                                )
+                            }
+                            Column {
+                                Text(
+                                    text = "Raihan Alifya Lubis",
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    modifier = Modifier.padding(start = 5.dp),
                                     color = Color(0xff616161),
                                     style = TextStyle(
                                         fontSize = 12.sp,
@@ -490,6 +607,145 @@ fun SearchOrang() {
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
+                                )
+                            }
+                            Column {
+                                Text(
+                                    text = "Raihan Alifya Lubis",
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    color = Color(0xff616161),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
+                                )
+                            }
+                            Column {
+                                Text(
+                                    text = "Raihan Alifya Lubis",
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    color = Color(0xff616161),
+                                    modifier = Modifier.padding(start = 5.dp),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
@@ -542,6 +798,7 @@ fun SearchOrang() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
@@ -549,6 +806,7 @@ fun SearchOrang() {
                                 Text(
                                     text = "Alumni",
                                     color = Color(0xff616161),
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Medium
@@ -556,204 +814,7 @@ fun SearchOrang() {
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(90.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(90.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(90.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    modifier = Modifier.padding(start = 5.dp),
                                     style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
@@ -769,10 +830,9 @@ fun SearchOrang() {
         }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
-fun SearchOrangPreview() {
-        SearchOrang()
+fun SearchNotFoundPreview() {
+        SearchNotFound()
 
 }

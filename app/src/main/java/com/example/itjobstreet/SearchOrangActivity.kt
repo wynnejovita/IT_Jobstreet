@@ -1,11 +1,8 @@
 package com.example.itjobstreet
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,20 +24,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -49,7 +41,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -72,20 +63,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.itjobstreet.ui.ui.theme.ITJobstreetTheme
-import java.time.format.TextStyle
+import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class Search_post : ComponentActivity() {
+class SearchOrangActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -95,19 +83,16 @@ class Search_post : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        SearchPost()
-                    }
+                    SearchOrang()
                 }
             }
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchPost() {
+fun SearchOrang() {
     Scaffold(
         topBar = {
             Box(
@@ -192,8 +177,8 @@ fun SearchPost() {
                     ){
                         OutlinedButton(
                             onClick={},
-                            border = BorderStroke(1.dp,Color(0xFF2493DC)),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                            border = BorderStroke(1.dp,Color.White),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(50.dp))
                                 .padding(end = 10.dp)
@@ -201,7 +186,7 @@ fun SearchPost() {
                         ){
                             Text(
                                 text = "Posting",
-                                color = Color(0xFF2493DC),
+                                color = Color(0xFFFFFFFF),
                                 style = androidx.compose.ui.text.TextStyle(
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold
@@ -211,14 +196,14 @@ fun SearchPost() {
                         Button(
                             onClick={},
                             border = BorderStroke(1.dp,Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                             modifier = Modifier
                                 .clip(shape = RoundedCornerShape(50.dp))
                                 .padding(end = 10.dp)
                         ){
                             Text(
                                 text = "Orang",
-                                color = Color(0xFFFFFFFF),
+                                color = Color(0xFF2493DC),
                                 style = androidx.compose.ui.text.TextStyle(
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold
@@ -284,7 +269,7 @@ fun SearchPost() {
                 navigationIcon = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Localized description",
                             tint = Color(0xffffffff)
                         )
@@ -293,7 +278,7 @@ fun SearchPost() {
                 actions = {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
-                            imageVector =  ImageVector.vectorResource(id = R.drawable.visibility),
+                            imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "Localized description",
                             modifier = Modifier
                                 .requiredWidth(width = 30.dp)
@@ -370,7 +355,7 @@ fun SearchPost() {
             }
         },
 
-    ) { innerPadding ->
+        ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
@@ -378,7 +363,7 @@ fun SearchPost() {
                 .fillMaxSize()
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(
-                space = 25.dp
+                space = 16.dp
             )
         ) {
             ElevatedCard(
@@ -390,19 +375,10 @@ fun SearchPost() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
+                    .height(90.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
                         Row(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
@@ -418,7 +394,7 @@ fun SearchPost() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.visibility),
+                                    painter = painterResource(id = R.drawable.profil_image),
                                     contentDescription = "profil_user",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
@@ -430,145 +406,27 @@ fun SearchPost() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
                                 Text(
                                     text = "Alumni",
                                     color = Color(0xff616161),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Medium
                                     )
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
                                 )
                             }
-                        }
-
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 13.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top=20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-
-
-                        }
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black
-                                )
-                            }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
 
                     }
@@ -583,19 +441,10 @@ fun SearchPost() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
+                    .height(90.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
                         Row(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
@@ -611,7 +460,7 @@ fun SearchPost() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.visibility),
+                                    painter = painterResource(id = R.drawable.profil_image),
                                     contentDescription = "profil_user",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
@@ -623,339 +472,27 @@ fun SearchPost() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
                                 Text(
                                     text = "Alumni",
                                     color = Color(0xff616161),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Medium
                                     )
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
                                     ),
                                     onClick = {}
                                 )
                             }
-                        }
-
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 13.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top=20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-
-
-                    }
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black
-                                )
-                            }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
-                        }
-
-                    }
-
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.visibility),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 13.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top=20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-
-
-                    }
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black
-                                )
-                            }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
 
                     }
@@ -970,19 +507,10 @@ fun SearchPost() {
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(220.dp)
+                    .height(90.dp)
             ){
                 Column{
                     Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
                         Row(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
@@ -998,7 +526,7 @@ fun SearchPost() {
                                     .size(56.dp)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.visibility),
+                                    painter = painterResource(id = R.drawable.profil_image),
                                     contentDescription = "profil_user",
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
@@ -1010,21 +538,21 @@ fun SearchPost() {
                                 Text(
                                     text = "Raihan Alifya Lubis",
                                     color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp, fontWeight = FontWeight.Medium
                                     ),
                                 )
                                 Text(
                                     text = "Alumni",
                                     color = Color(0xff616161),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.Medium
                                     )
                                 )
                                 ClickableText(
                                     text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
                                         color = Color(0xff2493dc),
                                         fontSize = 12.sp
                                     ),
@@ -1034,121 +562,201 @@ fun SearchPost() {
                         }
 
                     }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 13.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top=20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = androidx.compose.ui.text.TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-
-
-                    }
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
-                    )
-                    {
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
                         Row(
                             modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
                             verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
+                                )
+                            }
+                            Column {
                                 Text(
-                                    text = "17",
+                                    text = "Raihan Alifya Lubis",
                                     color = Color.Black,
-                                    style = androidx.compose.ui.text.TextStyle(
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    color = Color(0xff616161),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
                                         fontSize = 12.sp
                                     ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
+                                    onClick = {}
                                 )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
                             }
-
-
                         }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
                         Row(
                             modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
                             verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
+                        ) {
+                            Box(
                                 modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
                             ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
+                            Column {
+                                Text(
+                                    text = "Raihan Alifya Lubis",
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    color = Color(0xff616161),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+            ElevatedCard(
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 5.dp
+                ),
+                colors = CardDefaults.outlinedCardColors(
+                    containerColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+            ){
+                Column{
+                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                        Row(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .fillMaxWidth(),
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 5.dp
+                            ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
                                 modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .size(56.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.profil_image),
+                                    contentDescription = "profil_user",
+                                    modifier = Modifier
+                                        .requiredWidth(width = 56.dp)
+                                        .requiredHeight(height = 56.dp)
+
                                 )
-
-
                             }
-
+                            Column {
+                                Text(
+                                    text = "Raihan Alifya Lubis",
+                                    color = Color.Black,
+                                    style = TextStyle(
+                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
+                                    ),
+                                )
+                                Text(
+                                    text = "Alumni",
+                                    color = Color(0xff616161),
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
+                                    style = TextStyle(
+                                        color = Color(0xff2493dc),
+                                        fontSize = 12.sp
+                                    ),
+                                    onClick = {}
+                                )
+                            }
                         }
 
                     }
@@ -1158,10 +766,9 @@ fun SearchPost() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
-fun SearchPostPreview() {
-        SearchPost()
+fun SearchOrangPreview() {
+        SearchOrang()
 
 }
