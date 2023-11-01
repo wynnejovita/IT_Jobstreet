@@ -374,15 +374,13 @@ fun SearchNotFound() {
                             ) {
                                 Image(
                                     painter = painterResource(id = R.drawable.logo_ti),
-                                    contentDescription = "profil_user",
+                                    contentDescription = "Not_Found",
                                     modifier = Modifier
                                         .requiredWidth(width = 150.dp)
                                         .requiredHeight(height = 150.dp)
 
                                 )
                             }
-
-
 
                     }
                     Text(
