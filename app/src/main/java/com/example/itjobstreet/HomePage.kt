@@ -47,6 +47,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -103,7 +104,7 @@ fun HomePageShow() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(200.dp)
                     .background(color = Color(0xFF2493DC))
 
             ){
@@ -128,18 +129,18 @@ fun HomePageShow() {
 
                     var expanded by remember { mutableStateOf(false) }
                     var selectedItem by remember { mutableStateOf("Lokasi") }
-                    val listKota = listOf("Lokasi", "Medan", "Jakarta", "Bandung")
+                    val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
                     Column(
                         horizontalAlignment = Alignment.Start,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(80.dp)
+                            .height(50.dp)
                     ){
                         Box{
                             TextButton(onClick = { expanded = true }) {
                                 Row{
                                     Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
-                                        fontSize = 18.sp,
+                                        fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold),
                                     )
                                     Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
@@ -171,7 +172,7 @@ fun HomePageShow() {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(58.dp)
+                        .height(80.dp)
                         .align(alignment = Alignment.BottomCenter)
 
                 ){
@@ -194,7 +195,7 @@ fun HomePageShow() {
                                 text = "Rekomendasi",
                                 color = Color(0xFF2493DC),
                                 style = TextStyle(
-                                    fontSize = 12.sp,
+                                    fontSize = 14.sp,
                                     fontWeight = FontWeight.Bold),
                             )
                         }
@@ -209,13 +210,13 @@ fun HomePageShow() {
                                 text = "Terbaru",
                                 color = Color(0xFFFFFFFF),
                                 style = TextStyle(
-                                    fontSize = 12.sp,
+                                    fontSize = 14.sp,
                                     fontWeight = FontWeight.Bold),
                             )
                         }
                         var rExpanded by remember { mutableStateOf(false) }
                         var rSelectedItem by remember { mutableStateOf("Rating") }
-                        val listRating = listOf("Rating", "1", "2", "3",  "4", "5")
+                        val listRating = listOf("1", "2", "3",  "4", "5")
 
                         Box{
 
@@ -236,7 +237,7 @@ fun HomePageShow() {
                                     Text(
                                         text = "$rSelectedItem", color = Color(0xFFFFFFFF),
                                         style = TextStyle(
-                                            fontSize = 12.sp,
+                                            fontSize = 14.sp,
                                             fontWeight = FontWeight.Bold),
                                     )
                                 }
@@ -291,12 +292,16 @@ fun HomePageShow() {
                             focusedBorderColor = Color.Gray,
                             unfocusedBorderColor = Color.LightGray,
                         ),
+                        textStyle = LocalTextStyle.current.copy(
+                            fontSize = 14.sp,
+                            color = Color.Black
+                        ),
                         singleLine = true,
                         shape = RoundedCornerShape(20.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(55.dp)
-                            .padding(top = 5.dp, bottom = 5.dp )
+                            .height(75.dp)
+                            .padding(top = 15.dp, bottom = 5.dp )
                             .background(
                                 color = Color(0xffffffff),
                                 shape = RoundedCornerShape(20.dp)
@@ -391,8 +396,6 @@ fun HomePageShow() {
             }
         }
     ) { innerPadding ->
-
-
         Column(modifier = Modifier
             .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
             .verticalScroll(rememberScrollState())
@@ -556,6 +559,25 @@ fun HomePageShow() {
                             verticalAlignment = Alignment.CenterVertically
                         )
                         {
+                            val saveable = remember { mutableStateOf(true) }
+                            IconButton(
+                                onClick = {saveable.value = !saveable.value},
+                                modifier = Modifier
+                            ){
+                                if (saveable.value) {
+                                    Icon(
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
+                                    )
+                                }
+                            }
                             val sendIntent: Intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
@@ -571,23 +593,10 @@ fun HomePageShow() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
                     }
                 }
@@ -747,6 +756,25 @@ fun HomePageShow() {
                             verticalAlignment = Alignment.CenterVertically
                         )
                         {
+                            val saveable = remember { mutableStateOf(true) }
+                            IconButton(
+                                onClick = {saveable.value = !saveable.value},
+                                modifier = Modifier
+                            ){
+                                if (saveable.value) {
+                                    Icon(
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
+                                    )
+                                }
+                            }
                             val sendIntent: Intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
@@ -762,23 +790,10 @@ fun HomePageShow() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
                     }
                 }
@@ -943,6 +958,26 @@ fun HomePageShow() {
                             type = "text/plain"
                             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                         }
+
+                            val saveable = remember { mutableStateOf(true) }
+                            IconButton(
+                                onClick = {saveable.value = !saveable.value},
+                                modifier = Modifier
+                            ){
+                                if (saveable.value) {
+                                    Icon(
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
+                                    )
+                                }
+                            }
                             val shareIntent = Intent.createChooser(sendIntent, null)
                             val context = LocalContext.current
                             IconButton(
@@ -952,21 +987,9 @@ fun HomePageShow() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
-                            }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
                             }
 
                         }
