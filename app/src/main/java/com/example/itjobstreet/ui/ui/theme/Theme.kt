@@ -1,4 +1,4 @@
-package com.example.itjobstreet.ui.theme
+package com.example.itjobstreet.ui.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -16,18 +16,15 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Blue01,
+    primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80,
-    background = White01,
-    onSurface = Gray01,
+    tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Blue01,
+    primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40,
-    background = White01,
+    tertiary = Pink40
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

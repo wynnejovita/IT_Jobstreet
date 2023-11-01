@@ -49,7 +49,7 @@ class Kalender : ComponentActivity() {
         }
     }
 }
-
+//tes
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TampilKalender() {
@@ -68,7 +68,7 @@ fun TampilKalender() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconButton(onClick = { /* dismiss the UI */ }) {
+            IconButton(onClick = { }) {
                 Icon(Icons.Filled.Close, contentDescription = "Localized description")
             }
             TextButton(

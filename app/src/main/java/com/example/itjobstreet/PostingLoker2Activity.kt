@@ -71,6 +71,12 @@ class PostingLoker2Activity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PostingLoker2() {
+    // var untuk textfield yang wajib diisi namun tidak terisi
+    var errorText by rememberSaveable { mutableStateOf("") }
+
+    // var value di card deskripsi
+    var deskripsi by rememberSaveable { mutableStateOf("") }
+
     Scaffold(
         // navbar atas
         topBar = {
@@ -110,7 +116,14 @@ fun PostingLoker2() {
                 ) {
                     // tombol untuk posting
                     ElevatedButton(
-                        onClick = {},
+                        onClick = {
+                            errorText = if (deskripsi.isEmpty()) {
+                                "wajib diisi!"
+                            } else {
+                                ""
+                                // lanjut posting
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
                     ) {
                         Text("Posting", color = Color.White)
@@ -128,8 +141,7 @@ fun PostingLoker2() {
             verticalArrangement = Arrangement.spacedBy(
                 space = 20.dp
             ),
-
-            ){
+        ){
             /* Card Deskripsi Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
@@ -142,25 +154,39 @@ fun PostingLoker2() {
                     .height(222.dp)
                     .fillMaxWidth()
             ){
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(style = SpanStyle(
-                            color = Color.Black,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        ) {append("Deskripsi")}
-                        withStyle(style = SpanStyle(
-                            color = Color(0xffe84642),
-                            fontSize = 18.sp)
-                        ) {append("*")}
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                )
+                Box(Modifier.fillMaxWidth()) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            ) { append("Deskripsi") }
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color(0xffe84642),
+                                    fontSize = 18.sp
+                                )
+                            ) { append("*") }
+                        },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                    )
 
-                var deskripsi by rememberSaveable { mutableStateOf("") }
+                    Text(
+                        text = errorText,
+                        color = Color.Red,
+                        style = TextStyle(
+                            fontSize = 12.sp
+                        ),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
+                    )
+                }
 
                 //text field input untuk mengisi deskripsi loker
                 OutlinedTextField(
@@ -176,8 +202,10 @@ fun PostingLoker2() {
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.Gray,
                         unfocusedBorderColor = Color.LightGray,
+                        errorContainerColor = Color(0xFFFFF6F6)
                     ),
                     singleLine = false,
+                    isError = errorText.isNotEmpty(),
                     modifier = Modifier
                         .padding(7.dp)
                         .height(172.dp)

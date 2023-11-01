@@ -89,6 +89,19 @@ class PostingLoker1Activity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PostingLoker1() {
+    // var untuk textfield yang wajib diisi namun tidak terisi
+    var errorText by remember { mutableStateOf("") }
+
+    // var value di card perusahaan
+    var perusahaanValue by remember() { mutableStateOf("") }
+
+    // var value di card posisi
+    var posisiValue by remember { mutableStateOf("") }
+
+    // var value di card kriteria
+    var kriteria by remember { mutableStateOf("") }
+
+
     Scaffold(
         // navbar atas
         topBar = {
@@ -127,9 +140,16 @@ fun PostingLoker1() {
                     verticalAlignment = Alignment.CenterVertically
 
                 ) {
-                    // tombol untuk lanjut ke field loker selanjutnya
+                    // tombol untuk lanjut ke halaman field loker selanjutnya
                     ElevatedButton(
-                        onClick = {},
+                        onClick = {
+                            errorText = if (perusahaanValue.isEmpty() || posisiValue.isEmpty() || kriteria.isEmpty()) {
+                                "wajib diisi!"
+                            } else {
+                                ""
+                                // Lanjut ke halaman field loker selanjutnya
+                            }
+                        },
                         colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
                     ) {
                         Text("Selanjutnya", color = Color.White)
@@ -154,32 +174,47 @@ fun PostingLoker1() {
                     defaultElevation = 5.dp
                 ),
                 colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
+                    containerColor = Color.White,
                 ),
                 modifier = Modifier
                     .height(108.dp)
+//                    .border(1.dp, Color.Red, shape = RoundedCornerShape(10.dp))
                     .fillMaxWidth()
             ) {
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Black,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        ) { append("Perusahaan") }
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color(0xffe84642),
-                                fontSize = 18.sp
-                            )
-                        ) { append("*") }
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                )
+                Box(Modifier.fillMaxWidth()) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            ) { append("Perusahaan") }
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color(0xffe84642),
+                                    fontSize = 18.sp
+                                )
+                            ) { append("*") }
+                        },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                    )
+
+                    Text(
+                        text = errorText,
+                        color = Color.Red,
+                        style = TextStyle(
+                            fontSize = 12.sp
+                        ),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
+                    )
+                }
+
                 // list nama perusahaan untuk dropdown
                 val listPerusahaan = listOf(
                     "PT Telkom Indonesia",
@@ -192,8 +227,7 @@ fun PostingLoker1() {
                 )
 
                 // dropdown
-                var expanded by remember { mutableStateOf(false) }
-                var perusahaanValue by remember { mutableStateOf("") }
+                var expanded by rememberSaveable { mutableStateOf(false) }
 
                 ExposedDropdownMenuBox(
                     expanded = expanded,
@@ -225,15 +259,17 @@ fun PostingLoker1() {
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = Color.Gray,
                             unfocusedBorderColor = Color.LightGray,
+                            errorContainerColor = Color(0xFFFFF6F6)
                         ),
-
                         singleLine = true,
+                        isError = errorText.isNotEmpty(),
                         modifier = Modifier
                             .padding(7.dp)
                             .height(70.dp)
                             .fillMaxWidth()
                             .menuAnchor(), // menuAnchor modifier must be passed to the text field for correctness
                     )
+
                     // filter options berdasarkan inputan user di text field
                     val filteringOptions =
                         listPerusahaan.filter { it.contains(perusahaanValue, ignoreCase = true) }
@@ -269,26 +305,40 @@ fun PostingLoker1() {
                     .height(108.dp)
                     .fillMaxWidth()
             ) {
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Black,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        ) { append("Posisi") }
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color(0xffe84642),
-                                fontSize = 18.sp
-                            )
-                        ) { append("*") }
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                )
+                Box(Modifier.fillMaxWidth()) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            ) { append("Posisi") }
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color(0xffe84642),
+                                    fontSize = 18.sp
+                                )
+                            ) { append("*") }
+                        },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                    )
+
+                    Text(
+                        text = errorText,
+                        color = Color.Red,
+                        style = TextStyle(
+                            fontSize = 12.sp
+                        ),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
+                    )
+                }
+
                 // list posisi pekerjaan untuk dropdown
                 val listPosisi = listOf(
                     "Project Manager",
@@ -299,8 +349,7 @@ fun PostingLoker1() {
                 )
 
                 // dropdown
-                var expanded by remember { mutableStateOf(false) }
-                var textFieldValue by remember { mutableStateOf("") }
+                var expanded by rememberSaveable { mutableStateOf(false) }
 
                 ExposedDropdownMenuBox(
                     expanded = expanded,
@@ -310,9 +359,9 @@ fun PostingLoker1() {
                 ) {
                     // text field untuk input memilih posisi pekerjaan
                     OutlinedTextField(
-                        value = textFieldValue,
+                        value = posisiValue,
                         onValueChange = { newValue ->
-                            textFieldValue = newValue
+                            posisiValue = newValue
                         },
                         textStyle = LocalTextStyle.current.copy(
                             fontSize = 16.sp,
@@ -327,9 +376,10 @@ fun PostingLoker1() {
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = Color.Gray,
                             unfocusedBorderColor = Color.LightGray,
+                            errorContainerColor = Color(0xFFFFF6F6)
                         ),
-
                         singleLine = true,
+                        isError = errorText.isNotEmpty(),
                         modifier = Modifier
                             .padding(7.dp)
                             .height(70.dp)
@@ -338,17 +388,17 @@ fun PostingLoker1() {
                     )
                     // filter options berdasarkan inputan user di text field
                     val filteringOptions =
-                        listPosisi.filter { it.contains(textFieldValue, ignoreCase = true) }
+                        listPosisi.filter { it.contains(posisiValue, ignoreCase = true) }
                     if (filteringOptions.isNotEmpty()) {
                         ExposedDropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = false },
                         ) {
-                            filteringOptions.forEach { selectedMovie ->
+                            filteringOptions.forEach { pilihPosisi ->
                                 DropdownMenuItem(
-                                    text = { Text(selectedMovie) },
+                                    text = { Text(pilihPosisi) },
                                     onClick = {
-                                        textFieldValue = selectedMovie
+                                        posisiValue = pilihPosisi
                                         expanded = false
                                     },
                                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
@@ -371,27 +421,39 @@ fun PostingLoker1() {
                     .height(108.dp)
                     .fillMaxWidth()
             ) {
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Black,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        ) { append("Kriteria") }
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color(0xffe84642),
-                                fontSize = 18.sp
-                            )
-                        ) { append("*") }
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                )
-                var kriteria by rememberSaveable { mutableStateOf("") }
+                Box(Modifier.fillMaxWidth()) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            ) { append("Kriteria") }
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color(0xffe84642),
+                                    fontSize = 18.sp
+                                )
+                            ) { append("*") }
+                        },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                    )
+
+                    Text(
+                        text = errorText,
+                        color = Color.Red,
+                        style = TextStyle(
+                            fontSize = 12.sp
+                        ),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
+                    )
+                }
 
                 //text field untuk input tambah kriteria
                 OutlinedTextField(
@@ -407,6 +469,7 @@ fun PostingLoker1() {
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color.Gray,
                         unfocusedBorderColor = Color.LightGray,
+                        errorContainerColor = Color(0xFFFFF6F6)
                     ),
                     trailingIcon = {
                         Icon(
@@ -416,6 +479,7 @@ fun PostingLoker1() {
                         )
                     },
                     singleLine = false,
+                    isError = errorText.isNotEmpty(),
                     modifier = Modifier
                         .padding(7.dp)
                         .height(70.dp)
@@ -617,7 +681,7 @@ fun PostingLoker1() {
                             text = "Tanggal Pendaftaran",
                             color = Color.LightGray,
                             style = TextStyle(
-                                    fontSize = 16.sp),
+                                fontSize = 16.sp),
                             modifier = Modifier
                                 .align(alignment = Alignment.Center)
                                 .fillMaxWidth()
