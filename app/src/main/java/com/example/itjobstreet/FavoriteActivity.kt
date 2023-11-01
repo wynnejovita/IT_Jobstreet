@@ -301,7 +301,8 @@ fun Favorite() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
                         }
@@ -498,7 +499,8 @@ fun Favorite() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
                         }
@@ -694,7 +696,8 @@ fun Favorite() {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
                         }
