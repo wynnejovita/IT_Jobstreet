@@ -26,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
@@ -43,9 +44,11 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -59,6 +62,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -89,155 +93,29 @@ class Search_perusahaan : ComponentActivity() {
         }
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchPerusahaan() {
     Scaffold(
         topBar = {
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
-                    .background(color = Color(0xFF2493DC)))
-            {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-
-
-                        .height(80.dp)
-                        .align(alignment = Alignment.CenterStart)
-                        .padding(20.dp)
-                )
-                { Row(modifier = Modifier
-                    .fillMaxSize(),
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically,){
-                    Icon(
-                        imageVector = Icons.Filled.LocationOn,
-                        contentDescription = "notifications",
-                        tint = Color.White)
-
-                    var expanded by remember { mutableStateOf(false) }
-                    var selectedItem by remember { mutableStateOf("Lokasi") }
-                    val listKota = listOf("Lokasi", "Medan", "Jakarta", "Bandung")
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(80.dp)
-                    ){
-                        Box{
-                            TextButton(onClick = { expanded = true }) {
-                                Row{
-                                    Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Bold
-                                    ),
-                                    )
-                                    Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
-                                }
-                            }
-                            DropdownMenu(expanded = expanded, onDismissRequest = { expanded=false }) {
-                                listKota.forEach{
-                                    DropdownMenuItem(modifier=Modifier
-                                        .background(
-                                            color = Color(0xffffffff)
-                                        ),
-                                        text = { Text(it, color = Color(0xFF2493DC) )},
-                                        onClick = {
-                                            selectedItem = it
-                                            expanded = false }
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-
-
-
-                }
-
-                }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(58.dp)
-                        .align(alignment = Alignment.BottomCenter)
-
+                    .background(color = Color(0xFF2493DC))
+            ){
+                Box(modifier = Modifier
+                    .padding(top= 5.dp)
+                    .height(50.dp)
+                    .fillMaxWidth()
                 ){
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
-                        OutlinedButton(
-                            onClick={},
-                            border = BorderStroke(1.dp, Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
-                            modifier = Modifier
-                                .clip(shape = RoundedCornerShape(50.dp))
-                                .padding(end = 10.dp)
-
-                        ){
-                            Text(
-                                text = "Posting",
-                                color = Color(0xFFFFFFFF),
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold
-                                ),
-                            )
-                        }
-                        Button(
-                            onClick={},
-                            border = BorderStroke(1.dp, Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
-                            modifier = Modifier
-                                .clip(shape = RoundedCornerShape(50.dp))
-                                .padding(end = 10.dp)
-                        ){
-                            Text(
-                                text = "Orang",
-                                color = Color.White,
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold
-                                ),
-                            )
-                        }
-                        Button(
-                            onClick={},
-                            border = BorderStroke(1.dp, Color.White),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                            modifier = Modifier
-                                .clip(shape = RoundedCornerShape(50.dp))
-                                .padding(end = 10.dp)
-                        ){
-                            Text(
-                                text = "Perusahaan",
-                                color = Color(0xFF2493DC),
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold
-                                ),
-                            )
-                        }
-
-
-
-
+                    IconButton(modifier = Modifier
+                        .align(alignment = Alignment.CenterStart),
+                        onClick = {}) {
+                        Icon(
+                            Icons.Filled.ArrowBack,
+                            "backIcon",
+                            tint = Color.White)
                     }
-                }
-            }
-            TopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color(0xFF2493DC)
-                ),
-                title = {
                     var perusahaan by rememberSaveable { mutableStateOf("") }
                     OutlinedTextField(
                         value = perusahaan,
@@ -251,41 +129,132 @@ fun SearchPerusahaan() {
                                 contentDescription = "Search",
                                 tint = Color.LightGray)
                         },
-
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color.Gray,
+                            unfocusedBorderColor = Color.LightGray,
+                        ),
+                        textStyle = LocalTextStyle.current.copy(
+                            fontSize = 14.sp,
+                            color = Color.Black
+                        ),
                         singleLine = true,
                         shape = RoundedCornerShape(20.dp),
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(55.dp)
-                            .padding(top = 5.dp, bottom = 5.dp)
+                            .height(50.dp)
+                            .padding(start=10.dp, end=10.dp)
                             .background(
                                 color = Color(0xffffffff),
                                 shape = RoundedCornerShape(20.dp)
                             )
+                            .align(alignment = Alignment.Center)
 
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Localized description",
-                            tint = Color(0xffffffff)
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(modifier = Modifier
+                        .align(alignment = Alignment.CenterEnd),
+                        onClick = {}) {
                         Icon(
                             imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "filter",
                             modifier = Modifier
                                 .requiredWidth(width = 30.dp)
-                                .requiredHeight(height = 30.dp)
+                                .requiredHeight(height = 30.dp))
+                    }
+                }
+
+                Row(modifier = Modifier.padding(start=15.dp),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically,){
+                    Icon(
+                        imageVector = Icons.Filled.LocationOn,
+                        contentDescription = "notifications",
+                        tint = Color.White)
+
+                    var expanded by remember { mutableStateOf(false) }
+                    var selectedItem by remember { mutableStateOf("Lokasi") }
+                    val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
+
+                    TextButton(onClick = { expanded = true }) {
+                        Row(verticalAlignment = Alignment.CenterVertically){
+                            Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold),
+                            )
+                            Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
+                        }
+                    }
+                    DropdownMenu(expanded = expanded, onDismissRequest = { expanded=false }) {
+                        listKota.forEach{
+                            DropdownMenuItem(modifier=Modifier
+                                .background(
+                                    color = Color(0xffffffff)
+                                ),
+                                text = { Text(it, color = Color(0xFF2493DC) )},
+                                onClick = {
+                                    selectedItem = it
+                                    expanded = false }
+                            )
+                        }
+                    }
+
+
+
+
+
+                }
+                Row(
+                    modifier = Modifier.padding(start=15.dp, end=15.dp, bottom=5.dp).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ){
+                    OutlinedButton(
+                        onClick={},
+                        border = BorderStroke(1.dp,Color(0xFFFFFFFF)),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(50.dp))
+                            .padding(end=10.dp)
+
+                    ){
+                        Text(
+                            text = "Posting",
+                            color = Color(0xFFFFFFFF),
+                            style = TextStyle(
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold),
                         )
                     }
-                },
-            )
+                    Button(
+                        onClick={},
+                        border = BorderStroke(1.dp,Color.White),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp)
+                    ){
+                        Text(
+                            text = "Orang",
+                            color = Color(0xFFFFFFFF),
+                            style = TextStyle(
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold),
+                        )
+                    }
+                    Button(
+                        onClick={},
+                        border = BorderStroke(1.dp,Color.White),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFFFFF)),
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp)
+                    ){
+                        Text(
+                            text = "Perusahaan",
+                            color = Color(0xFF2493DC),
+                            style = TextStyle(
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold),
+                        )
+                    }
+                }
+            }
         },
         bottomBar = {
             BottomAppBar(
@@ -331,8 +300,7 @@ fun SearchPerusahaan() {
                                     width = 55.dp,
                                     height = 55.dp
                                 ),
-                            tint = Color(0xFF2493DC)
-                        )
+                            tint = Color(0xFF2493DC))
                     }
                     IconButton(onClick = {},
                         modifier = Modifier
@@ -353,9 +321,8 @@ fun SearchPerusahaan() {
 
                 }
             }
-        },
-
-        ) { innerPadding ->
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
