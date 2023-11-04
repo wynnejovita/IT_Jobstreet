@@ -102,195 +102,192 @@ fun HomePageShow() {
 
     Scaffold(
         topBar = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = Color(0xFF2493DC))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color(0xFF2493DC))
+            ){
+                Box(modifier = Modifier
+                    .padding(top= 5.dp)
+                    .height(50.dp)
+                    .fillMaxWidth()
                 ){
-                  Box(modifier = Modifier
-                      .padding(top= 5.dp)
-                      .height(50.dp)
-                      .fillMaxWidth()
-                  ){
-                      IconButton(modifier = Modifier
-                          .align(alignment = Alignment.CenterStart),
-                          onClick = {}) {
-                          Icon(
-                              Icons.Filled.ArrowBack,
-                              "backIcon",
-                              tint = Color.White)
-                      }
-                      var perusahaan by rememberSaveable { mutableStateOf("") }
-                      OutlinedTextField(
-                          value = perusahaan,
-                          onValueChange = {perusahaan = it},
-                          placeholder = {
-                              Text("Cari Perusahaan", color = Color.LightGray, fontSize = 12.sp)
-                          },
-                          leadingIcon = {
-                              Icon(
-                                  Icons.Filled.Search,
-                                  contentDescription = "Search",
-                                  tint = Color.LightGray)
-                          },
-                          colors = OutlinedTextFieldDefaults.colors(
-                              focusedBorderColor = Color.Gray,
-                              unfocusedBorderColor = Color.LightGray,
-                          ),
-                          textStyle = LocalTextStyle.current.copy(
-                              fontSize = 14.sp,
-                              color = Color.Black
-                          ),
-                          singleLine = true,
-                          shape = RoundedCornerShape(20.dp),
-                          modifier = Modifier
-                              .height(50.dp)
-                              .padding(start=10.dp, end=10.dp)
-                              .background(
-                                  color = Color(0xffffffff),
-                                  shape = RoundedCornerShape(20.dp)
-                              )
-                              .align(alignment = Alignment.Center)
-
-                      )
-                      IconButton(modifier = Modifier
-                          .align(alignment = Alignment.CenterEnd),
-                              onClick = {}) {
-                          Icon(
-                              Icons.Filled.Favorite,
-                              "favorite",
-                              tint = Color.White)
-                      }
-                  }
-
-                    Row(modifier = Modifier.padding(start=15.dp),
-                        horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically,){
+                    IconButton(modifier = Modifier
+                        .align(alignment = Alignment.CenterStart),
+                        onClick = {}) {
                         Icon(
-                            imageVector = Icons.Filled.LocationOn,
-                            contentDescription = "notifications",
+                            Icons.Filled.ArrowBack,
+                            "backIcon",
                             tint = Color.White)
-
-                        var expanded by remember { mutableStateOf(false) }
-                        var selectedItem by remember { mutableStateOf("Lokasi") }
-                        val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
-
-                                TextButton(onClick = { expanded = true }) {
-                                    Row(verticalAlignment = Alignment.CenterVertically){
-                                        Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
-                                            fontSize = 15.sp,
-                                            fontWeight = FontWeight.Bold),
-                                        )
-                                        Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
-                                    }
-                                }
-                                DropdownMenu(expanded = expanded, onDismissRequest = { expanded=false }) {
-                                    listKota.forEach{
-                                        DropdownMenuItem(modifier=Modifier
-                                            .background(
-                                                color = Color(0xffffffff)
-                                            ),
-                                            text = { Text(it, color = Color(0xFF2493DC) )},
-                                            onClick = {
-                                                selectedItem = it
-                                                expanded = false }
-                                        )
-                                    }
-                                }
-
-
-
-
-
                     }
-                    Row(
-                        modifier = Modifier.padding(start=15.dp, end=15.dp, bottom=5.dp).fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ){
-                        OutlinedButton(
-                            onClick={},
-                            border = BorderStroke(1.dp,Color(0xFF2493DC)),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                            modifier = Modifier
-                                .clip(shape = RoundedCornerShape(50.dp))
-                                .padding(end=10.dp)
+                    var perusahaan by rememberSaveable { mutableStateOf("") }
+                    OutlinedTextField(
+                        value = perusahaan,
+                        onValueChange = {perusahaan = it},
+                        placeholder = {
+                            Text("Cari Perusahaan", color = Color.LightGray, fontSize = 12.sp)
+                        },
+                        leadingIcon = {
+                            Icon(
+                                Icons.Filled.Search,
+                                contentDescription = "Search",
+                                tint = Color.LightGray)
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Color.Gray,
+                            unfocusedBorderColor = Color.LightGray,
+                        ),
+                        textStyle = LocalTextStyle.current.copy(
+                            fontSize = 14.sp,
+                            color = Color.Black
+                        ),
+                        singleLine = true,
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier
+                            .height(50.dp)
+                            .padding(start=10.dp, end=10.dp)
+                            .background(
+                                color = Color(0xffffffff),
+                                shape = RoundedCornerShape(20.dp)
+                            )
+                            .align(alignment = Alignment.Center)
 
-                        ){
-                            Text(
-                                text = "Rekomendasi",
-                                color = Color(0xFF2493DC),
-                                style = TextStyle(
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold),
+                    )
+                    IconButton(modifier = Modifier
+                        .align(alignment = Alignment.CenterEnd),
+                        onClick = {}) {
+                        Icon(
+                            Icons.Filled.Favorite,
+                            "favorite",
+                            tint = Color.White)
+                    }
+                }
+
+                Row(modifier = Modifier.padding(start=15.dp),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically,
+                    )
+                {
+                    Icon(
+                        imageVector = Icons.Filled.LocationOn,
+                        contentDescription = "notifications",
+                        tint = Color.White)
+
+                    var expanded by remember { mutableStateOf(false) }
+                    var selectedItem by remember { mutableStateOf("Lokasi") }
+                    val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
+                    TextButton(onClick = { expanded = true }) {
+                        Row(verticalAlignment = Alignment.CenterVertically){
+                            Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight.Bold),
+                            )
+                            Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
+                        }
+                    }
+                    DropdownMenu(expanded = expanded, onDismissRequest = { expanded=false }) {
+                        listKota.forEach{
+                            DropdownMenuItem(modifier=Modifier
+                                .background(
+                                    color = Color(0xffffffff)
+                                ),
+                                text = { Text(it, color = Color(0xFF2493DC) )},
+                                onClick = {
+                                    selectedItem = it
+                                    expanded = false }
                             )
                         }
-                        Button(
-                            onClick={},
+                    }
+                }
+                Row(
+                    modifier = Modifier.padding(start=15.dp, end=15.dp, bottom=5.dp).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ){
+                    OutlinedButton(
+                        onClick={},
+                        border = BorderStroke(1.dp,Color(0xFF2493DC)),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(50.dp))
+                            .padding(end=10.dp)
+
+
+                    ){
+                        Text(
+                            text = "Rekomendasi",
+                            color = Color(0xFF2493DC),
+                            style = TextStyle(
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold),
+                        )
+                    }
+                    Button(
+                        onClick={},
+                        border = BorderStroke(1.dp,Color.White),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp)
+                    ){
+                        Text(
+                            text = "Terbaru",
+                            color = Color(0xFFFFFFFF),
+                            style = TextStyle(
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold),
+                        )
+                    }
+                    var rExpanded by remember { mutableStateOf(false) }
+                    var rSelectedItem by remember { mutableStateOf("Rating") }
+                    val listRating = listOf("1", "2", "3",  "4", "5")
+
+                    Box{
+
+                        Button(onClick = { rExpanded = true },
                             border = BorderStroke(1.dp,Color.White),
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                             modifier = Modifier
-                                .clip(shape = RoundedCornerShape(50.dp)).padding(end=10.dp)
-                        ){
-                            Text(
-                                text = "Terbaru",
-                                color = Color(0xFFFFFFFF),
-                                style = TextStyle(
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold),
-                            )
-                        }
-                        var rExpanded by remember { mutableStateOf(false) }
-                        var rSelectedItem by remember { mutableStateOf("Rating") }
-                        val listRating = listOf("1", "2", "3",  "4", "5")
-
-                        Box{
-
-                            Button(onClick = { rExpanded = true },
-                                border = BorderStroke(1.dp,Color.White),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
-                                modifier = Modifier
-                                    .clip(shape = RoundedCornerShape(50.dp))
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.CenterVertically,)
-                                {
-                                    Icon(
-                                        Icons.Filled.Star,
-                                        contentDescription = null, tint= Color(0xFFD4AF37)
-                                    )
-                                    Text(
-                                        text = "$rSelectedItem", color = Color(0xFFFFFFFF),
-                                        style = TextStyle(
-                                            fontSize = 13.sp,
-                                            fontWeight = FontWeight.Bold),
-                                    )
-                                }
+                                .clip(shape = RoundedCornerShape(50.dp))
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.Start,
+                                verticalAlignment = Alignment.CenterVertically,)
+                            {
+                                Icon(
+                                    Icons.Filled.Star,
+                                    contentDescription = null, tint= Color(0xFFD4AF37)
+                                )
+                                Text(
+                                    text = "$rSelectedItem", color = Color(0xFFFFFFFF),
+                                    style = TextStyle(
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold),
+                                )
                             }
-                            DropdownMenu(expanded = rExpanded, onDismissRequest = { rExpanded=false }) {
-                                listRating.forEach{
+                        }
+                        DropdownMenu(expanded = rExpanded, onDismissRequest = { rExpanded=false }) {
+                            listRating.forEach{
 
-                                    DropdownMenuItem(modifier=Modifier
-                                        .background(
-                                            color = Color(0xffffffff)
-                                        ),
-                                        leadingIcon = {
-                                            Icon(
-                                                Icons.Filled.Star,
-                                                contentDescription = null, tint= Color(0xFFD4AF37)
-                                            )
-                                        },
-                                        text = { Text(it, color = Color(0xFF2493DC) )},
-                                        onClick = {
-                                            rSelectedItem = it
-                                            rExpanded = false }
-                                    )
-                                }
+                                DropdownMenuItem(modifier=Modifier
+                                    .background(
+                                        color = Color(0xffffffff)
+                                    ),
+                                    leadingIcon = {
+                                        Icon(
+                                            Icons.Filled.Star,
+                                            contentDescription = null, tint= Color(0xFFD4AF37)
+                                        )
+                                    },
+                                    text = { Text(it, color = Color(0xFF2493DC) )},
+                                    onClick = {
+                                        rSelectedItem = it
+                                        rExpanded = false }
+                                )
                             }
                         }
                     }
                 }
+            }
         },
         bottomBar = {
             BottomAppBar(
