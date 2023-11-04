@@ -105,4 +105,5 @@
     <string name="title_activity_profile_komentar">ProfileKomentar</string>
     <string name="title_activity_profile_review">ProfileReview</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_testing_search">TestingSearch</string>
 </resources>
