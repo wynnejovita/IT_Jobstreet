@@ -106,4 +106,6 @@
     <string name="title_activity_profile_review">ProfileReview</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
     <string name="title_activity_testing_search">TestingSearch</string>
+    <string name="title_activity_posting_loker1">PostingLoker1Activity</string>
+    <string name="title_activity_posting_loker2">PostingLoker2Activity</string>
 </resources>
