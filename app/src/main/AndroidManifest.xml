@@ -13,45 +13,35 @@
         android:theme="@style/Theme.ITJobstreet"
         tools:targetApi="31">
         <activity
+            android:name=".TestingSearch"
+            android:exported="false"
+            android:label="@string/title_activity_testing_search"
+            android:theme="@style/Theme.ITJobstreet" />
+        <activity
             android:name=".FavoriteActivity"
             android:exported="false"
             android:label="@string/title_activity_favorite"
             android:theme="@style/Theme.ITJobstreet" />
         <activity
-            android:name=".Search_NotFound"
+            android:name=".SearchNotFoundActivity"
             android:exported="false"
             android:label="@string/title_activity_search_not_found"
             android:theme="@style/Theme.ITJobstreet" />
         <activity
-            android:name=".Search_perusahaan"
+            android:name=".SearchPerusahaanActivity"
             android:exported="false"
             android:label="@string/title_activity_search_perusahaan"
             android:theme="@style/Theme.ITJobstreet" />
         <activity
-            android:name=".Search_orang"
+            android:name=".SearchOrangActivity"
             android:exported="false"
             android:label="@string/title_activity_search_orang"
             android:theme="@style/Theme.ITJobstreet" />
         <activity
-            android:name=".Search_post"
+            android:name=".SearchPostActivity"
             android:exported="false"
             android:label="@string/title_activity_search_post"
             android:theme="@style/Theme.ITJobstreet" />
-        <activity
-            android:name=".Search"
-            android:exported="true"
-            android:label="@string/title_activity_search"
-            android:theme="@style/Theme.ITJobstreet.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".search"
-            android:exported="false"
-            android:label="@string/title_activity_search" />
         <activity
             android:name=".ProfileReview"
             android:exported="false"
@@ -61,11 +51,6 @@
             android:name=".ProfileKomentar"
             android:exported="false"
             android:label="@string/title_activity_profile_komentar"
-            android:theme="@style/Theme.ITJobstreet" />
-        <activity
-            android:name=".Coba"
-            android:exported="false"
-            android:label="@string/title_activity_coba"
             android:theme="@style/Theme.ITJobstreet" />
         <activity
             android:name=".ProfilePosting"
