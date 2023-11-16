@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -52,187 +53,23 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.itjobstreet.app.ITJobsApp
+import com.example.itjobstreet.data.login.LoginUIEvent
+import com.example.itjobstreet.data.login.LoginViewModel
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Login()
-                }
-            }
+            ITJobsApp()
         }
     }
 }
 
+@Preview
 @Composable
-fun Login() {
-    Box(
-        modifier = Modifier
-            .background(color = Color(0xff2493dc))
-            .fillMaxSize()
-    ){
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = "USU Single Sign On",
-                color = Color(0xfff9f9f9),
-                style = MaterialTheme.typography.headlineLarge,
-                modifier = Modifier
-                    .padding(top = 72.dp)
-            )
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(top = 180.dp)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-                    .background(color = Color.White)
-            ){
-                Column(
-                    modifier = Modifier
-                        .padding(top = 86.dp, start = 24.dp, end = 24.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(
-                        space = 12.dp,
-                    ),
-                ) {
-                    var identity by rememberSaveable { mutableStateOf("") }
-                    val containerColor = Color.White.copy(alpha = 0.08f)
-                    OutlinedTextField(
-                        value = identity,
-                        onValueChange = { identity = it },
-                        label = {
-                            Text(
-                                text = "Identity (NIM/USU’s Email)",
-                                color = Color.Black.copy(alpha = 0.5f),
-                                style = TextStyle(
-                                    fontSize = 15.sp,
-                                    fontWeight = FontWeight.Medium),
-                                modifier = Modifier
-                                    .requiredHeight(height = 17.dp)
-                                    .wrapContentHeight(align = Alignment.CenterVertically))
-                        },
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = containerColor,
-                            unfocusedContainerColor = containerColor,
-                            disabledContainerColor = containerColor,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .requiredHeight(height = 60.dp))
-
-                    var password by rememberSaveable { mutableStateOf("") }
-                    val passwordVisibility = remember { mutableStateOf(true) }
-                    val containerColor1 = Color.White.copy(alpha = 0.08f)
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        visualTransformation = if (passwordVisibility.value) PasswordVisualTransformation() else VisualTransformation.None,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        label = {
-                            Text(
-                                text = "Password",
-                                color = Color.Black.copy(alpha = 0.5f),
-                                style = TextStyle(
-                                    fontSize = 15.sp,
-                                    fontWeight = FontWeight.Medium),
-                                modifier = Modifier
-                                    .requiredHeight(height = 17.dp)
-                                    .wrapContentHeight(align = Alignment.CenterVertically))
-                        },
-                        trailingIcon = {
-                            IconButton(onClick = {
-                                passwordVisibility.value = !passwordVisibility.value
-                            }) {
-                                Icon(
-                                    imageVector = if (passwordVisibility.value) ImageVector.vectorResource(id = R.drawable.visibility_off) else ImageVector.vectorResource(id = R.drawable.visibility),
-                                    contentDescription = "visibility",
-                                    tint = Color.Gray
-                                )
-                            }
-                        },
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = containerColor1,
-                            unfocusedContainerColor = containerColor1,
-                            disabledContainerColor = containerColor1,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .requiredHeight(height = 60.dp)
-                    )
-                    ElevatedButton(
-                        onClick = {},
-                        colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
-                        modifier = Modifier
-                            .padding(24.dp)
-                            .width(132.dp)
-                    ) {
-                        Text("LOGIN", color = Color.White)
-                    }
-                }
-
-                Column(
-                    modifier = Modifier
-                        .padding(bottom = 24.dp, start = 10.dp, end = 10.dp)
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    Text(
-                        text = "Got an Issue?",
-                        color = Color.Black,
-                        style = TextStyle(
-                            fontSize = 19.sp),
-                    )
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(style = SpanStyle(
-                                color = Color.Black,
-                                fontSize = 15.sp)
-                            ) {append("Report to ")}
-                            withStyle(style = SpanStyle(
-                                color = Color(0xff0033cc),
-                                fontSize = 15.sp)
-                            ) {append("administrator [helpdesk@usu.ac.id]")}},
-                    )
-                }
-            }
-        }
-        Image(
-            painter = painterResource(id = R.drawable.logo_ti),
-            contentDescription = "logo_ti",
-            modifier = Modifier
-                .align(alignment = Alignment.TopCenter)
-                .offset(
-                    x = 0.dp,
-                    y = 132.dp
-                )
-                .requiredWidth(width = 95.dp)
-                .requiredHeight(height = 96.dp))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginPreview() {
-    ITJobstreetTheme {
-        Login()
-    }
+fun DefaultPreview(){
+    ITJobsApp()
 }
