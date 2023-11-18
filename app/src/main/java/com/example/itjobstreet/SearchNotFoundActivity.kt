@@ -794,5 +794,4 @@ fun SearchNotFound() {
 @Composable
 fun SearchNotFoundPreview() {
         SearchNotFound()
-
 }
