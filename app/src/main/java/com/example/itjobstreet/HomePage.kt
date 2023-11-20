@@ -1,5 +1,4 @@
 package com.example.itjobstreet
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,36 +12,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -61,8 +50,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -82,35 +69,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.itjobstreet.ui.Screen
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class HomePage : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    HomePageShow()
-                }
-            }
-        }
-    }
-}
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun HomePageShow() {
-    val navController = rememberNavController()
+fun HomePageShow(navController : NavController) {
     Scaffold(
         topBar = {
             Column(
@@ -125,7 +92,7 @@ fun HomePageShow() {
                 ){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {}) {
+                        onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
@@ -166,7 +133,7 @@ fun HomePageShow() {
                     )
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterEnd),
-                        onClick = {}) {
+                        onClick = {navController.navigate(route = Screens.FavoriteScreen.name)}) {
                         Icon(
                             Icons.Filled.Favorite,
                             "favorite",
@@ -302,12 +269,9 @@ fun HomePageShow() {
                     }
                 }
             }
-        },
-        bottomBar = { BottomBar(navController = navController)
         }
     ){
             innerPadding ->
-            BottomNavGraph(navController = navController)
              Column(modifier = Modifier
                  .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
                  .verticalScroll(rememberScrollState())
@@ -397,6 +361,7 @@ fun HomePageShow() {
                         ),
                         modifier = Modifier
                             .padding(start=15.dp, top=10.dp, end=15.dp)
+                            .clickable {navController.navigate(route = Screens.HomePageDetailScreen.name) }
                     )
                     Box(
                         modifier = Modifier
@@ -594,7 +559,7 @@ fun HomePageShow() {
                         ),
                         modifier = Modifier
                             .padding(start = 15.dp, top = 10.dp, end = 15.dp)
-                            .clickable { navController.navigate(route = Screen.HomePageDetail.route) }
+
                     )
                     Box(
                         modifier = Modifier
@@ -914,61 +879,5 @@ fun HomePageShow() {
     }
 }
 
-
-@Composable
-fun BottomBar(navController: NavHostController){
-    val screens = listOf(
-        BottomBarScreen.Home,
-        BottomBarScreen.Search,
-        BottomBarScreen.Add,
-        BottomBarScreen.Favorite,
-        BottomBarScreen.Person
-    )
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-    BottomNavigation {
-        screens.forEach { screen ->
-            AddItem(
-                screen = screen, 
-                currentDestination = currentDestination, 
-                navController = navController 
-            )
-        }
-    }
-}
-
-@Composable
-fun RowScope.AddItem(
-    screen: BottomBarScreen,
-    currentDestination: NavDestination?,
-    navController: NavHostController
-) {
-    BottomNavigationItem(
-        label = {
-            Text(text = screen.title)
-        },
-        icon = {
-            Icon(
-                imageVector = screen.icon,
-                contentDescription = "Navigation Icon"
-            )
-        },
-        selected = currentDestination?.hierarchy?.any{
-            it.route == screen.route
-        } == true,
-
-        onClick = {
-            navController.navigate(screen.route)
-        }
-    )
-}
-
-
-
-@Preview(widthDp = 360, heightDp = 800)
-@Composable
-private fun HomePageShowPreview() {
-    HomePageShow()
-}
 
 

@@ -168,10 +168,9 @@ fun Login(
                         modifier = Modifier
                             .padding(24.dp)
                             .width(132.dp)
-                            .clickable { navController.navigate(route = Screen.HomePage.route) }
                     ) {
                         Text("LOGIN", color =
-                        Color.White, modifier = Modifier.clickable { navController.navigate(route = Screen.HomePage.route) })
+                        Color.White)
                     }
                 }
 

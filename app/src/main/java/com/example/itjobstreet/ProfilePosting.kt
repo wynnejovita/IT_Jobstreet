@@ -72,6 +72,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 import java.time.Clock.offset
 
@@ -95,6 +96,7 @@ class ProfilePosting : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfilePostingShow() {
+    val navController = rememberNavController()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -103,14 +105,15 @@ fun ProfilePostingShow() {
                 ),
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    if(navController.previousBackStackEntry != null){
+                    IconButton(onClick = {navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             tint = Color.White,
                             contentDescription = "kembali"
                         )
                     }
-                },
+                }},
             )
 
         },
@@ -194,7 +197,7 @@ fun ProfilePostingShow() {
 
            Column(modifier = Modifier
                .padding(bottom = 15.dp)
-                .fillMaxWidth()){
+               .fillMaxWidth()){
                Box(modifier = Modifier.fillMaxWidth()){
                    Box(
                        modifier = Modifier
@@ -235,7 +238,7 @@ fun ProfilePostingShow() {
                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                        modifier = Modifier
                            .align(alignment = Alignment.End)
-                           .padding(end=10.dp)
+                           .padding(end = 10.dp)
 
                    ){
                        Text(
@@ -246,7 +249,9 @@ fun ProfilePostingShow() {
                                fontWeight = FontWeight.Bold),
                        )
                    }
-                   Column(modifier = Modifier.padding(start=10.dp, end=10.dp).fillMaxWidth()){
+                   Column(modifier = Modifier
+                       .padding(start = 10.dp, end = 10.dp)
+                       .fillMaxWidth()){
                        Text(
                            text = "Rusdi Tembung S.kom",
                            color = Color.Black,
@@ -335,7 +340,9 @@ fun ProfilePostingShow() {
                        }
                    }
             }
-        Row(modifier = Modifier.fillMaxWidth().padding(start=10.dp, end=10.dp, bottom = 15.dp),
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp, end = 10.dp, bottom = 15.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically){
             TextButton(
@@ -383,7 +390,10 @@ fun ProfilePostingShow() {
             }
         }
         Column(modifier = Modifier
-            .padding(start=25.dp, end=25.dp)//padding yang ditulis pada baris pertama modifier = margin
+            .padding(
+                start = 25.dp,
+                end = 25.dp
+            )//padding yang ditulis pada baris pertama modifier = margin
             .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
@@ -472,7 +482,7 @@ fun ProfilePostingShow() {
                     )
                     Box(
                         modifier = Modifier
-                            .padding(top=20.dp)
+                            .padding(top = 20.dp)
                             .fillMaxWidth()
                             .height(26.dp)
                             .background(color = Color(0xffb8e5cd))
@@ -497,7 +507,7 @@ fun ProfilePostingShow() {
 
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
+                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
                     )
                     {
                         Row(

@@ -81,6 +81,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.itjobstreet.ui.ui.theme.ITJobstreetTheme
 
 class SearchPostActivity : ComponentActivity() {
@@ -105,6 +106,7 @@ class SearchPostActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchPost() {
+    val navController = rememberNavController()
     Scaffold(
         topBar = {
             Column(
@@ -117,14 +119,15 @@ fun SearchPost() {
                     .height(50.dp)
                     .fillMaxWidth()
                 ){
+                    if(navController.previousBackStackEntry != null){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {}) {
+                        onClick = {navController.navigateUp()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
-                    }
+                    }}
                     var perusahaan by rememberSaveable { mutableStateOf("") }
                     OutlinedTextField(
                         value = perusahaan,
