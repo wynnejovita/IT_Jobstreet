@@ -8,5 +8,8 @@ enum class Screens {
     ProfileScreen,
     HomePageDetailScreen,
     ProfileKomentarScreen,
-    ProfileReviewScreen
+    ProfileReviewScreen,
+    EditProfileScreen,
+    SearchOrangScreen,
+    SearchPerusahaanScreen
 }

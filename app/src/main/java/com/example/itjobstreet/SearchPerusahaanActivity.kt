@@ -24,8 +24,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Home
@@ -75,27 +73,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class SearchPerusahaanActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    SearchPerusahaan()
-                }
-            }
-        }
-    }
-}
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SearchPerusahaan() {
+fun SearchPerusahaan(navController: NavController) {
     Scaffold(
         topBar = {
             Column(
@@ -110,7 +94,7 @@ fun SearchPerusahaan() {
                 ){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {}) {
+                        onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
@@ -195,11 +179,6 @@ fun SearchPerusahaan() {
                             )
                         }
                     }
-
-
-
-
-
                 }
                 Row(
                     modifier = Modifier.padding(start=15.dp, end=15.dp, bottom=5.dp).fillMaxWidth(),
@@ -207,7 +186,7 @@ fun SearchPerusahaan() {
                     verticalAlignment = Alignment.CenterVertically,
                 ){
                     OutlinedButton(
-                        onClick={},
+                        onClick={navController.navigate(route = Screens.SearchScreen.name)},
                         border = BorderStroke(1.dp,Color(0xFFFFFFFF)),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -224,7 +203,7 @@ fun SearchPerusahaan() {
                         )
                     }
                     Button(
-                        onClick={},
+                        onClick={navController.navigate(route = Screens.SearchOrangScreen.name)},
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -253,72 +232,6 @@ fun SearchPerusahaan() {
                                 fontWeight = FontWeight.Bold),
                         )
                     }
-                }
-            }
-        },
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .border(BorderStroke(2.dp, Color.LightGray))
-                    .height(70.dp),
-
-                containerColor = Color(0xFFFFFFFF),
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                    ) {
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Home,
-                            contentDescription = "home",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "search",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.AddCircle,
-                            contentDescription = "add",
-                            modifier = Modifier
-                                .requiredSize(
-                                    width = 55.dp,
-                                    height = 55.dp
-                                ),
-                            tint = Color(0xFF2493DC))
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Notifications,
-                            contentDescription = "notifications",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "person",
-                            tint = Color.Gray)
-                    }
-
                 }
             }
         }
@@ -791,12 +704,4 @@ fun SearchPerusahaan() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SearchPerusahaanPreview() {
-
-        SearchPerusahaan()
-
 }

@@ -149,7 +149,7 @@ fun ProfilePostingShow(navController: NavController) {
                    }
                }
                    OutlinedButton(
-                       onClick={},
+                       onClick={navController.navigate(route = Screens.EditProfileScreen.name)},
                        border = BorderStroke(1.dp,Color(0xFF2493DC)),
                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                        modifier = Modifier

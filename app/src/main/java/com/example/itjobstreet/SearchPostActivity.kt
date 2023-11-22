@@ -1,11 +1,6 @@
 package com.example.itjobstreet
 
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -27,19 +21,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -50,16 +38,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -78,35 +62,14 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
-import com.example.itjobstreet.ui.ui.theme.ITJobstreetTheme
-
-class SearchPostActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-
-                        SearchPost()
-                }
-            }
-        }
-    }
-}
-
+import androidx.navigation.NavController
+import com.example.itjobstreet.navigation.Screens
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SearchPost() {
-    val navController = rememberNavController()
+fun SearchPost(navController: NavController) {
     Scaffold(
         topBar = {
             Column(
@@ -119,15 +82,14 @@ fun SearchPost() {
                     .height(50.dp)
                     .fillMaxWidth()
                 ){
-                    if(navController.previousBackStackEntry != null){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {navController.navigateUp()}) {
+                        onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
-                    }}
+                    }
                     var perusahaan by rememberSaveable { mutableStateOf("") }
                     OutlinedTextField(
                         value = perusahaan,
@@ -207,11 +169,6 @@ fun SearchPost() {
                             )
                         }
                     }
-
-
-
-
-
                 }
                 Row(
                     modifier = Modifier.padding(start=15.dp, end=15.dp, bottom=5.dp).fillMaxWidth(),
@@ -236,7 +193,7 @@ fun SearchPost() {
                         )
                     }
                     Button(
-                        onClick={},
+                        onClick={navController.navigate(route = Screens.SearchOrangScreen.name)},
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -251,7 +208,7 @@ fun SearchPost() {
                         )
                     }
                     Button(
-                        onClick={},
+                        onClick={navController.navigate(route = Screens.SearchPerusahaanScreen.name)},
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -268,72 +225,6 @@ fun SearchPost() {
                 }
             }
         },
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .border(BorderStroke(2.dp, Color.LightGray))
-                    .height(70.dp),
-
-                containerColor = Color(0xFFFFFFFF),
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                    ) {
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Home,
-                            contentDescription = "home",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "search",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.AddCircle,
-                            contentDescription = "add",
-                            modifier = Modifier
-                                .requiredSize(
-                                    width = 55.dp,
-                                    height = 55.dp
-                                ),
-                            tint = Color(0xFF2493DC))
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Notifications,
-                            contentDescription = "notifications",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "person",
-                            tint = Color.Gray)
-                    }
-
-                }
-            }
-        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -1120,12 +1011,4 @@ fun SearchPost() {
             }
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun SearchPostPreview() {
-        SearchPost()
-
 }

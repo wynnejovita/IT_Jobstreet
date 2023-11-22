@@ -52,29 +52,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
-
-class EditProfile : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    EditProfileShow()
-                }
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditProfileShow() {
-
+fun EditProfileShow(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -96,7 +79,7 @@ fun EditProfileShow() {
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
@@ -396,10 +379,4 @@ fun EditProfileShow() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun EditProfileShowPreview() {
-    EditProfileShow()
 }
