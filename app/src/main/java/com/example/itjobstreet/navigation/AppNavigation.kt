@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.itjobstreet.EditProfileShow
 import com.example.itjobstreet.Favorite
+import com.example.itjobstreet.FilterSearchShow
 import com.example.itjobstreet.HomePageDetailShow
 import com.example.itjobstreet.HomePageShow
 import com.example.itjobstreet.PostingLoker1
@@ -114,6 +115,10 @@ fun AppNavigation() {
 
             composable(route = Screens.Add2Screen.name){
                 PostingLoker2(navController = navController)
+            }
+
+            composable(route = Screens.TestingSearchScreen.name){
+                FilterSearchShow(navController = navController)
             }
         }
     }

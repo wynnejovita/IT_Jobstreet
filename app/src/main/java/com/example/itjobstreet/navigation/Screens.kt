@@ -12,5 +12,6 @@ enum class Screens {
     EditProfileScreen,
     SearchOrangScreen,
     SearchPerusahaanScreen,
-    Add2Screen
+    Add2Screen,
+    TestingSearchScreen
 }
