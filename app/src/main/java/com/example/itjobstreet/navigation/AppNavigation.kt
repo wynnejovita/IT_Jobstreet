@@ -1,4 +1,4 @@
-package com.example.itjobstreet
+package com.example.itjobstreet.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -16,6 +16,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.itjobstreet.Favorite
+import com.example.itjobstreet.HomePageDetailShow
+import com.example.itjobstreet.HomePageShow
+import com.example.itjobstreet.PostingLoker1
+import com.example.itjobstreet.ProfileKomentarShow
+import com.example.itjobstreet.ProfilePostingShow
+import com.example.itjobstreet.ProfileReviewShow
+import com.example.itjobstreet.SearchPost
 
 @Composable
 fun AppNavigation() {
@@ -73,11 +81,19 @@ fun AppNavigation() {
                 Favorite()
             }
             composable(route = Screens.ProfileScreen.name){
-                ProfilePostingShow()
+                ProfilePostingShow(navController = navController)
             }
 
             composable(route = Screens.HomePageDetailScreen.name){
                 HomePageDetailShow(navController = navController)
+            }
+
+            composable(route = Screens.ProfileKomentarScreen.name){
+                ProfileKomentarShow(navController = navController)
+            }
+
+            composable(route = Screens.ProfileReviewScreen.name){
+                ProfileReviewShow(navController = navController)
             }
         }
     }

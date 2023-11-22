@@ -1,4 +1,4 @@
-package com.example.itjobstreet
+package com.example.itjobstreet.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
