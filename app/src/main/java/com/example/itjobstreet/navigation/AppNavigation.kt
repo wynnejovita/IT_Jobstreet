@@ -21,6 +21,7 @@ import com.example.itjobstreet.Favorite
 import com.example.itjobstreet.HomePageDetailShow
 import com.example.itjobstreet.HomePageShow
 import com.example.itjobstreet.PostingLoker1
+import com.example.itjobstreet.PostingLoker2
 import com.example.itjobstreet.ProfileKomentarShow
 import com.example.itjobstreet.ProfilePostingShow
 import com.example.itjobstreet.ProfileReviewShow
@@ -78,7 +79,7 @@ fun AppNavigation() {
                 SearchPost(navController = navController)
             }
             composable(route = Screens.AddScreen.name){
-                PostingLoker1()
+                PostingLoker1(navController = navController)
             }
             composable(route = Screens.FavoriteScreen.name){
                 Favorite()
@@ -109,6 +110,10 @@ fun AppNavigation() {
             
             composable(route = Screens.SearchPerusahaanScreen.name){
                 SearchPerusahaan(navController = navController)
+            }
+
+            composable(route = Screens.Add2Screen.name){
+                PostingLoker2(navController = navController)
             }
         }
     }
