@@ -83,7 +83,7 @@ fun AppNavigation() {
                 PostingLoker1(navController = navController)
             }
             composable(route = Screens.FavoriteScreen.name){
-                Favorite()
+                Favorite(navController = navController)
             }
             composable(route = Screens.ProfileScreen.name){
                 ProfilePostingShow(navController = navController)

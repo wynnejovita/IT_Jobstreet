@@ -8,6 +8,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,28 +55,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class FavoriteActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Favorite()
-                }
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Favorite() {
+fun Favorite(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -90,7 +77,7 @@ fun Favorite() {
                         )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -191,6 +178,7 @@ fun Favorite() {
                         ),
                         modifier = Modifier
                             .padding(start=15.dp, top=10.dp, end=15.dp)
+                            .clickable { navController.navigate(route = Screens.HomePageDetailScreen.name) }
                     )
                     Box(
                         modifier = Modifier
@@ -706,13 +694,5 @@ fun Favorite() {
             }
 
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun FavoritePreview() {
-    ITJobstreetTheme {
-        Favorite()
     }
 }
