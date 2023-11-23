@@ -89,30 +89,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 import kotlinx.coroutines.launch
 
-class HomePageDetail : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    HomePageDetailShow()
-                }
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePageDetailShow() {
-
+fun HomePageDetailShow(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -133,7 +116,7 @@ fun HomePageDetailShow() {
                         )
                     }},
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             "backIcon",
@@ -1012,10 +995,4 @@ fun HomePageDetailShow() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomePageDetailPreview() {
-    HomePageDetailShow()
 }

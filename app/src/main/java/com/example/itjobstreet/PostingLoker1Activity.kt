@@ -1,10 +1,7 @@
 package com.example.itjobstreet
 
 import android.net.Uri
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -46,7 +43,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -70,35 +66,18 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.itjobstreet.ui.theme.ITJobstreetTheme
+import androidx.navigation.NavController
+import com.example.itjobstreet.navigation.Screens
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class PostingLoker1Activity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    PostingLoker1()
-                }
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostingLoker1() {
+fun PostingLoker1(navController: NavController) {
     // var untuk textfield yang wajib diisi namun tidak terisi
     var errorText by remember { mutableStateOf("") }
 
@@ -126,7 +105,7 @@ fun PostingLoker1() {
                 },
                 // icon kembali/back
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -153,11 +132,10 @@ fun PostingLoker1() {
                     // tombol untuk lanjut ke halaman field loker selanjutnya
                     ElevatedButton(
                         onClick = {
-                            errorText = if (perusahaanValue.isEmpty() || posisiValue.isEmpty() || kriteria.isEmpty()) {
-                                "wajib diisi!"
-                            } else {
-                                ""
-                                // Lanjut ke halaman field loker selanjutnya
+                            if (perusahaanValue.isEmpty() || posisiValue.isEmpty() || kriteria.isEmpty()) {
+                                errorText = "wajib diisi!"
+                            }else{
+                                navController.navigate(route = Screens.Add2Screen.name)
                             }
                         },
                         colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
@@ -753,12 +731,4 @@ fun PostingLoker1() {
         }
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PostingLoker1ActivityPreview() {
-    ITJobstreetTheme {
-        PostingLoker1()
-    }
 }

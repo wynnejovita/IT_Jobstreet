@@ -72,29 +72,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 import java.time.Clock.offset
 
-class ProfilePosting : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    ProfilePostingShow()
-                }
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePostingShow() {
+fun ProfilePostingShow(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -103,7 +89,7 @@ fun ProfilePostingShow() {
                 ),
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             tint = Color.White,
@@ -113,73 +99,6 @@ fun ProfilePostingShow() {
                 },
             )
 
-        },
-
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .border(BorderStroke(2.dp, Color.LightGray))
-                    .height(70.dp),
-
-                containerColor = Color(0xFFFFFFFF),
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                    ) {
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Home,
-                            contentDescription = "home",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "search",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.AddCircle,
-                            contentDescription = "add",
-                            modifier = Modifier
-                                .requiredSize(
-                                    width = 55.dp,
-                                    height = 55.dp
-                                ),
-                            tint = Color(0xFF2493DC))
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Notifications,
-                            contentDescription = "notifications",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "person",
-                            tint = Color.Gray)
-                    }
-
-                }
-            }
         },
 
     ) {
@@ -194,7 +113,7 @@ fun ProfilePostingShow() {
 
            Column(modifier = Modifier
                .padding(bottom = 15.dp)
-                .fillMaxWidth()){
+               .fillMaxWidth()){
                Box(modifier = Modifier.fillMaxWidth()){
                    Box(
                        modifier = Modifier
@@ -230,12 +149,12 @@ fun ProfilePostingShow() {
                    }
                }
                    OutlinedButton(
-                       onClick={},
+                       onClick={navController.navigate(route = Screens.EditProfileScreen.name)},
                        border = BorderStroke(1.dp,Color(0xFF2493DC)),
                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                        modifier = Modifier
                            .align(alignment = Alignment.End)
-                           .padding(end=10.dp)
+                           .padding(end = 10.dp)
 
                    ){
                        Text(
@@ -246,7 +165,9 @@ fun ProfilePostingShow() {
                                fontWeight = FontWeight.Bold),
                        )
                    }
-                   Column(modifier = Modifier.padding(start=10.dp, end=10.dp).fillMaxWidth()){
+                   Column(modifier = Modifier
+                       .padding(start = 10.dp, end = 10.dp)
+                       .fillMaxWidth()){
                        Text(
                            text = "Rusdi Tembung S.kom",
                            color = Color.Black,
@@ -335,7 +256,9 @@ fun ProfilePostingShow() {
                        }
                    }
             }
-        Row(modifier = Modifier.fillMaxWidth().padding(start=10.dp, end=10.dp, bottom = 15.dp),
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 10.dp, end = 10.dp, bottom = 15.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically){
             TextButton(
@@ -357,7 +280,7 @@ fun ProfilePostingShow() {
                 modifier = Modifier
                     .requiredWidth(width = 110.dp)
                     .requiredHeight(height = 36.dp),
-                onClick = {}
+                onClick = {navController.navigate(route = Screens.ProfileKomentarScreen.name)}
             ) {
                 Text("Komentar",
                     color = Color.Gray,
@@ -371,7 +294,7 @@ fun ProfilePostingShow() {
                 modifier = Modifier
                     .requiredWidth(width = 110.dp)
                     .requiredHeight(height = 36.dp),
-                onClick = {}
+                onClick = {navController.navigate(route = Screens.ProfileReviewScreen.name)}
             ) {
                 Text("Review",
                     color = Color.Gray,
@@ -383,7 +306,10 @@ fun ProfilePostingShow() {
             }
         }
         Column(modifier = Modifier
-            .padding(start=25.dp, end=25.dp)//padding yang ditulis pada baris pertama modifier = margin
+            .padding(
+                start = 25.dp,
+                end = 25.dp
+            )//padding yang ditulis pada baris pertama modifier = margin
             .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
@@ -472,7 +398,7 @@ fun ProfilePostingShow() {
                     )
                     Box(
                         modifier = Modifier
-                            .padding(top=20.dp)
+                            .padding(top = 20.dp)
                             .fillMaxWidth()
                             .height(26.dp)
                             .background(color = Color(0xffb8e5cd))
@@ -497,7 +423,7 @@ fun ProfilePostingShow() {
 
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
+                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
                     )
                     {
                         Row(
@@ -588,10 +514,4 @@ fun ProfilePostingShow() {
         }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProfilePostingShowPreview() {
-    ProfilePostingShow()
 }

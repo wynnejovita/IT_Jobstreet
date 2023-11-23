@@ -75,29 +75,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 import java.time.Clock.offset
 
-class ProfileReview : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    ProfileReviewShow()
-                }
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileReviewShow() {
+fun ProfileReviewShow(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -106,7 +91,7 @@ fun ProfileReviewShow() {
                 ),
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.popBackStack()}) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             tint = Color.White,
@@ -117,74 +102,6 @@ fun ProfileReviewShow() {
             )
 
         },
-
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .border(BorderStroke(2.dp, Color.LightGray))
-                    .height(70.dp),
-
-                containerColor = Color(0xFFFFFFFF),
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                    ) {
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Home,
-                            contentDescription = "home",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "search",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.AddCircle,
-                            contentDescription = "add",
-                            modifier = Modifier
-                                .requiredSize(
-                                    width = 55.dp,
-                                    height = 55.dp
-                                ),
-                            tint = Color(0xFF2493DC))
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Notifications,
-                            contentDescription = "notifications",
-                            tint = Color.Gray)
-                    }
-                    IconButton(onClick = {},
-                        modifier = Modifier
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "person",
-                            tint = Color.Gray)
-                    }
-
-                }
-            }
-        },
-
         ) {
             innerPadding ->
         Column(
@@ -233,7 +150,7 @@ fun ProfileReviewShow() {
                     }
                 }
                 OutlinedButton(
-                    onClick={},
+                    onClick={navController.navigate(route = Screens.EditProfileScreen.name)},
                     border = BorderStroke(1.dp,Color(0xFF2493DC)),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                     modifier = Modifier
@@ -345,7 +262,7 @@ fun ProfileReviewShow() {
                     modifier = Modifier
                         .requiredWidth(width = 110.dp)
                         .requiredHeight(height = 36.dp),
-                    onClick = {}
+                    onClick = {navController.navigate(route = Screens.ProfileScreen.name)}
                 ) {
                     Text("Posting",
                         color = Color.Gray,
@@ -359,7 +276,7 @@ fun ProfileReviewShow() {
                     modifier = Modifier
                         .requiredWidth(width = 110.dp)
                         .requiredHeight(height = 36.dp),
-                    onClick = {}
+                    onClick = {navController.navigate(route = Screens.ProfileKomentarScreen.name)}
                 ) {
                     Text("Komentar",
                         color = Color.Gray,
@@ -374,7 +291,7 @@ fun ProfileReviewShow() {
                         .border(1.dp, Color(0xFF2493DC))
                         .requiredWidth(width = 110.dp)
                         .requiredHeight(height = 36.dp),
-                    onClick = {}
+                    onClick = {navController.navigate(route = Screens.ProfileReviewScreen.name)}
                 ) {
                     Text("Review",
                         color = Color(0xFF2493DC),
@@ -472,10 +389,4 @@ fun ProfileReviewShow() {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProfileReviewShowPreview() {
-    ProfileReviewShow()
 }

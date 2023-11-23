@@ -49,34 +49,18 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
-class PostingLoker2Activity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ITJobstreetTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    PostingLoker2()
-                }
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostingLoker2() {
+fun PostingLoker2(navController: NavController) {
     // var untuk textfield yang wajib diisi namun tidak terisi
     var errorText by rememberSaveable { mutableStateOf("") }
 
     // var value di card deskripsi
     var deskripsi by rememberSaveable { mutableStateOf("") }
-
     Scaffold(
         // navbar atas
         topBar = {
@@ -91,7 +75,7 @@ fun PostingLoker2() {
                 },
                 // icon kembali/back
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -285,13 +269,5 @@ fun PostingLoker2() {
             }/* End Card Tambah Tag */
 
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PostingLoker2ActivityPreview() {
-    ITJobstreetTheme {
-        PostingLoker2()
     }
 }
