@@ -120,7 +120,7 @@ fun SearchPerusahaan(navController: NavController) {
                     )
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterEnd),
-                        onClick = {}) {
+                        onClick = {navController.navigate(route = Screens.TestingSearchScreen.name)}) {
                         Icon(
                             imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "filter",

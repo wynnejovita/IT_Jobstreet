@@ -3,6 +3,7 @@ package com.example.itjobstreet
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -116,7 +117,7 @@ fun SearchOrang(navController: NavController) {
                     )
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterEnd),
-                        onClick = {}) {
+                        onClick = {navController.navigate(route = Screens.TestingSearchScreen.name)}) {
                         Icon(
                             imageVector =  ImageVector.vectorResource(id = R.drawable.filter),
                             contentDescription = "filter",
@@ -237,6 +238,7 @@ fun SearchOrang(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(90.dp)
+                    .clickable {}
             ){
                 Column{
                     Box(
