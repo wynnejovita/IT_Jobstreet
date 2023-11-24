@@ -299,7 +299,7 @@ fun ProfilePostingShow(navController: NavController) {
         }
         Column(
             modifier = Modifier
-                .padding(start = 25.dp, end = 25.dp)
+                .padding(start = 25.dp, end = 25.dp, bottom = 25.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp

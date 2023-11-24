@@ -276,12 +276,14 @@ fun ProfileReviewShow(navController: NavController) {
                     )
                 }
             }
-            Column(modifier = Modifier
-                .padding(start=25.dp, end=25.dp)//padding yang ditulis pada baris pertama modifier = margin
-                .fillMaxSize(),
+            Column(
+                modifier = Modifier
+                    .padding(start = 25.dp, end = 25.dp, bottom =  25.dp)//padding yang ditulis pada baris pertama modifier = margin
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(
                     space = 25.dp
-                )){
+                )
+            ){
                 /* Card Review */
                 ElevatedCard(
                     elevation = CardDefaults.cardElevation(
