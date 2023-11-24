@@ -22,7 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
@@ -32,7 +32,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -51,7 +50,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -83,7 +81,6 @@ class SearchNotFoundActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchNotFound() {
     Scaffold(
@@ -102,7 +99,7 @@ fun SearchNotFound() {
                         .align(alignment = Alignment.CenterStart),
                         onClick = {}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -249,52 +246,56 @@ fun SearchNotFound() {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 16.dp
             )
         ) {
-                Column{
-                    Box(modifier = Modifier.padding(top = 25.dp, start = 180.dp, end = 210.dp)){
-                            Box(
-                                modifier = Modifier
-                                    .requiredWidth(width = 150.dp)
-                                    .requiredHeight(height = 150.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.not_found),
-                                    contentDescription = "Not_Found",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 150.dp)
-                                        .requiredHeight(height = 150.dp)
-
-                                )
-                            }
-
+            Column{
+                Box(
+                    modifier = Modifier
+                        .padding(top = 25.dp, start = 180.dp, end = 210.dp)
+                ){
+                    Box(
+                        modifier = Modifier
+                            .requiredWidth(width = 150.dp)
+                            .requiredHeight(height = 150.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.not_found),
+                            contentDescription = "Not_Found",
+                            modifier = Modifier
+                                .requiredWidth(width = 150.dp)
+                                .requiredHeight(height = 150.dp)
+                        )
                     }
-                    Text(
-                        text = "Waduh, Pencarian Tidak Ditemukan",
-                        color = Color(0x802493DC),
-                        modifier = Modifier.padding(top = 10.dp, start = 90.dp),
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                    )
-                    Text(
-                        text = "Waduh, Pencarian Tidak DitemukanCoba cari dengan kata kunci lainnya atau lihat rekomendasi pekerjaan di bawah ini.",
-                        color = Color(0x99000000),
-                        modifier = Modifier.padding(top = 2.dp, start = 20.dp, end = 20.dp),
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                    )
                 }
 
+                Text(
+                    text = "Waduh, Pencarian Tidak Ditemukan",
+                    color = Color(0x802493DC),
+                    modifier = Modifier
+                        .padding(top = 10.dp, start = 90.dp),
+                    style = TextStyle(
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                    )
+                )
+
+                Text(
+                    text = "Waduh, Pencarian Tidak DitemukanCoba cari dengan kata kunci lainnya atau lihat rekomendasi pekerjaan di bawah ini.",
+                    color = Color(0x99000000),
+                    modifier = Modifier
+                        .padding(top = 2.dp, start = 20.dp, end = 20.dp),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                )
+            }
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp

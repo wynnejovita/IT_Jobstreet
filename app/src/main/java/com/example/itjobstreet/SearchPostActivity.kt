@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -34,7 +35,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -51,7 +51,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -67,7 +66,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SearchPost(navController: NavController) {
     Scaffold(
@@ -86,7 +84,7 @@ fun SearchPost(navController: NavController) {
                         .align(alignment = Alignment.CenterStart),
                         onClick = {navController.popBackStack()}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -188,7 +186,7 @@ fun SearchPost(navController: NavController) {
                             text = "Posting",
                             color = Color(0xFF2493DC),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -203,7 +201,7 @@ fun SearchPost(navController: NavController) {
                             text = "Orang",
                             color = Color(0xFFFFFFFF),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -218,7 +216,7 @@ fun SearchPost(navController: NavController) {
                             text = "Perusahaan",
                             color = Color(0xFFFFFFFF),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -228,14 +226,15 @@ fun SearchPost(navController: NavController) {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
             )
         ) {
+            /* Card Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp
@@ -248,7 +247,10 @@ fun SearchPost(navController: NavController) {
                     .height(220.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Text(
                             text = "2 hari lalu",
                             color = Color(0xff616161),
@@ -307,20 +309,20 @@ fun SearchPost(navController: NavController) {
                                 )
                             }
                         }
-
                     }
                     Text(
                         text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
                         color = Color.Black,
                         style = TextStyle(
-                            fontSize = 13.sp
+                            fontSize = 12.sp
                         ),
                         modifier = Modifier
                             .padding(start=15.dp, top=10.dp, end=15.dp)
+                            .clickable {navController.navigate(route = Screens.HomePageDetailScreen.name) }
                     )
                     Box(
                         modifier = Modifier
-                            .padding(top=20.dp)
+                            .padding(top = 20.dp)
                             .fillMaxWidth()
                             .height(26.dp)
                             .background(color = Color(0xffb8e5cd))
@@ -341,12 +343,11 @@ fun SearchPost(navController: NavController) {
                             modifier = Modifier
                                 .align(alignment = Alignment.Center)
                         )
+                    }
 
-
-                        }
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
+                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
                     )
                     {
                         Row(
@@ -392,6 +393,25 @@ fun SearchPost(navController: NavController) {
                             verticalAlignment = Alignment.CenterVertically
                         )
                         {
+                            val saveable = remember { mutableStateOf(true) }
+                            IconButton(
+                                onClick = {saveable.value = !saveable.value},
+                                modifier = Modifier
+                            ){
+                                if (saveable.value) {
+                                    Icon(
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
+                                    )
+                                }
+                            }
                             val sendIntent: Intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
@@ -407,28 +427,16 @@ fun SearchPost(navController: NavController) {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
-
                     }
                 }
             }
+
+            /* Card Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp
@@ -441,7 +449,10 @@ fun SearchPost(navController: NavController) {
                     .height(220.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Text(
                             text = "2 hari lalu",
                             color = Color(0xff616161),
@@ -500,20 +511,20 @@ fun SearchPost(navController: NavController) {
                                 )
                             }
                         }
-
                     }
                     Text(
                         text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
                         color = Color.Black,
                         style = TextStyle(
-                            fontSize = 13.sp
+                            fontSize = 12.sp
                         ),
                         modifier = Modifier
                             .padding(start=15.dp, top=10.dp, end=15.dp)
+                            .clickable {navController.navigate(route = Screens.HomePageDetailScreen.name) }
                     )
                     Box(
                         modifier = Modifier
-                            .padding(top=20.dp)
+                            .padding(top = 20.dp)
                             .fillMaxWidth()
                             .height(26.dp)
                             .background(color = Color(0xffb8e5cd))
@@ -534,12 +545,11 @@ fun SearchPost(navController: NavController) {
                             modifier = Modifier
                                 .align(alignment = Alignment.Center)
                         )
-
-
                     }
+
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
+                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
                     )
                     {
                         Row(
@@ -585,200 +595,25 @@ fun SearchPost(navController: NavController) {
                             verticalAlignment = Alignment.CenterVertically
                         )
                         {
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black
-                                )
-                            }
                             val saveable = remember { mutableStateOf(true) }
                             IconButton(
                                 onClick = {saveable.value = !saveable.value},
                                 modifier = Modifier
                             ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
-                        }
-
-                    }
-
-                }
-            }
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = TextStyle(
-                            fontSize = 13.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top=20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-
-
-                    }
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
+                                if (saveable.value) {
                                     Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
                                     )
                                 }
                             }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
                             val sendIntent: Intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
@@ -794,28 +629,16 @@ fun SearchPost(navController: NavController) {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
-
                     }
                 }
             }
+
+            /* Card Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp
@@ -828,7 +651,10 @@ fun SearchPost(navController: NavController) {
                     .height(220.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Text(
                             text = "2 hari lalu",
                             color = Color(0xff616161),
@@ -887,20 +713,20 @@ fun SearchPost(navController: NavController) {
                                 )
                             }
                         }
-
                     }
                     Text(
                         text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
                         color = Color.Black,
                         style = TextStyle(
-                            fontSize = 13.sp
+                            fontSize = 12.sp
                         ),
                         modifier = Modifier
                             .padding(start=15.dp, top=10.dp, end=15.dp)
+                            .clickable {navController.navigate(route = Screens.HomePageDetailScreen.name) }
                     )
                     Box(
                         modifier = Modifier
-                            .padding(top=20.dp)
+                            .padding(top = 20.dp)
                             .fillMaxWidth()
                             .height(26.dp)
                             .background(color = Color(0xffb8e5cd))
@@ -921,12 +747,11 @@ fun SearchPost(navController: NavController) {
                             modifier = Modifier
                                 .align(alignment = Alignment.Center)
                         )
-
-
                     }
+
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start=15.dp, top = 5.dp, end=15.dp)
+                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
                     )
                     {
                         Row(
@@ -972,6 +797,25 @@ fun SearchPost(navController: NavController) {
                             verticalAlignment = Alignment.CenterVertically
                         )
                         {
+                            val saveable = remember { mutableStateOf(true) }
+                            IconButton(
+                                onClick = {saveable.value = !saveable.value},
+                                modifier = Modifier
+                            ){
+                                if (saveable.value) {
+                                    Icon(
+                                        imageVector = Icons.Filled.FavoriteBorder,
+                                        "favorite",
+                                        tint = Color.Black
+                                    )
+                                } else {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        "favorite",
+                                        tint = Color(0xff2493dc)
+                                    )
+                                }
+                            }
                             val sendIntent: Intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
@@ -987,25 +831,11 @@ fun SearchPost(navController: NavController) {
                                 Icon(
                                     imageVector = Icons.Filled.Share,
                                     contentDescription = "share",
-                                    tint = Color.Black
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                Icon(
-                                    imageVector = if (saveable.value) Icons.Filled.FavoriteBorder else Icons.Filled.Favorite,
-                                    "favorite",
-                                    tint = Color.Black
-                                )
-
-
-                            }
-
                         }
-
                     }
                 }
             }

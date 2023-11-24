@@ -21,7 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -35,7 +35,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -52,7 +51,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -66,7 +64,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun HomePageShow(navController : NavController) {
     Scaffold(
@@ -85,7 +82,7 @@ fun HomePageShow(navController : NavController) {
                         .align(alignment = Alignment.CenterStart),
                         onClick = {navController.popBackStack()}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -253,17 +250,18 @@ fun HomePageShow(navController : NavController) {
                 }
             }
         }
-    ){
-            innerPadding ->
-             Column(modifier = Modifier
-                 .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
+    ){ innerPadding ->
+        Column(
+            modifier = Modifier
                  .verticalScroll(rememberScrollState())
                  .fillMaxSize()
-                 .padding(innerPadding),
+                 .padding(innerPadding)
+                 .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
-            )) {
-            /* Card Perusahaan */
+            )
+        ) {
+            /* Card Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp
@@ -276,7 +274,10 @@ fun HomePageShow(navController : NavController) {
                     .height(220.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Text(
                             text = "2 hari lalu",
                             color = Color(0xff616161),
@@ -461,7 +462,7 @@ fun HomePageShow(navController : NavController) {
                     }
                 }
             }
-            /* Card Perusahaan */
+            /* Card Loker */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 5.dp

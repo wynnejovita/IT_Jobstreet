@@ -1,8 +1,5 @@
 package com.example.itjobstreet
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
@@ -22,17 +18,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
@@ -49,7 +43,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -61,15 +54,13 @@ fun EditProfileShow(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                modifier = Modifier
-                    .height(55.dp),
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color(0xFF2493DC)
                 ),
                 title = {
-                    Row(modifier = Modifier
-                        .fillMaxSize(),
-                        horizontalArrangement = Arrangement.Center,
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
@@ -81,7 +72,7 @@ fun EditProfileShow(navController: NavController) {
                 navigationIcon = {
                     IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -135,11 +126,11 @@ fun EditProfileShow(navController: NavController) {
                                     fontSize = 17.sp,
                                     fontWeight = FontWeight.Black),
                             )
-                            var nama_user by rememberSaveable { mutableStateOf("") }
+                            var namaUser by rememberSaveable { mutableStateOf("") }
                             val containerColor = Color.White.copy(alpha = 0.08f)
                             OutlinedTextField(
-                                value = nama_user,
-                                onValueChange = { nama_user = it },
+                                value = namaUser,
+                                onValueChange = { namaUser = it },
                                 placeholder = {
                                     Text(
                                         text = "Masukkan nama anda",
@@ -201,11 +192,11 @@ fun EditProfileShow(navController: NavController) {
                                     fontSize = 17.sp,
                                     fontWeight = FontWeight.Black),
                             )
-                            var password_baru by rememberSaveable { mutableStateOf("") }
+                            var passwordBaru by rememberSaveable { mutableStateOf("") }
                             val containerColor = Color.White.copy(alpha = 0.08f)
                             OutlinedTextField(
-                                value = password_baru,
-                                onValueChange = { password_baru = it },
+                                value = passwordBaru,
+                                onValueChange = { passwordBaru = it },
                                 placeholder = {
                                     Text(
                                         text = "Masukkan password baru",

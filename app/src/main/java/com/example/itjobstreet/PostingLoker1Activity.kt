@@ -95,13 +95,13 @@ fun PostingLoker1(navController: NavController) {
         // navbar atas
         topBar = {
             TopAppBar(
-                modifier = Modifier
-                    .height(50.dp),
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color(0xFF2493DC)
                 ),
                 title = {
-                    Text("")
+                    Text("Tambah Loker",
+                            color = Color.White,
+                    )
                 },
                 // icon kembali/back
                 navigationIcon = {

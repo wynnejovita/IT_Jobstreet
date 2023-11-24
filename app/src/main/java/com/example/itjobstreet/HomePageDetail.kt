@@ -1,9 +1,6 @@
 package com.example.itjobstreet
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -14,32 +11,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Star
@@ -48,6 +39,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -56,7 +48,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -65,6 +56,7 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -86,7 +78,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -118,7 +109,7 @@ fun HomePageDetailShow(navController: NavController) {
                 navigationIcon = {
                     IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -254,7 +245,10 @@ fun HomePageDetailShow(navController: NavController) {
 
                                         }
                                     }
-                                    Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth().align(alignment = Alignment.BottomCenter))
+                                    HorizontalDivider(
+                                        modifier = Modifier.fillMaxWidth().align(alignment = Alignment.BottomCenter),
+                                        color = Color.Gray
+                                    )
                                 }
                             }
                             ,
@@ -304,7 +298,7 @@ fun HomePageDetailShow(navController: NavController) {
                                                     }
                                                     IconButton(onClick = {}) {
                                                         Icon(
-                                                            Icons.Filled.Send,
+                                                            Icons.AutoMirrored.Filled.Send,
                                                             "send_comment",
                                                             tint = Color.Gray)
                                                     }
@@ -800,7 +794,7 @@ fun HomePageDetailShow(navController: NavController) {
 
                 }
             }
-            val scale = remember { mutableStateOf(1f) }
+            val scale = remember { mutableFloatStateOf(1f) }
             var offset by remember { mutableStateOf(Offset(0f, 0f)) }
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.align(alignment = Alignment.CenterHorizontally)){
                 Box(
@@ -820,15 +814,15 @@ fun HomePageDetailShow(navController: NavController) {
                         modifier = Modifier
                             .align(Alignment.Center) // keep the image centralized into the Box
                             .pointerInput(Unit) {
-                                detectTransformGestures { centroid, pan, zoom, rotation ->
-                                    scale.value *= zoom
-                                    offset = if (scale.value == 1f) Offset(0f, 0f) else offset + pan
+                                detectTransformGestures { _, pan, zoom, _ ->
+                                    scale.floatValue *= zoom
+                                    offset = if (scale.floatValue == 1f) Offset(0f, 0f) else offset + pan
                                 }
                             }
                             .graphicsLayer(
                                 // adding some zoom limits (min 50%, max 200%)
-                                scaleX = maxOf(.5f, minOf(3f, scale.value)),
-                                scaleY = maxOf(.5f, minOf(3f, scale.value)),
+                                scaleX = maxOf(.5f, minOf(3f, scale.floatValue)),
+                                scaleY = maxOf(.5f, minOf(3f, scale.floatValue)),
                                 translationX = offset.x, translationY = offset.y
                             ),
                     )
@@ -836,7 +830,7 @@ fun HomePageDetailShow(navController: NavController) {
                 }
                 TextButton(
                     onClick = {
-                        scale.value = 1f
+                        scale.floatValue = 1f
                         offset = Offset(0f, 0f)
                     },
                     modifier = Modifier

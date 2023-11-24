@@ -1,9 +1,6 @@
 package com.example.itjobstreet
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,9 +31,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -52,13 +47,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,16 +80,16 @@ fun Favorite(navController: NavController) {
             )
         },
     ) { innerPadding ->
-
-
-        Column(modifier = Modifier
-            .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-            .padding(innerPadding),
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
-            )) {
+            )
+        ) {
             /* Card Perusahaan */
             ElevatedCard(
                 elevation = CardDefaults.cardElevation(
@@ -110,7 +103,10 @@ fun Favorite(navController: NavController) {
                     .height(220.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Text(
                             text = "2 hari lalu",
                             color = Color(0xff616161),

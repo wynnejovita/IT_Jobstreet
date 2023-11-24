@@ -1,12 +1,8 @@
 package com.example.itjobstreet
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -24,15 +19,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -42,12 +32,10 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -66,7 +54,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -90,7 +77,7 @@ fun SearchOrang(navController: NavController) {
                         .align(alignment = Alignment.CenterStart),
                         onClick = {navController.popBackStack()}) {
                         Icon(
-                            Icons.Filled.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
                             tint = Color.White)
                     }
@@ -192,7 +179,7 @@ fun SearchOrang(navController: NavController) {
                             text = "Posting",
                             color = Color(0xFFFFFFFF),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -207,7 +194,7 @@ fun SearchOrang(navController: NavController) {
                             text = "Orang",
                             color = Color(0xFF2493DC),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -222,7 +209,7 @@ fun SearchOrang(navController: NavController) {
                             text = "Perusahaan",
                             color = Color(0xFFFFFFFF),
                             style = TextStyle(
-                                fontSize = 13.sp,
+                                fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold),
                         )
                     }
@@ -232,10 +219,10 @@ fun SearchOrang(navController: NavController) {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(15.dp)//padding yang ditulis pada baris pertama modifier = margin
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 16.dp
             )
@@ -252,7 +239,10 @@ fun SearchOrang(navController: NavController) {
                     .height(90.dp)
             ){
                 Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                    ){
                         Row(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
@@ -273,7 +263,6 @@ fun SearchOrang(navController: NavController) {
                                     modifier = Modifier
                                         .requiredWidth(width = 56.dp)
                                         .requiredHeight(height = 56.dp)
-
                                 )
                             }
                             Column {
@@ -302,7 +291,6 @@ fun SearchOrang(navController: NavController) {
                                 )
                             }
                         }
-
                     }
                 }
             }
@@ -632,7 +620,6 @@ fun SearchOrang(navController: NavController) {
                                 )
                             }
                         }
-
                     }
                 }
             }
