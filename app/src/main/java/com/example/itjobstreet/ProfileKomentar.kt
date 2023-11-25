@@ -62,7 +62,7 @@ fun ProfileKomentarShow(navController: NavController) {
                     containerColor = Color(0xFF2493DC)
                 ),
                 title = {
-                    Text("Profile",
+                    Text("Profil",
                         color = Color.White,
                     )
                 },
@@ -82,8 +82,9 @@ fun ProfileKomentarShow(navController: NavController) {
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(innerPadding)
-        ) {
+                .padding(innerPadding),
+        )
+        {
             Column(
                 modifier = Modifier
                     .padding(bottom = 15.dp)
@@ -110,10 +111,11 @@ fun ProfileKomentarShow(navController: NavController) {
                             .align(alignment = Alignment.TopStart)
                             .offset(
                                 x = 10.dp,
-                                y = 40.dp
+                                y = 35.dp
                             )
                             .clip(RoundedCornerShape(8.dp))
-                            .size(56.dp)
+                            .size(70.dp)
+
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.profil_image),
@@ -136,13 +138,17 @@ fun ProfileKomentarShow(navController: NavController) {
                         color = Color(0xFF2493DC),
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold),
+                            fontWeight = FontWeight.Bold
+                        ),
                     )
                 }
                 Column(
                     modifier = Modifier
                         .padding(start = 10.dp, end = 10.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 2.dp
+                    ),
                 ){
                     Text(
                         text = "Rusdi Tembung S.kom",
@@ -158,17 +164,15 @@ fun ProfileKomentarShow(navController: NavController) {
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                        modifier = Modifier
-                            .padding(bottom=5.dp)
+                        modifier = Modifier.padding(bottom=5.dp)
                     )
                     Text(
-                        text = "fresh graduate with a bachelor’s degree in Teknologi Informasi I am intrested in blablabla and bliblibli. pls hire me thx.",
+                        text = "P butuh ingfo loker gaji 2 digit. Pengalaman terakhir kerja kelompok.",
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 12.sp
                         ),
-                        modifier = Modifier
-                            .padding(bottom=5.dp)
+                        modifier = Modifier.padding(bottom=5.dp)
                     )
                     Text(
                         text = "Universitas Sumatera Utara",
@@ -189,52 +193,48 @@ fun ProfileKomentarShow(navController: NavController) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =Arrangement.spacedBy(
-                            space = 10.dp
-                        ),
+                            space = 3.dp)
                     ){
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)
-                        ){
-                            Icon(
-                                painter = painterResource(id = R.drawable.link_icon),
-                                contentDescription = "link",
-                                tint = Color.Black,
-                                modifier = Modifier
-                                    .requiredWidth(width = 10.dp)
-                                    .requiredHeight(height = 10.dp)
-                            )
-                            ClickableText(
-                                text = AnnotatedString("linkedin.com/Rusdiyoru"),
-                                style = TextStyle(
-                                    color = Color(0xFF2493DC),
-                                    fontSize = 12.sp
-                                ),
-                                onClick = {}
+                        Icon(
+                            painter = painterResource(id = R.drawable.link_icon),
+                            contentDescription = "link",
+                            tint = Color.Black,
+                            modifier = Modifier
+                                .padding(end = 5.dp)
+                                .requiredWidth(width = 10.dp)
+                                .requiredHeight(height = 10.dp)
+                        )
+                        ClickableText(
+                            text = AnnotatedString("https://www.linkedin.com/in/calon-budak-korporat"),
+                            style = TextStyle(
+                                color = Color(0xFF2493DC),
+                                fontSize = 12.sp
+                            ),
+                            onClick = {}
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement =Arrangement.spacedBy(
+                            space = 2.dp)
+                    ){
+                        Icon(
+                            imageVector = Icons.Filled.DateRange,
+                            contentDescription = "tanggal_lulus",
+                            tint = Color.Gray,
+                            modifier = Modifier
 
+                                .requiredWidth(width = 15.dp)
+                                .requiredHeight(height = 15.dp)
+                                .padding(end = 3.dp)
+                        )
+                        Text(
+                            text = "Lulus pada September 2019",
+                            color = Color.Gray,
+                            style = TextStyle(
+                                fontSize = 12.sp,
                             )
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)){
-                            Icon(
-                                imageVector = Icons.Filled.DateRange,
-                                contentDescription = "tanggal_lulus",
-                                tint = Color.Gray,
-                                modifier = Modifier
-                                    .requiredWidth(width = 15.dp)
-                                    .requiredHeight(height = 15.dp)
-                            )
-                            Text(
-                                text = "Lulus pada September 2019",
-                                color = Color.Gray,
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                )
-                            )
-                        }
+                        )
                     }
                 }
             }

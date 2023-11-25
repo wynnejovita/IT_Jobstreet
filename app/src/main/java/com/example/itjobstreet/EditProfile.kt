@@ -64,7 +64,7 @@ fun EditProfileShow(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            "Edit Profile",
+                            "Edit Profil",
                             color = Color.White,
                         )
                     }

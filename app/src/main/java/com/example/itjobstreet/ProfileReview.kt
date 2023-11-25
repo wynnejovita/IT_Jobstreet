@@ -61,7 +61,7 @@ fun ProfileReviewShow(navController: NavController) {
                     containerColor = Color(0xFF2493DC)
                 ),
                 title = {
-                    Text("Profile",
+                    Text("Profil",
                         color = Color.White,
                     )
                 },
@@ -82,13 +82,15 @@ fun ProfileReviewShow(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(innerPadding),
-        ) {
-            Column(modifier = Modifier
-                .padding(bottom = 15.dp)
-                .fillMaxWidth()){
+        )
+        {
+            Column(
+                modifier = Modifier
+                    .padding(bottom = 15.dp)
+                    .fillMaxWidth()
+            ){
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 ){
                     Box(
                         modifier = Modifier
@@ -108,10 +110,11 @@ fun ProfileReviewShow(navController: NavController) {
                             .align(alignment = Alignment.TopStart)
                             .offset(
                                 x = 10.dp,
-                                y = 40.dp
+                                y = 35.dp
                             )
                             .clip(RoundedCornerShape(8.dp))
-                            .size(56.dp)
+                            .size(70.dp)
+
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.profil_image),
@@ -127,20 +130,24 @@ fun ProfileReviewShow(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                     modifier = Modifier
                         .align(alignment = Alignment.End)
-                        .padding(end=10.dp)
-
+                        .padding(end = 10.dp)
                 ){
                     Text(
                         text = "Edit profil",
                         color = Color(0xFF2493DC),
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold),
+                            fontWeight = FontWeight.Bold
+                        ),
                     )
                 }
                 Column(
                     modifier = Modifier
-                        .padding(start=10.dp, end=10.dp).fillMaxWidth()
+                        .padding(start = 10.dp, end = 10.dp)
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 2.dp
+                    ),
                 ){
                     Text(
                         text = "Rusdi Tembung S.kom",
@@ -159,7 +166,7 @@ fun ProfileReviewShow(navController: NavController) {
                         modifier = Modifier.padding(bottom=5.dp)
                     )
                     Text(
-                        text = "fresh graduate with a bachelor’s degree in Teknologi Informasi I am intrested in blablabla and bliblibli. pls hire me thx.",
+                        text = "P butuh ingfo loker gaji 2 digit. Pengalaman terakhir kerja kelompok.",
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 12.sp
@@ -182,50 +189,51 @@ fun ProfileReviewShow(navController: NavController) {
                             fontWeight = FontWeight.SemiBold
                         )
                     )
-                    Row(verticalAlignment = Alignment.CenterVertically,
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =Arrangement.spacedBy(
-                            space = 10.dp
-                        ),){
-                        Row(verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)){
-                            Icon(
-                                painter = painterResource(id = R.drawable.link_icon),
-                                contentDescription = "link",
-                                tint = Color.Black,
-                                modifier = Modifier
-                                    .requiredWidth(width = 10.dp)
-                                    .requiredHeight(height = 10.dp)
-                            )
-                            ClickableText(
-                                text = AnnotatedString("linkedin.com/Rusdiyoru"),
-                                style = TextStyle(
-                                    color = Color(0xFF2493DC),
-                                    fontSize = 12.sp
-                                ),
-                                onClick = {}
-                            )
-                        }
-                        Row(verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)){
-                            Icon(
-                                imageVector = Icons.Filled.DateRange,
-                                contentDescription = "tanggal_lulus",
-                                tint = Color.Gray,
-                                modifier = Modifier
-                                    .requiredWidth(width = 15.dp)
-                                    .requiredHeight(height = 15.dp)
-                            )
+                            space = 3.dp)
+                    ){
+                        Icon(
+                            painter = painterResource(id = R.drawable.link_icon),
+                            contentDescription = "link",
+                            tint = Color.Black,
+                            modifier = Modifier
+                                .padding(end = 5.dp)
+                                .requiredWidth(width = 10.dp)
+                                .requiredHeight(height = 10.dp)
+                        )
+                        ClickableText(
+                            text = AnnotatedString("https://www.linkedin.com/in/calon-budak-korporat"),
+                            style = TextStyle(
+                                color = Color(0xFF2493DC),
+                                fontSize = 12.sp
+                            ),
+                            onClick = {}
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement =Arrangement.spacedBy(
+                            space = 2.dp)
+                    ){
+                        Icon(
+                            imageVector = Icons.Filled.DateRange,
+                            contentDescription = "tanggal_lulus",
+                            tint = Color.Gray,
+                            modifier = Modifier
 
-                            Text(
-                                text = "Lulus pada September 2019",
-                                color = Color.Gray,
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                )
+                                .requiredWidth(width = 15.dp)
+                                .requiredHeight(height = 15.dp)
+                                .padding(end = 3.dp)
+                        )
+                        Text(
+                            text = "Lulus pada September 2019",
+                            color = Color.Gray,
+                            style = TextStyle(
+                                fontSize = 12.sp,
                             )
-                        }
+                        )
                     }
                 }
             }
