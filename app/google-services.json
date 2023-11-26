@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "258753186687",
+    "firebase_url": "https://com-example-itjobstreet-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "com-example-itjobstreet",
+    "storage_bucket": "com-example-itjobstreet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258753186687:android:45428385201cfb6b1b284a",
+        "android_client_info": {
+          "package_name": "com.example.itjobstreet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2xPNREW07vX3GUhTtHoLTIzp2lDWe_z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

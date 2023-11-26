@@ -6,8 +6,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -36,10 +36,12 @@ import com.example.itjobstreet.ProfileReviewShow
 import com.example.itjobstreet.SearchOrang
 import com.example.itjobstreet.SearchPerusahaan
 import com.example.itjobstreet.SearchPost
+import com.example.itjobstreet.util.SharedViewModel
 
 @Composable
 fun AppNavigation() {
     val navController : NavHostController = rememberNavController()
+    var sharedViewModel = SharedViewModel()
     Scaffold(
         bottomBar = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -96,6 +98,7 @@ fun AppNavigation() {
         paddingValues ->
         NavHost(
             navController = navController,
+            //sharedViewModel = sharedViewModel,
             startDestination = Screens.HomePageScreen.name,
             modifier = Modifier.
                 padding(paddingValues)
@@ -112,24 +115,25 @@ fun AppNavigation() {
             composable(route = Screens.FavoriteScreen.name){
                 Favorite(navController = navController)
             }
+            // Profile Posting
             composable(route = Screens.ProfileScreen.name){
-                ProfilePostingShow(navController = navController)
+                    ProfilePostingShow(navController = navController, sharedViewModel = sharedViewModel)
             }
 
             composable(route = Screens.HomePageDetailScreen.name){
                 HomePageDetailShow(navController = navController)
             }
-
+            // Profile Komentar
             composable(route = Screens.ProfileKomentarScreen.name){
-                ProfileKomentarShow(navController = navController)
+                ProfileKomentarShow(navController = navController, sharedViewModel = sharedViewModel)
             }
-
+            // Profile Review
             composable(route = Screens.ProfileReviewScreen.name){
-                ProfileReviewShow(navController = navController)
+                ProfileReviewShow(navController = navController, sharedViewModel = sharedViewModel)
             }
 
             composable(route = Screens.EditProfileScreen.name){
-                EditProfileShow(navController = navController)
+                    EditProfileShow(navController = navController, sharedViewModel = sharedViewModel)
             }
 
             composable(route = Screens.SearchOrangScreen.name){
