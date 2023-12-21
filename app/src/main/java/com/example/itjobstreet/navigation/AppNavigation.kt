@@ -36,9 +36,10 @@ import com.example.itjobstreet.ProfileReviewShow
 import com.example.itjobstreet.SearchOrang
 import com.example.itjobstreet.SearchPerusahaan
 import com.example.itjobstreet.SearchPost
+import com.example.itjobstreet.viewmodels.LowonganViewModel
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(viewModel1: LowonganViewModel) {
     val navController : NavHostController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -93,15 +94,15 @@ fun AppNavigation() {
             }
         }
     ){
-        paddingValues ->
+            paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Screens.HomePageScreen.name,
             modifier = Modifier.
-                padding(paddingValues)
+            padding(paddingValues)
         ){
             composable(route = Screens.HomePageScreen.name){
-                HomePageShow(navController = navController)
+                HomePageShow(navController = navController, viewModel1)
             }
             composable(route = Screens.SearchScreen.name){
                 SearchPost(navController = navController)
@@ -135,7 +136,7 @@ fun AppNavigation() {
             composable(route = Screens.SearchOrangScreen.name){
                 SearchOrang(navController = navController)
             }
-            
+
             composable(route = Screens.SearchPerusahaanScreen.name){
                 SearchPerusahaan(navController = navController)
             }

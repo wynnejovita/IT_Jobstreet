@@ -32,12 +32,14 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -62,10 +64,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.itjobstreet.model.Lowongan
 import com.example.itjobstreet.navigation.Screens
+import com.example.itjobstreet.sealed.DataState
+import com.example.itjobstreet.viewmodels.LowonganViewModel
+
 
 @Composable
-fun HomePageShow(navController : NavController) {
+fun HomePageShow(navController : NavController, viewModelLowongan: LowonganViewModel) {
+
     Scaffold(
         topBar = {
             Column(
@@ -121,10 +128,11 @@ fun HomePageShow(navController : NavController) {
                     )
                 }
 
-                Row(modifier = Modifier.padding(start=15.dp),
+                Row(
+                    modifier = Modifier.padding(start = 15.dp),
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically,
-                    )
+                )
                 {
                     Icon(
                         imageVector = Icons.Filled.LocationOn,
@@ -136,9 +144,12 @@ fun HomePageShow(navController : NavController) {
                     val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
                     TextButton(onClick = { expanded = true }) {
                         Row(verticalAlignment = Alignment.CenterVertically){
-                            Text(text = "$selectedItem", color = Color(0xFFFFFFFF),   style = TextStyle(
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold),
+                            Text(
+                                text = "$selectedItem", color = Color(0xFFFFFFFF),
+                                style = TextStyle(
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
                             )
                             Icon(Icons.Default.ArrowDropDown, contentDescription = "",tint = Color.White)
                         }
@@ -212,7 +223,8 @@ fun HomePageShow(navController : NavController) {
                         ) {
                             Row(
                                 horizontalArrangement = Arrangement.Start,
-                                verticalAlignment = Alignment.CenterVertically,)
+                                verticalAlignment = Alignment.CenterVertically,
+                            )
                             {
                                 Icon(
                                     Icons.Filled.Star,
@@ -253,612 +265,270 @@ fun HomePageShow(navController : NavController) {
     ){ innerPadding ->
         Column(
             modifier = Modifier
-                 .verticalScroll(rememberScrollState())
-                 .fillMaxSize()
-                 .padding(innerPadding)
-                 .padding(15.dp),
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(15.dp),
             verticalArrangement = Arrangement.spacedBy(
                 space = 25.dp
             )
         ) {
-            /* Card Loker */
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
+            SetData(viewModelLowongan, navController)
+        }
+    }
+}
+
+@Composable
+fun SetData(viewModel: LowonganViewModel, navController: NavController){
+    when (val result = viewModel.response.value) {
+        is DataState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ){
-                Column{
+                CircularProgressIndicator()
+            }
+        }
+        is DataState.Success -> {
+            ShowList(result.data, navController)
+        }
+        is DataState.Failed -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = result.message,
+                    fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                )
+            }
+        }
+        else -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "Error Fetching Data!",
+                    fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ShowList(data: MutableList<Lowongan>, navController: NavController) {
+    for(lowong in data){
+        CardItem(navController, lowong)
+    }
+}
+
+
+@Composable
+fun CardItem(navController : NavController, lowongan: Lowongan){
+    /* Card Loker */
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 5.dp
+        ),
+        colors = CardDefaults.outlinedCardColors(
+            containerColor = Color.White
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(220.dp)
+    ){
+        Column{
+            Box(
+                modifier = Modifier
+                    .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+            ){
+
+                Text(
+                    text = "2 hari lalu",
+                    color = Color(0xff616161),
+                    style = TextStyle(
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Medium
+                    ),
+                    modifier = Modifier.align(alignment = Alignment.TopEnd)
+                )
+                Row(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 5.dp
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Box(
                         modifier = Modifier
-                            .padding(top = 15.dp, start = 15.dp, end = 15.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .size(56.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.profil_image),
+                            contentDescription = "profil_user",
+                            modifier = Modifier
+                                .requiredWidth(width = 56.dp)
+                                .requiredHeight(height = 56.dp)
+
+                        )
+                    }
+                    Column {
+                        Text(
+                            text = "Raihan Alifya Lubis",
+                            color = Color.Black,
+                            style = TextStyle(
+                                fontSize = 12.sp, fontWeight = FontWeight.Medium
+                            ),
+                        )
+                        Text(
+                            text = "Alumni",
+                            color = Color(0xff616161),
+                            style = TextStyle(
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
+                        )
+                        ClickableText(
+                            text = AnnotatedString("${lowongan.posisi!!} | ${lowongan.perusahaan!!}"),
+                            style = TextStyle(
+                                color = Color(0xff2493dc),
+                                fontSize = 12.sp
+                            ),
+                            onClick = {}
+                        )
+                    }
+                }
+            }
+            Text(
+                text = lowongan.deskripsi_singkat!!,
+                color = Color.Black,
+                style = TextStyle(
+                    fontSize = 12.sp
+                ),
+                modifier = Modifier
+                    .padding(start = 15.dp, top = 10.dp, end = 15.dp)
+                    .clickable { navController.navigate(route = Screens.HomePageDetailScreen.name) }
+            )
+            Box(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .fillMaxWidth()
+                    .height(26.dp)
+                    .background(color = Color(0xffb8e5cd))
+                    .border(
+                        border = BorderStroke(
+                            0.5.dp,
+                            Color(0xff12a858).copy(alpha = 0.7f)
+                        )
+                    )
+            )
+            {
+                Text(
+                    text = "11 hari lagi",
+                    color = Color.Black,
+                    style = TextStyle(
+                        fontSize = 12.sp, fontWeight = FontWeight.SemiBold
+                    ),
+                    modifier = Modifier
+                        .align(alignment = Alignment.Center)
+                )
+            }
+
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 15.dp, top = 5.dp, end = 15.dp)
+            )
+            {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                )
+                {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    )
+                    {
+                        Text(
+                            text = "17",
+                            color = Color.Black,
+                            style = TextStyle(
+                                fontSize = 12.sp
+                            ),
+                            modifier = Modifier
+                                .height(18.dp)
+
+                        )
+                        IconButton(
+                            onClick = {},
+                            modifier = Modifier
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.comment_home),
+                                contentDescription = "komen",
+                                modifier = Modifier
+                                    .requiredWidth(width = 20.dp)
+                                    .requiredHeight(height = 20.dp)
+                            )
+                        }
+                    }
+
+
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                )
+                {
+                    val saveable = remember { mutableStateOf(true) }
+                    IconButton(
+                        onClick = {saveable.value = !saveable.value},
+                        modifier = Modifier
                     ){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = TextStyle(
-                            fontSize = 12.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                            .clickable {navController.navigate(route = Screens.HomePageDetailScreen.name) }
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
+                        if (saveable.value) {
+                            Icon(
+                                imageVector = Icons.Filled.FavoriteBorder,
+                                "favorite",
+                                tint = Color.Black
                             )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Filled.Favorite,
+                                "favorite",
+                                tint = Color(0xff2493dc)
+                            )
+                        }
                     }
-
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                        type = "text/plain"
+                        flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    val context = LocalContext.current
+                    IconButton(
+                        onClick = {context.startActivity(shareIntent)},
+                        modifier = Modifier
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Share,
+                            contentDescription = "share",
+                            tint = Color.Black,
+                            modifier = Modifier.size(22.dp)
                         )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                if (saveable.value) {
-                                    Icon(
-                                        imageVector = Icons.Filled.FavoriteBorder,
-                                        "favorite",
-                                        tint = Color.Black
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Filled.Favorite,
-                                        "favorite",
-                                        tint = Color(0xff2493dc)
-                                    )
-                                }
-                            }
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black,
-                                    modifier = Modifier.size(22.dp)
-                                )
-                            }
-                        }
                     }
                 }
             }
-            /* Card Loker */
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = TextStyle(
-                            fontSize = 12.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start = 15.dp, top = 10.dp, end = 15.dp)
-
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-                    }
-
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                if (saveable.value) {
-                                    Icon(
-                                        imageVector = Icons.Filled.FavoriteBorder,
-                                        "favorite",
-                                        tint = Color.Black
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Filled.Favorite,
-                                        "favorite",
-                                        tint = Color(0xff2493dc)
-                                    )
-                                }
-                            }
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                type = "text/plain"
-                                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = {context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black,
-                                    modifier = Modifier.size(22.dp)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            /* Card Perusahaan */
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 5.dp
-                ),
-                colors = CardDefaults.outlinedCardColors(
-                    containerColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-            ){
-                Column{
-                    Box(modifier = Modifier.padding(top = 15.dp, start = 15.dp, end = 15.dp)){
-                        Text(
-                            text = "2 hari lalu",
-                            color = Color(0xff616161),
-                            style = TextStyle(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            modifier = Modifier.align(alignment = Alignment.TopEnd)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .fillMaxWidth(),
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 5.dp
-                            ),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .size(56.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.profil_image),
-                                    contentDescription = "profil_user",
-                                    modifier = Modifier
-                                        .requiredWidth(width = 56.dp)
-                                        .requiredHeight(height = 56.dp)
-
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = "Raihan Alifya Lubis",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp, fontWeight = FontWeight.Medium
-                                    ),
-                                )
-                                Text(
-                                    text = "Alumni",
-                                    color = Color(0xff616161),
-                                    style = TextStyle(
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                )
-                                ClickableText(
-                                    text = AnnotatedString("UI/UX Programer | Telkom Indonesia"),
-                                    style = TextStyle(
-                                        color = Color(0xff2493dc),
-                                        fontSize = 12.sp
-                                    ),
-                                    onClick = {}
-                                )
-                            }
-                        }
-                    }
-                    Text(
-                        text = "Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.",
-                        color = Color.Black,
-                        style = TextStyle(
-                            fontSize = 12.sp
-                        ),
-                        modifier = Modifier
-                            .padding(start=15.dp, top=10.dp, end=15.dp)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 20.dp)
-                            .fillMaxWidth()
-                            .height(26.dp)
-                            .background(color = Color(0xffb8e5cd))
-                            .border(
-                                border = BorderStroke(
-                                    0.5.dp,
-                                    Color(0xff12a858).copy(alpha = 0.7f)
-                                )
-                            )
-                    )
-                    {
-                        Text(
-                            text = "11 hari lagi",
-                            color = Color.Black,
-                            style = TextStyle(
-                                fontSize = 12.sp, fontWeight = FontWeight.SemiBold
-                            ),
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center)
-                        )
-                    }
-
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 15.dp, top = 5.dp, end = 15.dp)
-                    )
-                    {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,)
-                            {
-                                Text(
-                                    text = "17",
-                                    color = Color.Black,
-                                    style = TextStyle(
-                                        fontSize = 12.sp
-                                    ),
-                                    modifier = Modifier
-                                        .height(18.dp)
-
-                                )
-                                IconButton(
-                                    onClick = {},
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.comment_home),
-                                        contentDescription = "komen",
-                                        modifier = Modifier
-                                            .requiredWidth(width = 20.dp)
-                                            .requiredHeight(height = 20.dp)
-                                    )
-                                }
-                            }
-
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {   val sendIntent: Intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                            type = "text/plain"
-                            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        }
-
-                            val saveable = remember { mutableStateOf(true) }
-                            IconButton(
-                                onClick = {saveable.value = !saveable.value},
-                                modifier = Modifier
-                            ){
-                                if (saveable.value) {
-                                    Icon(
-                                        imageVector = Icons.Filled.FavoriteBorder,
-                                        "favorite",
-                                        tint = Color.Black
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Filled.Favorite,
-                                        "favorite",
-                                        tint = Color(0xff2493dc)
-                                    )
-                                }
-                            }
-                            val shareIntent = Intent.createChooser(sendIntent, null)
-                            val context = LocalContext.current
-                            IconButton(
-                                onClick = { context.startActivity(shareIntent)},
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Share,
-                                    contentDescription = "share",
-                                    tint = Color.Black,
-                                    modifier = Modifier.size(22.dp)
-                                )
-                            }
-
-                        }
-                    }
-                }
-            }
-
         }
     }
 }
