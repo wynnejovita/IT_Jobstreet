@@ -33,10 +33,18 @@ Proyek Tugas Besar Pemrograman Mobile
   Pengguna dapat melakukan cari pekerjaan dengan memasukkan kata kunci pada kolom search atau mengklik lokasi yang tertera pada layar.\
   Jika pengguna mengklik salah satu lokasi pekerjaan maka akan muncul tampilan seperti gambar kedua.
 - ### Home
+  ![Home 1](screenshots/home1.png)\
+  ![Home 2](screenshots/home2.png)\
+  ![Home 3](screenshots/home3.png)
 - ### Search
   ![Search 1](screenshots/search1.png)\
   ![Search 2](screenshots/search2.png)
 - ### Tambah Loker
+  ![Tambah Loker 1](screenshots/tambah1.png)\
+  ![Tambah Loker 2](screenshots/tambah2.png)\
+  ![Tambah Loker 3](screenshots/tambah3.png)\
+  ![Tambah Loker 4](screenshots/tambah4.png)\
+  ![Tambah Loker 5](screenshots/tambah5.png)
 - ### Favorit
   ![Favorit](screenshots/favorit.png)
 - ### Profil
