@@ -41,7 +41,6 @@ Proyek Tugas Besar Pemrograman Mobile
   ![Search 2](screenshots/search2.png)
 - ### Tambah Loker
   ![Tambah Loker 1](screenshots/tambah1.png)\
-  ![Tambah Loker 2](screenshots/tambah2.png)\
   ![Tambah Loker 3](screenshots/tambah3.png)\
   ![Tambah Loker 4](screenshots/tambah4.png)\
   ![Tambah Loker 5](screenshots/tambah5.png)
