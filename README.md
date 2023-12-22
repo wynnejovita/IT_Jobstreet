@@ -27,10 +27,19 @@ Proyek Tugas Besar Pemrograman Mobile
   Jika pengguna mengklik salah satu pekerjaan maka akan muncul tampilan seperti gambar kedua.\
   Jika pekerjaan tidak ditemukan maka akan muncul tampilan seperti gambar ketiga.
 - ### Pilih Lokasi Pekerjaan
-  ![Pilih Lokasi Pekerjaan](screenshots/pilih%20lokasi%20pekerjaan.png)
+  ![Pilih Lokasi Pekerjaan](screenshots/pilih%20lokasi%20pekerjaan.png)\
+  Tampilan ini berfungsi agar pengguna dapat memilih lokasi pekerjaan yang diinginkan.\
+  Pengguna dapat memilih beberapa lokasi pekerjaan yang diinginkan.\
+  Pengguna dapat melakukan cari pekerjaan dengan memasukkan kata kunci pada kolom search atau mengklik lokasi yang tertera pada layar.\
+  Jika pengguna mengklik salah satu lokasi pekerjaan maka akan muncul tampilan seperti gambar kedua.
 - ### Home
 - ### Search
+  ![Search 1](screenshots/search1.png)\
+  ![Search 2](screenshots/search2.png)
 - ### Tambah Loker
 - ### Favorit
+  ![Favorit](screenshots/favorit.png)
 - ### Profil
+  ![Profil 1](screenshots/profil1.png)\
+  ![Profil 2](screenshots/profil2.png)
 - ### Rating
