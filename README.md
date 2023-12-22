@@ -74,7 +74,7 @@ Proyek Tugas Besar Pemrograman Mobile
   
   ![Tambah Loker 5](screenshots/tambah5.png)\
   Tampilan pertama merupakan halaman selanjutnya dari pengisian form loker. Pada tampilan ini terdapat form card deskripsi yang wajib diisi dan form card Tambah Tag yang sifatnya opsional.\
-  Tampilan Kedua berfungsi ketika pengguna tidak mengisi form deskripsi. Pengguna wajib mengisi form tersebut agar bisa melakukan posting loker.
+  Tampilan Kedua muncul ketika pengguna tidak mengisi form deskripsi. Pengguna wajib mengisi form tersebut agar bisa melakukan posting loker.
   
 - ### Favorit
   ![Favorit](screenshots/favorit.png)\
