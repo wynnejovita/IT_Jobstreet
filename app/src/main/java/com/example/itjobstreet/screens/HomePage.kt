@@ -64,14 +64,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+//import androidx.navigation.NavController
 import com.example.itjobstreet.model.Lowongan
-import com.example.itjobstreet.navigation.Screens
+//import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.sealed.DataState
 import com.example.itjobstreet.viewmodels.LowonganViewModel
 
 
 @Composable
-fun HomePageShow(navController : NavController, viewModelLowongan: LowonganViewModel) {
+fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewModel) {
 
     Scaffold(
         topBar = {
@@ -87,7 +88,7 @@ fun HomePageShow(navController : NavController, viewModelLowongan: LowonganViewM
                 ){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {navController.popBackStack()}) {
+                        onClick = {}) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -273,13 +274,13 @@ fun HomePageShow(navController : NavController, viewModelLowongan: LowonganViewM
                 space = 25.dp
             )
         ) {
-            SetData(viewModelLowongan, navController)
+            SetData(viewModelLowongan)
         }
     }
 }
 
 @Composable
-fun SetData(viewModel: LowonganViewModel, navController: NavController){
+fun SetData(viewModel: LowonganViewModel){
     when (val result = viewModel.response.value) {
         is DataState.Loading -> {
             Box(
@@ -290,7 +291,7 @@ fun SetData(viewModel: LowonganViewModel, navController: NavController){
             }
         }
         is DataState.Success -> {
-            ShowList(result.data, navController)
+            ShowList(result.data)
         }
         is DataState.Failed -> {
             Box(
@@ -319,15 +320,15 @@ fun SetData(viewModel: LowonganViewModel, navController: NavController){
 
 
 @Composable
-fun ShowList(data: MutableList<Lowongan>, navController: NavController) {
+fun ShowList(data: MutableList<Lowongan>) {
     for(lowong in data){
-        CardItem(navController, lowong)
+        CardItem(lowong)
     }
 }
 
 
 @Composable
-fun CardItem(navController : NavController, lowongan: Lowongan){
+fun CardItem(lowongan: Lowongan){
     /* Card Loker */
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -413,7 +414,7 @@ fun CardItem(navController : NavController, lowongan: Lowongan){
                 ),
                 modifier = Modifier
                     .padding(start = 15.dp, top = 10.dp, end = 15.dp)
-                    .clickable { navController.navigate(route = Screens.HomePageDetailScreen.name) }
+                    .clickable {  }
             )
             Box(
                 modifier = Modifier
