@@ -38,10 +38,18 @@ Proyek Tugas Besar Pemrograman Mobile
   ![Home 3](screenshots/home3.png)
 - ### Search
   ![Search 1](screenshots/search1.png)\
-  ![Search 2](screenshots/search2.png)
+  Tampilan ini berfungsi agar pengguna dapat melakukan pencarian terhadap postingan, orang, ataupun perusahaan.\
+  Pencarian yang dilakukan dapat diseleksi dengan memilih lokasi penerbitan postingan, lokasi orang yang dicari, ataupun lokasi perusahaan yang diinginkan.\
+  Tampilan pencarian berdasarkan postingan terdapat pada gambar pertama, yang berisikan isi postingan, profil singkat dari pengguna yang memposting, tanggal diposting dan batas waktu postingan lowongan kerja tersebut dibuka.\
+  Pada tampilan ini pengguna dapat memberikan komentar, likes, ataupun membagikan postingan.\
+  Tampilan pencarian berdasarkan orang terdapat pada gambar kedua, yang berisikan profil singkat dari pengguna yang memposting.\
+  Tampilan pencarian berdasarkan perusahaan terdapat pada gambar ketiga, yang berisikan profil singkat perusahaan yang sedang membutuhkan lowongan kerja.\
+  ![Search 2](screenshots/search2.png)\
+  Tampilan ini muncul ketika pengguna mengklik ikon filter pada sudut kanan atas.\
+  Pada tampilan ini pengguna dapat melakukan filter pada tipe pekerjaan dan bidang pekerjaan yang diinginkan.
 - ### Tambah Loker
   ![Tambah Loker 1](screenshots/tambah1.png)\
-  Pengguna dapat menambahkan loker dengan cara box isian form pada card Perusahaan, Posisi, Kriteria, Foto dan Tanggal Pendaftaran loker.\
+  Pengguna dapat menambahkan loker dengan cara mengisi box isian form pada card Perusahaan, Posisi, Kriteria, Foto dan Tanggal Pendaftaran loker.\
   Form card Perusahaan, Posisi, dan Kriteria merupakan form yang wajib diisi. Sedangkan Form card Foto dan Tanggal Pendaftaran merupakan form opsional.
   
   ![Tambah Loker 2](screenshots/tambah2.png)\
@@ -53,15 +61,17 @@ Proyek Tugas Besar Pemrograman Mobile
   Tampilan pertama berfungsi untuk mengupload gambar dari penyimpanan lokal dan tampilan kedua berfungsi untuk membuat range untuk tanggal pendaftaran loker.
   
   ![Tambah Loker 4](screenshots/tambah4.png)\
-  Tampilan ini berfungsi ketika pengguna tidak mengisi form yang wajib diisi. Pengguna wajib mengisi form tersebut agar pengguna dapat menambahkan loker pada aplikasi. \
+  Tampilan ini berfungsi ketika pengguna tidak mengisi form yang wajib diisi. Pengguna wajib mengisi form tersebut agar pengguna dapat menambahkan loker pada aplikasi.\
   Nantinya ketika semua form sudah terisi, klik tombol selanjutnya untuk menuju ke halaman selanjutnya dari pengisian form loker.
   
   ![Tambah Loker 5](screenshots/tambah5.png)\
-  Tampilan pertama merupakan halaman selanjutnya dari pengisian form loker. Pada tampilan ini terdapat form card deskripsi yang wajib diisi dan form card Tambah Tag yang sifatnya opsional. \
+  Tampilan pertama merupakan halaman selanjutnya dari pengisian form loker. Pada tampilan ini terdapat form card deskripsi yang wajib diisi dan form card Tambah Tag yang sifatnya opsional.\
   Tampilan Kedua berfungsi ketika pengguna tidak mengisi form deskripsi. Pengguna wajib mengisi form tersebut agar bisa melakukan posting loker.
   
 - ### Favorit
-  ![Favorit](screenshots/favorit.png)
+  ![Favorit](screenshots/favorit.png)\
+  Tampilan ini berfungsi ketika pengguna menyukai suatu postingan lowongan kerja, postingan tersebut dapat tersimpan dan mudah untuk dilihat kembali jika dibutuhkan.\
+  Jika ikon hati ditekan maka ikon hati akan berubah warna menjadi abu-abu.
 - ### Profil
   ![Profil 1](screenshots/profil1.png)\
   ![Profil 2](screenshots/profil2.png)
