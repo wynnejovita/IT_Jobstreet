@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
+import com.example.itjobstreet.viewmodels.LowonganViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
