@@ -34,8 +34,16 @@ Proyek Tugas Besar Pemrograman Mobile
   Jika pengguna mengklik salah satu lokasi pekerjaan maka akan muncul tampilan seperti gambar kedua.
 - ### Home
   ![Home 1](screenshots/home1.png)\
+  Tampilan ini merupakan halaman home pengguna, dimana pengguna dapat melihat postingan lowongan kerja baik yang berdasarkan rekomendasi, terbaru, dan rating, , seperti gambar pertama.\
+  Jika pengguna mengklik tombol "Lokasi" maka akan muncul dropdown berisi lokasi yang memiliki lowongan kerja, dimana postingan lowongan kerja akan difilter sesuai dengan lokasi yang dipilih, seperti gambar kedua.\
+  Jika pengguna mengklik tab rating maka akan muncul dropdown berisi rating 1-5, dimana postingan lowongan kerja akan difilter sesuai dengan rating dari suatu perusahaan, seperti gambar ketiga.\
   ![Home 2](screenshots/home2.png)\
-  ![Home 3](screenshots/home3.png)
+  Jika pengguna mengklik icon hati pada suatu postingan lowongan kerja maka postingan tersebut akan masuk ke halaman "Favorite", seperti gambar pertama.\
+  Jika pengguna menglik icon share pada suatu postingan lowongan kerja maka pengguna dapat membagikan info link postingan suatu lowongan kerja, seperti gambar kedua.\
+  ![Home 3](screenshots/home3.png)\
+  Tampilan ini merupakan halaman detail dari suatu postingan lowongan kerja, dimana pengguna dapat melihat informasi yang lebih rinci baik batas waktu pendaftaran, poster, hingga kriteria yang dibutuhkan dari suatu perusahaan tersebut, seperti gambar pertama.\
+  Jika pengguna mengklik icon komentar maka akan muncul bottom sheet komentar untuk postingan lowongan kerja tersebut, seperti gambar kedua.\
+  Jika pengguna mengklik tanggal pendaftaran maka akan muncul bottom sheet sisa waktu masa pendaftaran dari suatu lowongan kerja, seperti gambar ketiga.
 - ### Search
   ![Search 1](screenshots/search1.png)\
   Tampilan ini berfungsi agar pengguna dapat melakukan pencarian terhadap postingan, orang, ataupun perusahaan.\
@@ -74,5 +82,10 @@ Proyek Tugas Besar Pemrograman Mobile
   Jika ikon hati ditekan maka ikon hati akan berubah warna menjadi abu-abu.
 - ### Profil
   ![Profil 1](screenshots/profil1.png)\
-  ![Profil 2](screenshots/profil2.png)
+  Tampilan ini merupakan halaman profil pengguna yang berisi informasi berupa nama, asal universitas, lokasi, link linkedin, dan tanggal kelulusan pengguna. Dimana pada halaman ini terdapat tab posting, komentar dan review. \
+  Tab posting berfungsi agar pengguna dapat melihat postingan lowongan kerja yang telah diunggah oleh pengguna, seperti pada gambar pertama. \
+  Tab komentar berfungsi agar pengguna dapat melihat komentar apa saja yang telah dikirim pengguna pada suatu postingan lowongan kerja, seperti pada gambar kedua. \
+  Tab review berfungsi agar pengguna dapat melihat review apa saja yang telah diberi pengguna pada suatu perusahaan, seperti pada gambar ketiga. \
+  ![Profil 2](screenshots/profil2.png)\
+  Tampilan ini berfungsi untuk mengubah profil pengguna ketika pengguna mengklik tombol "Edit profil", dimana pengguna diminta untuk memasukkan foto, nama, email, password baru, bio, alamat, dan tautan pengguna.
 - ### Rating
