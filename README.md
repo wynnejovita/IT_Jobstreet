@@ -87,5 +87,5 @@ Proyek Tugas Besar Pemrograman Mobile
   Tab komentar berfungsi agar pengguna dapat melihat komentar apa saja yang telah dikirim pengguna pada suatu postingan lowongan kerja, seperti pada gambar kedua. \
   Tab review berfungsi agar pengguna dapat melihat review apa saja yang telah diberi pengguna pada suatu perusahaan, seperti pada gambar ketiga. \
   ![Profil 2](screenshots/profil2.png)\
-  Tampilan ini berfungsi untuk mengubah profil pengguna ketika pengguna mengklik tombol "Edit profil", dimana pengguna diminta untuk memasukkan foto, nama, email, password baru, bio, alamat, dan tautan pengguna.
+  Tampilan ini berfungsi untuk mengubah profil pengguna ketika pengguna mengklik tombol "Edit profil", dimana pengguna dapat mengedit foto, nama, email, password baru, bio, alamat, dan tautan pengguna.
 - ### Rating
