@@ -41,10 +41,25 @@ Proyek Tugas Besar Pemrograman Mobile
   ![Search 2](screenshots/search2.png)
 - ### Tambah Loker
   ![Tambah Loker 1](screenshots/tambah1.png)\
+  Pengguna dapat menambahkan loker dengan cara box isian form pada card Perusahaan, Posisi, Kriteria, Foto dan Tanggal Pendaftaran loker.\
+  Form card Perusahaan, Posisi, dan Kriteria merupakan form yang wajib diisi. Sedangkan Form card Foto dan Tanggal Pendaftaran merupakan form opsional.
+  
   ![Tambah Loker 2](screenshots/tambah2.png)\
+  Tampilan ini berfungsi untuk mengisi form pada card Perusahaan, Posisi dan Kriteria. \
+  Pada card Perusahaan dan Posisi, form berbentuk dropdown yang interaktif karena pengguna dapat memilih salah satu opsi dari daftar perusahaan dan posisi pekerjaan yang ada atau menginput nama perusahaan dan posisi pekerjaan yang tidak ada dalam daftar tersebut.\
+  Pada card Kriteria, form berbentuk textfield yang memungkinkan pengguna untuk menambahkan lebih banyak field untuk kriteria khusus pada loker sesuai kebutuhan mereka.
+  
   ![Tambah Loker 3](screenshots/tambah3.png)\
+  Tampilan pertama berfungsi untuk mengupload gambar dari penyimpanan lokal dan tampilan kedua berfungsi untuk membuat range untuk tanggal pendaftaran loker.
+  
   ![Tambah Loker 4](screenshots/tambah4.png)\
-  ![Tambah Loker 5](screenshots/tambah5.png)
+  Tampilan ini berfungsi ketika pengguna tidak mengisi form yang wajib diisi. Pengguna wajib mengisi form tersebut agar pengguna dapat menambahkan loker pada aplikasi. \
+  Nantinya ketika semua form sudah terisi, klik tombol selanjutnya untuk menuju ke halaman selanjutnya dari pengisian form loker.
+  
+  ![Tambah Loker 5](screenshots/tambah5.png)\
+  Tampilan pertama merupakan halaman selanjutnya dari pengisian form loker. Pada tampilan ini terdapat form card deskripsi yang wajib diisi dan form card Tambah Tag yang sifatnya opsional. \
+  Tampilan Kedua berfungsi ketika pengguna tidak mengisi form deskripsi. Pengguna wajib mengisi form tersebut agar bisa melakukan posting loker.
+  
 - ### Favorit
   ![Favorit](screenshots/favorit.png)
 - ### Profil
