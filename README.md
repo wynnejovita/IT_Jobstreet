@@ -34,7 +34,7 @@ Proyek Tugas Besar Pemrograman Mobile
   Jika pengguna mengklik salah satu lokasi pekerjaan maka akan muncul tampilan seperti gambar kedua.
 - ### Home
   ![Home 1](screenshots/home1.png)\
-  Tampilan ini merupakan halaman home pengguna, dimana pengguna dapat melihat postingan lowongan kerja baik yang berdasarkan rekomendasi, terbaru, dan rating, , seperti gambar pertama.\
+  Tampilan ini merupakan halaman home pengguna, dimana pengguna dapat melihat postingan lowongan kerja baik yang berdasarkan rekomendasi, terbaru, dan rating, seperti gambar pertama.\
   Jika pengguna mengklik tombol "Lokasi" maka akan muncul dropdown berisi lokasi yang memiliki lowongan kerja, dimana postingan lowongan kerja akan difilter sesuai dengan lokasi yang dipilih, seperti gambar kedua.\
   Jika pengguna mengklik tab rating maka akan muncul dropdown berisi rating 1-5, dimana postingan lowongan kerja akan difilter sesuai dengan rating dari suatu perusahaan, seperti gambar ketiga.\
   ![Home 2](screenshots/home2.png)\
