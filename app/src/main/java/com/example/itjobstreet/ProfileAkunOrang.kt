@@ -1,9 +1,6 @@
 package com.example.itjobstreet
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -31,32 +27,21 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -64,53 +49,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
-import com.example.itjobstreet.util.SharedViewModel
-import java.time.Clock.offset
-import com.example.itjobstreet.viewmodels.LowonganViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedViewModel) {
-    var UserID: String by rememberSaveable { mutableStateOf("") }
-    var User_Alamat: String by rememberSaveable { mutableStateOf("") }
-    var User_Bio: String by rememberSaveable { mutableStateOf("") }
-    var User_Email: String by rememberSaveable { mutableStateOf("") }
-    var User_Link: String by rememberSaveable { mutableStateOf("") }
-    var User_Name: String by rememberSaveable { mutableStateOf("") }
-
-    val context = LocalContext.current
-
-    sharedViewModel.getProfileData(
-        UserID = UserID,
-        context = context
-    ) {
-        profileData ->
-        User_Name = profileData.User_Name
-        User_Alamat = profileData.User_Alamat
-        User_Bio = profileData.User_Bio
-        User_Email = profileData.User_Email
-        User_Link = profileData.User_Link
-    }
-
+fun ProfileAkunOrang(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color(0xFF2493DC)
                 ),
-                title = {
-                    Text("Profil",
-                        color = Color.White,
-                    )
-                },
+                title = {},
                 navigationIcon = {
                     IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
@@ -133,7 +87,7 @@ fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedView
         {
             Column(
                 modifier = Modifier
-                    .padding(bottom = 15.dp)
+                    .padding(bottom = 25.dp)
                     .fillMaxWidth()
             ){
                 Box(
@@ -157,10 +111,10 @@ fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedView
                             .align(alignment = Alignment.TopStart)
                             .offset(
                                 x = 10.dp,
-                                y = 35.dp
+                                y = 40.dp
                             )
                             .clip(RoundedCornerShape(8.dp))
-                            .size(70.dp)
+                            .size(56.dp)
 
                     ) {
                         Image(
@@ -171,34 +125,14 @@ fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedView
                         )
                     }
                 }
-                OutlinedButton(
-                    onClick={navController.navigate(route = Screens.EditProfileScreen.name)},
-                    border = BorderStroke(1.dp,Color(0xFF2493DC)),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                    modifier = Modifier
-                        .align(alignment = Alignment.End)
-                        .padding(end = 10.dp)
-                ){
-                    Text(
-                        text = "Edit profil",
-                        color = Color(0xFF2493DC),
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
-                    )
-                }
+
                 Column(
                     modifier = Modifier
-                        .padding(start = 10.dp, end = 10.dp)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(
-                        space = 2.dp
-                    ),
+                        .padding(start = 10.dp, end = 10.dp, top = 40.dp)
+                        .fillMaxWidth()
                 ){
-                    // nama
                     Text(
-                        text = User_Name,
+                        text = "Rusdi Tembung S.kom",
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 20.sp, fontWeight = FontWeight.Black
@@ -213,9 +147,8 @@ fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedView
                         ),
                         modifier = Modifier.padding(bottom=5.dp)
                     )
-                    // Bio
                     Text(
-                        text = User_Bio,
+                        text = "fresh graduate with a bachelor’s degree in Teknologi Informasi I am intrested in blablabla and bliblibli. pls hire me thx.",
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 12.sp
@@ -230,123 +163,91 @@ fun ProfilePostingShow(navController: NavController, sharedViewModel: SharedView
                             fontWeight = FontWeight.SemiBold
                         )
                     )
-                    // Alamat
                     Text(
-                        text = User_Alamat,
+                        text = "Kota Medan, Sumatera Utara, Indonesia",
                         color = Color.Gray,
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                     )
-                    // Link
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =Arrangement.spacedBy(
-                            space = 3.dp)
+                            space = 10.dp
+                        ),
                     ){
-                        Icon(
-                            painter = painterResource(id = R.drawable.link_icon),
-                            contentDescription = "link",
-                            tint = Color.Black,
-                            modifier = Modifier
-                                .padding(end = 5.dp)
-                                .requiredWidth(width = 10.dp)
-                                .requiredHeight(height = 10.dp)
-                        )
-                        ClickableText(
-                            text = AnnotatedString(User_Link),
-                            style = TextStyle(
-                                color = Color(0xFF2493DC),
-                                fontSize = 12.sp
-                            ),
-                            onClick = {}
-                        )
-                    }
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement =Arrangement.spacedBy(
-                            space = 2.dp)
-                    ){
-                        Icon(
-                            imageVector = Icons.Filled.DateRange,
-                            contentDescription = "tanggal_lulus",
-                            tint = Color.Gray,
-                            modifier = Modifier
-
-                                .requiredWidth(width = 15.dp)
-                                .requiredHeight(height = 15.dp)
-                                .padding(end = 3.dp)
-                        )
-                        Text(
-                            text = "Lulus pada September 2019",
-                            color = Color.Gray,
-                            style = TextStyle(
-                                fontSize = 12.sp,
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 2.dp)
+                        ){
+                            Icon(
+                                painter = painterResource(id = R.drawable.link_icon),
+                                contentDescription = "link",
+                                tint = Color.Black,
+                                modifier = Modifier
+                                    .requiredWidth(width = 10.dp)
+                                    .requiredHeight(height = 10.dp)
                             )
-                        )
+                            ClickableText(
+                                text = AnnotatedString("linkedin.com/Rusdiyoru"),
+                                style = TextStyle(
+                                    color = Color(0xFF2493DC),
+                                    fontSize = 12.sp
+                                ),
+                                onClick = {}
+                            )
+                        }
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement =Arrangement.spacedBy(
+                                space = 2.dp)
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.DateRange,
+                                contentDescription = "tanggal_lulus",
+                                tint = Color.Gray,
+                                modifier = Modifier
+                                    .requiredWidth(width = 15.dp)
+                                    .requiredHeight(height = 15.dp)
+                            )
+                            Text(
+                                text = "Lulus pada September 2019",
+                                color = Color.Gray,
+                                style = TextStyle(
+                                    fontSize = 12.sp,
+                                )
+                            )
+                        }
                     }
                 }
             }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 10.dp, end = 10.dp, bottom = 15.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                TextButton(
-                    modifier = Modifier
-                        .border(1.dp, Color(0xFF2493DC))
-                        .requiredWidth(width = 110.dp)
-                        .requiredHeight(height = 36.dp),
-                    onClick = {}
-                ) {
-                    Text("Posting",
-                        color = Color(0xFF2493DC),
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Black
-                        ),
-                    )
-                }
-                TextButton(
-                    modifier = Modifier
-                        .requiredWidth(width = 110.dp)
-                        .requiredHeight(height = 36.dp),
-                    onClick = {navController.navigate(route = Screens.ProfileKomentarScreen.name)}
-                ) {
-                    Text("Komentar",
-                        color = Color.Gray,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Black
-                        ),
-                    )
-                }
-                TextButton(
-                    modifier = Modifier
-                        .requiredWidth(width = 110.dp)
-                        .requiredHeight(height = 36.dp),
-                    onClick = {navController.navigate(route = Screens.ProfileReviewScreen.name)}
-                ) {
-                    Text("Review",
-                        color = Color.Gray,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Black
-                        ),
-                    )
-                }
-            }
+
             Column(
                 modifier = Modifier
                     .padding(start = 25.dp, end = 25.dp, bottom = 25.dp)
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(
-                    space = 25.dp
+                    space = 15.dp
                 )
             ){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Text(
+                        text = "Posting",
+                        color = Color.Black,
+                        style = TextStyle(
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                    )
+                }
+
                 /* Card Posting */
                 ElevatedCard(
                     elevation = CardDefaults.cardElevation(

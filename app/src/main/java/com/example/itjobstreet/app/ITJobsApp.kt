@@ -1,21 +1,25 @@
-package com.example.itjobstreet.navigation
+package com.example.itjobstreet.app
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Gray
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -37,17 +41,33 @@ import com.example.itjobstreet.SearchOrang
 import com.example.itjobstreet.SearchPerusahaan
 import com.example.itjobstreet.SearchPost
 import com.example.itjobstreet.util.SharedViewModel
+import com.example.itjobstreet.data.login.LoginViewModel
+import com.example.itjobstreet.navigation.PostRoute
+import com.example.itjobstreet.navigation.Screen
+import com.example.itjobstreet.navigation.Screens
+import com.example.itjobstreet.navigation.listOfNavItems
+import com.example.itjobstreet.screens.Login
+import com.example.itjobstreet.viewmodels.LowonganViewModel
 
 @Composable
-fun AppNavigation() {
+fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganViewModel = viewModel()) {
     val navController : NavHostController = rememberNavController()
     var sharedViewModel = SharedViewModel()
+
+    homeViewModel.checkForActiveSession()
+
+    /**
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    )
+    */
     Scaffold(
         bottomBar = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
             NavigationBar(
-                containerColor = White,
+                containerColor = Color.White,
                 modifier = Modifier
                     .height(60.dp)
                     .drawBehind {
@@ -56,7 +76,7 @@ fun AppNavigation() {
 
                         //top line navbar
                         drawLine(
-                            color = Gray,
+                            color = Color.Gray,
                             start = Offset(0f, 0f), //(0,0) at top-left point of the box
                             end = Offset(x, 0f), //top-right point of the box
                             strokeWidth = strokeWidth
@@ -67,7 +87,7 @@ fun AppNavigation() {
                     NavigationBarItem(
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Color(0xFF2493DC),
-                            unselectedIconColor = Gray,
+                            unselectedIconColor = Color.Gray,
                             indicatorColor = Color(0xFFEEEEEE)
                         ),
                         selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
@@ -94,17 +114,16 @@ fun AppNavigation() {
                 }
             }
         }
-    ){
-        paddingValues ->
+    ){  paddingValues ->
         NavHost(
             navController = navController,
-            //sharedViewModel = sharedViewModel,
             startDestination = Screens.HomePageScreen.name,
             modifier = Modifier.
-                padding(paddingValues)
-        ){
+            padding(paddingValues)
+        )
+        {
             composable(route = Screens.HomePageScreen.name){
-                HomePageShow(navController = navController)
+                HomePageShow(navController = navController, viewModel1)
             }
             composable(route = Screens.SearchScreen.name){
                 SearchPost(navController = navController)
@@ -115,7 +134,6 @@ fun AppNavigation() {
             composable(route = Screens.FavoriteScreen.name){
                 Favorite(navController = navController)
             }
-            // Profile Posting
             composable(route = Screens.ProfileScreen.name){
                     ProfilePostingShow(navController = navController, sharedViewModel = sharedViewModel)
             }
@@ -152,5 +170,28 @@ fun AppNavigation() {
                 FilterSearchShow(navController = navController)
             }
         }
+
+//        if (homeViewModel.isUserLoggedIn.value == true) {
+//            PostRoute.navigateTo(Screen.HomePage)
+//        }
+
+        Crossfade(targetState = PostRoute.currentScreen, label = "") { currentState ->
+            when (currentState.value) {
+                is Screen.LoginScreen -> {
+                    Login()
+                }
+
+                /**
+                is Screen.HomePage -> {
+                    HomePageShow(viewModel1)
+                }
+                */
+
+                else -> {}
+            }
+
+        }
+
     }
+
 }
