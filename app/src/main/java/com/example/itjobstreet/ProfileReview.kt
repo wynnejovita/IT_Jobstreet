@@ -36,11 +36,16 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -49,11 +54,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
-import com.example.itjobstreet.ui.theme.ITJobstreetTheme
+import com.example.itjobstreet.util.SharedViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileReviewShow(navController: NavController) {
+fun ProfileReviewShow(navController: NavController, sharedViewModel: SharedViewModel) {
+    var UserID: String by rememberSaveable { mutableStateOf("") }
+    var User_Alamat: String by rememberSaveable { mutableStateOf("") }
+    var User_Bio: String by rememberSaveable { mutableStateOf("") }
+    var User_Email: String by rememberSaveable { mutableStateOf("") }
+    var User_Link: String by rememberSaveable { mutableStateOf("") }
+    var User_Name: String by rememberSaveable { mutableStateOf("") }
+
+    val context = LocalContext.current
+
+    sharedViewModel.getProfileData(
+        UserID = UserID,
+        context = context
+    ) {
+            profileData ->
+        User_Name = profileData.User_Name
+        User_Alamat = profileData.User_Alamat
+        User_Bio = profileData.User_Bio
+        User_Email = profileData.User_Email
+        User_Link = profileData.User_Link
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -149,8 +176,9 @@ fun ProfileReviewShow(navController: NavController) {
                         space = 2.dp
                     ),
                 ){
+                    // name
                     Text(
-                        text = "Rusdi Tembung S.kom",
+                        text = User_Name,
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 20.sp, fontWeight = FontWeight.Black
@@ -165,8 +193,9 @@ fun ProfileReviewShow(navController: NavController) {
                         ),
                         modifier = Modifier.padding(bottom=5.dp)
                     )
+                    // Bio
                     Text(
-                        text = "P butuh ingfo loker gaji 2 digit. Pengalaman terakhir kerja kelompok.",
+                        text = User_Bio,
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 12.sp
@@ -181,14 +210,16 @@ fun ProfileReviewShow(navController: NavController) {
                             fontWeight = FontWeight.SemiBold
                         )
                     )
+                    // Alamat
                     Text(
-                        text = "Kota Medan, Sumatera Utara, Indonesia",
+                        text = User_Alamat,
                         color = Color.Gray,
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                     )
+                    // Link
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =Arrangement.spacedBy(
@@ -204,7 +235,7 @@ fun ProfileReviewShow(navController: NavController) {
                                 .requiredHeight(height = 10.dp)
                         )
                         ClickableText(
-                            text = AnnotatedString("https://www.linkedin.com/in/calon-budak-korporat"),
+                            text = AnnotatedString(User_Link),
                             style = TextStyle(
                                 color = Color(0xFF2493DC),
                                 fontSize = 12.sp
