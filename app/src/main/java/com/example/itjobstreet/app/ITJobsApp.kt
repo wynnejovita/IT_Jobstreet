@@ -55,12 +55,6 @@ fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganV
 
     homeViewModel.checkForActiveSession()
 
-    /**
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    )
-    */
     Scaffold(
         bottomBar = {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
