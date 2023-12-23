@@ -115,36 +115,36 @@ fun PostingLoker1(navController: NavController) {
             )
         },
         // navbar bawah
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .height(60.dp),
-                containerColor = Color(0xFFE9F4FB),
-                contentColor = MaterialTheme.colorScheme.primary,
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-
-                ) {
-                    // tombol untuk lanjut ke halaman field loker selanjutnya
-                    ElevatedButton(
-                        onClick = {
-                            if (perusahaanValue.isEmpty() || posisiValue.isEmpty() || kriteria.isEmpty()) {
-                                errorText = "wajib diisi!"
-                            }else{
-                                navController.navigate(route = Screens.Add2Screen.name)
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
-                    ) {
-                        Text("Selanjutnya", color = Color.White)
-                    }
-                }
-            }
-        },
+//        bottomBar = {
+//            BottomAppBar(
+//                modifier = Modifier
+//                    .height(60.dp),
+//                containerColor = Color(0xFFE9F4FB),
+//                contentColor = MaterialTheme.colorScheme.primary,
+//            ) {
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxSize(),
+//                    horizontalArrangement = Arrangement.Center,
+//                    verticalAlignment = Alignment.CenterVertically
+//
+//                ) {
+//                    // tombol untuk lanjut ke halaman field loker selanjutnya
+//                    ElevatedButton(
+//                        onClick = {
+//                            if (perusahaanValue.isEmpty() || posisiValue.isEmpty() || kriteria.isEmpty()) {
+//                                errorText = "wajib diisi!"
+//                            }else{
+//                                navController.navigate(route = Screens.Add2Screen.name)
+//                            }
+//                        },
+//                        colors = ButtonDefaults.buttonColors(Color(0xFF2493DC)),
+//                    ) {
+//                        Text("Selanjutnya", color = Color.White)
+//                    }
+//                }
+//            }
+//        },
     ){ innerPadding ->
         Column(
             modifier = Modifier

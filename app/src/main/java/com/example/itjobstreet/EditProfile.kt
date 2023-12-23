@@ -1,5 +1,8 @@
 package com.example.itjobstreet
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,8 +28,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
@@ -34,23 +39,36 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
+import com.example.itjobstreet.util.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditProfileShow(navController: NavController) {
+fun EditProfileShow(navController: NavController, sharedViewModel: SharedViewModel) {
+    var UserID: String by rememberSaveable { mutableStateOf("") }
+    var User_Alamat: String by rememberSaveable { mutableStateOf("") }
+    var User_Bio: String by rememberSaveable { mutableStateOf("") }
+    var User_Email: String by rememberSaveable { mutableStateOf("") }
+    var User_Link: String by rememberSaveable { mutableStateOf("") }
+    var User_Name: String by rememberSaveable { mutableStateOf("") }
+
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -64,7 +82,7 @@ fun EditProfileShow(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            "Edit Profile",
+                            "Edit Profil",
                             color = Color.White,
                         )
                     }
@@ -114,7 +132,9 @@ fun EditProfileShow(navController: NavController) {
                         verticalArrangement = Arrangement.spacedBy(
                             space = 12.dp,
                         ),
-                    ) {
+                    )
+                    // Kolom nama
+                    {
                         Column(
                             verticalArrangement = Arrangement.spacedBy(
                                 space = 5.dp,
@@ -126,11 +146,11 @@ fun EditProfileShow(navController: NavController) {
                                     fontSize = 17.sp,
                                     fontWeight = FontWeight.Black),
                             )
-                            var namaUser by rememberSaveable { mutableStateOf("") }
+                            var nama_user by rememberSaveable { mutableStateOf("") }
                             val containerColor = Color.White.copy(alpha = 0.08f)
                             OutlinedTextField(
-                                value = namaUser,
-                                onValueChange = { namaUser = it },
+                                value = User_Name,
+                                onValueChange = { User_Name = it },
                                 placeholder = {
                                     Text(
                                         text = "Masukkan nama anda",
@@ -148,6 +168,7 @@ fun EditProfileShow(navController: NavController) {
                                     .fillMaxWidth()
                                     .requiredHeight(height = 55.dp))
                         }
+                        // Kolom email
                         Column(
                             verticalArrangement = Arrangement.spacedBy(
                                 space = 5.dp,

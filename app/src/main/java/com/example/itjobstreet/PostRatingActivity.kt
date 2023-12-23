@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
 fun RatingBar(
@@ -86,7 +87,7 @@ fun ReviewBox() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RatingPage() {
+fun RatingPage(navController: NavController) {
     var rating by remember { mutableStateOf(0) }
     val isRatingSelected = rating > 0
 
@@ -158,7 +159,7 @@ fun RatingPage() {
                 },
 
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.Default.ArrowBack,
                             "backIcon",
@@ -259,10 +260,4 @@ fun RatingPage() {
             }
         }
     )
-}
-
-@Preview
-@Composable
-fun RatingPagePreview() {
-    RatingPage()
 }

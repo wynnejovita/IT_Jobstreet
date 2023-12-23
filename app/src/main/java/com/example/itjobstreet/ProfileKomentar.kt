@@ -37,11 +37,16 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -51,10 +56,32 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
+import com.example.itjobstreet.util.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileKomentarShow(navController: NavController) {
+fun ProfileKomentarShow(navController: NavController, sharedViewModel: SharedViewModel) {
+    var UserID: String by rememberSaveable { mutableStateOf("") }
+    var User_Alamat: String by rememberSaveable { mutableStateOf("") }
+    var User_Bio: String by rememberSaveable { mutableStateOf("") }
+    var User_Email: String by rememberSaveable { mutableStateOf("") }
+    var User_Link: String by rememberSaveable { mutableStateOf("") }
+    var User_Name: String by rememberSaveable { mutableStateOf("") }
+
+    val context = LocalContext.current
+
+    sharedViewModel.getProfileData(
+        UserID = UserID,
+        context = context
+    ) {
+            profileData ->
+        User_Name = profileData.User_Name
+        User_Alamat = profileData.User_Alamat
+        User_Bio = profileData.User_Bio
+        User_Email = profileData.User_Email
+        User_Link = profileData.User_Link
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -62,7 +89,7 @@ fun ProfileKomentarShow(navController: NavController) {
                     containerColor = Color(0xFF2493DC)
                 ),
                 title = {
-                    Text("Profile",
+                    Text("Profil",
                         color = Color.White,
                     )
                 },
@@ -82,8 +109,9 @@ fun ProfileKomentarShow(navController: NavController) {
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
-                .padding(innerPadding)
-        ) {
+                .padding(innerPadding),
+        )
+        {
             Column(
                 modifier = Modifier
                     .padding(bottom = 15.dp)
@@ -110,10 +138,11 @@ fun ProfileKomentarShow(navController: NavController) {
                             .align(alignment = Alignment.TopStart)
                             .offset(
                                 x = 10.dp,
-                                y = 40.dp
+                                y = 35.dp
                             )
                             .clip(RoundedCornerShape(8.dp))
-                            .size(56.dp)
+                            .size(70.dp)
+
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.profil_image),
@@ -136,16 +165,21 @@ fun ProfileKomentarShow(navController: NavController) {
                         color = Color(0xFF2493DC),
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold),
+                            fontWeight = FontWeight.Bold
+                        ),
                     )
                 }
                 Column(
                     modifier = Modifier
                         .padding(start = 10.dp, end = 10.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = 2.dp
+                    ),
                 ){
+                    // name
                     Text(
-                        text = "Rusdi Tembung S.kom",
+                        text = User_Name,
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 20.sp, fontWeight = FontWeight.Black
@@ -158,17 +192,16 @@ fun ProfileKomentarShow(navController: NavController) {
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                        modifier = Modifier
-                            .padding(bottom=5.dp)
+                        modifier = Modifier.padding(bottom=5.dp)
                     )
+                    // Bio
                     Text(
-                        text = "fresh graduate with a bachelor’s degree in Teknologi Informasi I am intrested in blablabla and bliblibli. pls hire me thx.",
+                        text = User_Bio,
                         color = Color.Black,
                         style = TextStyle(
                             fontSize = 12.sp
                         ),
-                        modifier = Modifier
-                            .padding(bottom=5.dp)
+                        modifier = Modifier.padding(bottom=5.dp)
                     )
                     Text(
                         text = "Universitas Sumatera Utara",
@@ -178,63 +211,61 @@ fun ProfileKomentarShow(navController: NavController) {
                             fontWeight = FontWeight.SemiBold
                         )
                     )
+                    // Alamat
                     Text(
-                        text = "Kota Medan, Sumatera Utara, Indonesia",
+                        text = User_Alamat,
                         color = Color.Gray,
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                     )
+                    // Link
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =Arrangement.spacedBy(
-                            space = 10.dp
-                        ),
+                            space = 3.dp)
                     ){
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)
-                        ){
-                            Icon(
-                                painter = painterResource(id = R.drawable.link_icon),
-                                contentDescription = "link",
-                                tint = Color.Black,
-                                modifier = Modifier
-                                    .requiredWidth(width = 10.dp)
-                                    .requiredHeight(height = 10.dp)
-                            )
-                            ClickableText(
-                                text = AnnotatedString("linkedin.com/Rusdiyoru"),
-                                style = TextStyle(
-                                    color = Color(0xFF2493DC),
-                                    fontSize = 12.sp
-                                ),
-                                onClick = {}
+                        Icon(
+                            painter = painterResource(id = R.drawable.link_icon),
+                            contentDescription = "link",
+                            tint = Color.Black,
+                            modifier = Modifier
+                                .padding(end = 5.dp)
+                                .requiredWidth(width = 10.dp)
+                                .requiredHeight(height = 10.dp)
+                        )
+                        ClickableText(
+                            text = AnnotatedString(User_Link),
+                            style = TextStyle(
+                                color = Color(0xFF2493DC),
+                                fontSize = 12.sp
+                            ),
+                            onClick = {}
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement =Arrangement.spacedBy(
+                            space = 2.dp)
+                    ){
+                        Icon(
+                            imageVector = Icons.Filled.DateRange,
+                            contentDescription = "tanggal_lulus",
+                            tint = Color.Gray,
+                            modifier = Modifier
 
+                                .requiredWidth(width = 15.dp)
+                                .requiredHeight(height = 15.dp)
+                                .padding(end = 3.dp)
+                        )
+                        Text(
+                            text = "Lulus pada September 2019",
+                            color = Color.Gray,
+                            style = TextStyle(
+                                fontSize = 12.sp,
                             )
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement =Arrangement.spacedBy(
-                                space = 2.dp)){
-                            Icon(
-                                imageVector = Icons.Filled.DateRange,
-                                contentDescription = "tanggal_lulus",
-                                tint = Color.Gray,
-                                modifier = Modifier
-                                    .requiredWidth(width = 15.dp)
-                                    .requiredHeight(height = 15.dp)
-                            )
-                            Text(
-                                text = "Lulus pada September 2019",
-                                color = Color.Gray,
-                                style = TextStyle(
-                                    fontSize = 12.sp,
-                                )
-                            )
-                        }
+                        )
                     }
                 }
             }
