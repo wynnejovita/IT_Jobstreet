@@ -16,5 +16,25 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
+    //untuk seacrh
+    //binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        //override fun onQueryTextSubmit(query: String): Boolean {
+           // return false
+        }
+        //override fun onQueryTextChange(newText: String): Boolean {
+           // searchList(newText)
+           // return true
+       // }
+   // }
+    //fun searchList(text: String) {
+        //val searchList = java.util.ArrayList<DataClass>()
+        //for (dataClass in dataList) {
+            //if (dataClass.dataTitle?.lowercase()
+                    //?.contains(text.lowercase(Locale.getDefault())) == true
+            //) {
+                //searchList.add(dataClass)
+            //}
+       // }
+       // adapter.searchDataList(searchList)
+    //}
 
