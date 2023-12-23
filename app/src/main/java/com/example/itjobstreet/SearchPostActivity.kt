@@ -191,7 +191,7 @@ fun SearchPost(navController: NavController) {
                         )
                     }
                     Button(
-                        onClick={navController.navigate(route = Screens.ProfileOrangScreen.name)},
+                        onClick={navController.navigate(route = Screens.SearchOrangScreen.name)},
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -206,7 +206,7 @@ fun SearchPost(navController: NavController) {
                         )
                     }
                     Button(
-                        onClick={navController.navigate(route = Screens.RatingPerusahaanScreen.name)},
+                        onClick={navController.navigate(route = Screens.SearchPerusahaanScreen.name)},
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
