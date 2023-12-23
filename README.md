@@ -5,6 +5,11 @@ Proyek Tugas Besar Pemrograman Mobile
 ## Link figma yang telah dirancang tim design:
 [IT Jobstreet](https://www.figma.com/file/a89hDq6WF8QqWxgDpkBd8k/IT-JobStreet?type=design&node-id=42-2673&mode=design&t=ApOfmFkvyTgiPHi8-0)
 
+## Aplikasi ini dilengkapi dengan fitur login
+Akun yang tersedia:\
+Username = g@gmail.com\
+Password = 123456
+
 ## Disusun oleh:
 - Atikah Husna 201402020
 - Indah Zahrani Lubis 201402047
