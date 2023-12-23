@@ -55,12 +55,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RatingPerusahaan1() {
+fun RatingPerusahaan1(navController: NavController) {
     Scaffold(
         // navbar atas
         topBar = {
@@ -75,7 +76,7 @@ fun RatingPerusahaan1() {
                 },
                 // icon kembali/back
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {navController.popBackStack()}) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -88,7 +89,7 @@ fun RatingPerusahaan1() {
             val sheetState = rememberModalBottomSheetState()
             val scope = rememberCoroutineScope()
             var showAdd by remember { mutableStateOf(false) }
-            Button(onClick = {showAdd = true}, border = BorderStroke(1.dp,Color.White),
+            Button(onClick = {navController.navigate(route = Screens.PostRatingScreen.name)}, border = BorderStroke(1.dp,Color.White),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                 modifier = Modifier
                     .requiredWidth(width = 65.dp)

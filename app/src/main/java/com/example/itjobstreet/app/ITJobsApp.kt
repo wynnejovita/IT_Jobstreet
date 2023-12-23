@@ -33,9 +33,12 @@ import com.example.itjobstreet.HomePageDetailShow
 import com.example.itjobstreet.HomePageShow
 import com.example.itjobstreet.PostingLoker1
 import com.example.itjobstreet.PostingLoker2
+import com.example.itjobstreet.ProfileAkunOrang
 import com.example.itjobstreet.ProfileKomentarShow
 import com.example.itjobstreet.ProfilePostingShow
 import com.example.itjobstreet.ProfileReviewShow
+import com.example.itjobstreet.RatingPage
+import com.example.itjobstreet.RatingPerusahaan1
 import com.example.itjobstreet.SearchOrang
 import com.example.itjobstreet.SearchPerusahaan
 import com.example.itjobstreet.SearchPost
@@ -166,6 +169,19 @@ fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganV
             composable(route = Screens.TestingSearchScreen.name){
                 FilterSearchShow(navController = navController)
             }
+
+            composable(route = Screens.RatingPerusahaanScreen.name){
+                RatingPerusahaan1(navController = navController)
+            }
+
+            composable(route = Screens.ProfileOrangScreen.name){
+                ProfileAkunOrang(navController = navController)
+            }
+
+            composable(route = Screens.PostRatingScreen.name){
+                RatingPage(navController = navController)
+            }
+
         }
 
 //        if (homeViewModel.isUserLoggedIn.value == true) {
