@@ -5,6 +5,11 @@ Proyek Tugas Besar Pemrograman Mobile
 ## Link figma yang telah dirancang tim design:
 [IT Jobstreet](https://www.figma.com/file/a89hDq6WF8QqWxgDpkBd8k/IT-JobStreet?type=design&node-id=42-2673&mode=design&t=ApOfmFkvyTgiPHi8-0)
 
+## Aplikasi ini dilengkapi dengan fitur login
+Akun yang tersedia:\
+Username = g@gmail.com\
+Password = 123456
+
 ## Disusun oleh:
 - Atikah Husna 201402020
 - Indah Zahrani Lubis 201402047
@@ -89,6 +94,7 @@ Proyek Tugas Besar Pemrograman Mobile
   ![Profil 2](screenshots/profil2.png)\
   Tampilan ini berfungsi untuk mengubah profil pengguna ketika pengguna mengklik tombol "Edit profil", dimana pengguna dapat mengedit foto, nama, email, password baru, bio, alamat, dan tautan pengguna.
 - ### Rating
+  ![Rating](screenshots/rating.png)\
   Tampilan ini berfungsi untuk memberi rating kepada perusahaan.\
   Pengguna dapat menambahkan rating dengan mengklik tanda tambah dimana pengguna akan diarahkan ke halaman form untuk menambah rating.\
-  Pada halaman tersebut pengguna dapat mengisi form rating perusahaan dengan memberikan bintang 1-5 dan menambahkan deskripsi review.  
+  Pada halaman tersebut pengguna dapat mengisi form rating perusahaan dengan memberikan bintang 1-5 dan menambahkan deskripsi review. 

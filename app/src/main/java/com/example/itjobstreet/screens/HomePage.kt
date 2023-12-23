@@ -66,6 +66,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 //import androidx.navigation.NavController
 import com.example.itjobstreet.model.Lowongan
+import com.example.itjobstreet.navigation.Screens
 //import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.sealed.DataState
 import com.example.itjobstreet.viewmodels.LowonganViewModel
@@ -88,7 +89,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                 ){
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
-                        onClick = {}) {
+                        onClick = { navController.popBackStack() }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             "backIcon",
@@ -177,7 +178,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                     verticalAlignment = Alignment.CenterVertically,
                 ){
                     OutlinedButton(
-                        onClick={},
+                        onClick = { navController.navigate(route = Screens.HomePageScreen.name) },
                         border = BorderStroke(1.dp,Color(0xFF2493DC)),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                         modifier = Modifier
@@ -195,7 +196,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                         )
                     }
                     Button(
-                        onClick={},
+                        onClick = { navController.navigate(route = Screens.HomePageScreen.name) },
                         border = BorderStroke(1.dp,Color.White),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2493DC)),
                         modifier = Modifier
@@ -274,13 +275,13 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                 space = 25.dp
             )
         ) {
-            SetData(viewModelLowongan)
+            SetData(viewModelLowongan, navController)
         }
     }
 }
 
 @Composable
-fun SetData(viewModel: LowonganViewModel){
+fun SetData(viewModel: LowonganViewModel, navController: NavController){
     when (val result = viewModel.response.value) {
         is DataState.Loading -> {
             Box(
@@ -291,7 +292,7 @@ fun SetData(viewModel: LowonganViewModel){
             }
         }
         is DataState.Success -> {
-            ShowList(result.data)
+            ShowList(result.data, navController)
         }
         is DataState.Failed -> {
             Box(
@@ -320,15 +321,15 @@ fun SetData(viewModel: LowonganViewModel){
 
 
 @Composable
-fun ShowList(data: MutableList<Lowongan>) {
+fun ShowList(data: MutableList<Lowongan>, navController: NavController) {
     for(lowong in data){
-        CardItem(lowong)
+        CardItem(navController, lowong)
     }
 }
 
 
 @Composable
-fun CardItem(lowongan: Lowongan){
+fun CardItem(navController: NavController, lowongan: Lowongan){
     /* Card Loker */
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -414,7 +415,7 @@ fun CardItem(lowongan: Lowongan){
                 ),
                 modifier = Modifier
                     .padding(start = 15.dp, top = 10.dp, end = 15.dp)
-                    .clickable {  }
+                    .clickable { navController.navigate(route = Screens.HomePageDetailScreen.name) }
             )
             Box(
                 modifier = Modifier
