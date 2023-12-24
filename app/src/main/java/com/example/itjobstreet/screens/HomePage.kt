@@ -76,6 +76,7 @@ import com.example.itjobstreet.viewmodels.LowonganViewModel
 fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewModel) {
 
     Scaffold(
+        // top bar
         topBar = {
             Column(
                 modifier = Modifier
@@ -87,6 +88,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                     .height(50.dp)
                     .fillMaxWidth()
                 ){
+                    // button panah back
                     IconButton(modifier = Modifier
                         .align(alignment = Alignment.CenterStart),
                         onClick = { navController.popBackStack() }) {
@@ -95,6 +97,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                             "backIcon",
                             tint = Color.White)
                     }
+                    // bar search
                     var perusahaan by rememberSaveable { mutableStateOf("") }
                     OutlinedTextField(
                         value = perusahaan,
@@ -141,6 +144,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                         contentDescription = "notifications",
                         tint = Color.White)
 
+                    // lokasi
                     var expanded by remember { mutableStateOf(false) }
                     var selectedItem by remember { mutableStateOf("Lokasi") }
                     val listKota = listOf("Medan", "Jakarta", "Bandung", "Balikpapan")
@@ -177,6 +181,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ){
+                    // button rekomendasi
                     OutlinedButton(
                         onClick = { navController.navigate(route = Screens.HomePageScreen.name) },
                         border = BorderStroke(1.dp,Color(0xFF2493DC)),
@@ -195,6 +200,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                                 fontWeight = FontWeight.Bold),
                         )
                     }
+                    // button terbaru
                     Button(
                         onClick = { navController.navigate(route = Screens.HomePageScreen.name) },
                         border = BorderStroke(1.dp,Color.White),
@@ -211,6 +217,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                                 fontWeight = FontWeight.Bold),
                         )
                     }
+                    // button rating
                     var rExpanded by remember { mutableStateOf(false) }
                     var rSelectedItem by remember { mutableStateOf("Rating") }
                     val listRating = listOf("1", "2", "3",  "4", "5")
@@ -264,7 +271,9 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
                 }
             }
         }
-    ){ innerPadding ->
+    ){
+        // Bagian isi (Card)
+        innerPadding ->
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -280,6 +289,7 @@ fun HomePageShow(navController: NavController, viewModelLowongan: LowonganViewMo
     }
 }
 
+// fungsi untuk mengambil data
 @Composable
 fun SetData(viewModel: LowonganViewModel, navController: NavController){
     when (val result = viewModel.response.value) {
@@ -319,7 +329,7 @@ fun SetData(viewModel: LowonganViewModel, navController: NavController){
     }
 }
 
-
+// fungsi untuk menampilkan data
 @Composable
 fun ShowList(data: MutableList<Lowongan>, navController: NavController) {
     for(lowong in data){
@@ -327,7 +337,7 @@ fun ShowList(data: MutableList<Lowongan>, navController: NavController) {
     }
 }
 
-
+// fungsi untuk meletakkan data kedalam card
 @Composable
 fun CardItem(navController: NavController, lowongan: Lowongan){
     /* Card Loker */
@@ -534,6 +544,3 @@ fun CardItem(navController: NavController, lowongan: Lowongan){
         }
     }
 }
-
-
-

@@ -115,46 +115,51 @@ fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganV
             padding(paddingValues)
         )
         {
+            // HomePage
             composable(route = Screens.HomePageScreen.name){
                 HomePageShow(navController = navController, viewModel1)
             }
+            // SearchPostActivity
             composable(route = Screens.SearchScreen.name){
-                SearchPost(navController = navController)
+                SearchPost(navController = navController, viewModel1)
             }
+            // PostingLoker1Activity
             composable(route = Screens.AddScreen.name){
                 PostingLoker1(navController = navController)
             }
+            // FavoriteActivity
             composable(route = Screens.FavoriteScreen.name){
-                Favorite(navController = navController)
+                Favorite(navController = navController, viewModel1)
             }
+            // ProfilePosting
             composable(route = Screens.ProfileScreen.name){
-                    ProfilePostingShow(navController = navController, sharedViewModel = sharedViewModel)
+                ProfilePostingShow(navController = navController, sharedViewModel = sharedViewModel, viewModel1)
             }
-
+            // HomePageDetail
             composable(route = Screens.HomePageDetailScreen.name){
                 HomePageDetailShow(navController = navController)
             }
-            // Profile Komentar
+            // ProfileKomentar
             composable(route = Screens.ProfileKomentarScreen.name){
                 ProfileKomentarShow(navController = navController, sharedViewModel = sharedViewModel)
             }
-            // Profile Review
+            // ProfileReview
             composable(route = Screens.ProfileReviewScreen.name){
                 ProfileReviewShow(navController = navController, sharedViewModel = sharedViewModel)
             }
-
+            // EditProfile
             composable(route = Screens.EditProfileScreen.name){
                     EditProfileShow(navController = navController, sharedViewModel = sharedViewModel)
             }
-
+            // SearchOrangActivity
             composable(route = Screens.SearchOrangScreen.name){
                 SearchOrang(navController = navController)
             }
-            
+            // SearchPerusahaanActivity
             composable(route = Screens.SearchPerusahaanScreen.name){
                 SearchPerusahaan(navController = navController)
             }
-
+            // PostingLoker2Activity
             composable(route = Screens.Add2Screen.name){
                 PostingLoker2(navController = navController)
             }
@@ -162,11 +167,11 @@ fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganV
             composable(route = Screens.TestingSearchScreen.name){
                 FilterSearchShow(navController = navController)
             }
-
+            // RatingPerusahaan
             composable(route = Screens.RatingPerusahaanScreen.name){
                 RatingPerusahaan1(navController = navController)
             }
-
+            // ProfileAkunOrang
             composable(route = Screens.ProfileOrangScreen.name){
                 ProfileAkunOrang(navController = navController)
             }
@@ -181,6 +186,7 @@ fun ITJobsApp(homeViewModel: LoginViewModel = viewModel(), viewModel1: LowonganV
 //            PostRoute.navigateTo(Screen.HomePage)
 //        }
 
+        // Exception Login (not fully implemented)
         Crossfade(targetState = PostRoute.currentScreen, label = "") { currentState ->
             when (currentState.value) {
                 is Screen.LoginScreen -> {
