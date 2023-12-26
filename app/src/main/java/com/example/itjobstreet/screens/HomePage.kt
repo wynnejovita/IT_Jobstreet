@@ -512,7 +512,14 @@ fun CardItem(lowongan: Lowongan){
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
                         putExtra(Intent.EXTRA_TEXT,
-                            "Lowongan kerja dari ${lowongan.perusahaan!!} \n\nPosisi: ${lowongan.posisi!!} \n\nDeskripsi: ${lowongan.deskripsi_singkat!!}")
+                            """
+                                Lowongan kerja dari ${lowongan.perusahaan!!}
+                                
+                                Posisi: ${lowongan.posisi!!}
+                                
+                                Deskripsi: ${lowongan.deskripsi_singkat!!}
+                            """.trimIndent()
+                        )
                         type = "text/plain"
                         flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                     }

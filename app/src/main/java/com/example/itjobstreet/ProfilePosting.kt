@@ -59,6 +59,7 @@ import com.example.itjobstreet.navigation.Screens
 import com.example.itjobstreet.ui.theme.ITJobstreetTheme
 import com.example.itjobstreet.viewmodels.LowonganViewModel
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfilePostingShow(navController: NavController) {
@@ -477,7 +478,15 @@ fun ProfilePostingShow(navController: NavController) {
                                 }
                                 val sendIntent: Intent = Intent().apply {
                                     action = Intent.ACTION_SEND
-                                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                                    putExtra(Intent.EXTRA_TEXT,
+                                        """
+                                            Lowongan kerja dari Telkom Indonesia
+                                            
+                                            Posisi: UI/UX Programmer
+                                            
+                                            Deskripsi: Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.
+                                        """.trimIndent()
+                                    )
                                     type = "text/plain"
                                     flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                                 }
@@ -670,7 +679,15 @@ fun ProfilePostingShow(navController: NavController) {
                                 }
                                 val sendIntent: Intent = Intent().apply {
                                     action = Intent.ACTION_SEND
-                                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                                    putExtra(Intent.EXTRA_TEXT,
+                                        """
+                                            Lowongan kerja dari Telkom Indonesia
+                                            
+                                            Posisi: UI/UX Programmer
+                                            
+                                            Deskripsi: Perusahaan abang lagi buka lowongan untuk UI/UX Programer. Daftar aja klen nanti aku bantu.
+                                        """.trimIndent()
+                                    )
                                     type = "text/plain"
                                     flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                                 }
